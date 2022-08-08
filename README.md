@@ -5,9 +5,9 @@
 #### Instructions to connect the project to postgresql database
 
 1. install psycopg2 library using
-```
+`
 $ pip install psycopg2
-```
+`
 1. install postgresql
 
 1. create a database named "Content_Management_db"
