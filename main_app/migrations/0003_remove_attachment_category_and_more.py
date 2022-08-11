@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainApp', '0002_alter_account_options_alter_account_managers_and_more'),
+        ('main_app', '0002_alter_account_options_alter_account_managers_and_more'),
     ]
 
     operations = [
@@ -18,56 +18,56 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='attachment',
             name='attach_category',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='attachments', to='mainApp.attachcategory'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='attachments', to='main_app.attachcategory'),
         ),
         migrations.AlterField(
             model_name='attachcategory',
             name='allowed_suffixes',
-            field=models.ManyToManyField(related_name='allowed_attach_categories', to='mainApp.suffix'),
+            field=models.ManyToManyField(related_name='allowed_attach_categories', to='main_app.suffix'),
         ),
         migrations.AlterField(
             model_name='attachment',
             name='content',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='attachments', to='mainApp.content'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='attachments', to='main_app.content'),
         ),
         migrations.AlterField(
             model_name='category',
             name='allowed_attach_categories',
-            field=models.ManyToManyField(related_name='allowed_categories', to='mainApp.attachcategory'),
+            field=models.ManyToManyField(related_name='allowed_categories', to='main_app.attachcategory'),
         ),
         migrations.AlterField(
             model_name='category',
             name='allowed_suffixes',
-            field=models.ManyToManyField(related_name='allowed_categories', to='mainApp.suffix'),
+            field=models.ManyToManyField(related_name='allowed_categories', to='main_app.suffix'),
         ),
         migrations.AlterField(
             model_name='content',
             name='category',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='contents', to='mainApp.category'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='contents', to='main_app.category'),
         ),
         migrations.AlterField(
             model_name='content',
             name='creator_account',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='created_contents', to='mainApp.account'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='created_contents', to='main_app.account'),
         ),
         migrations.AlterField(
             model_name='content',
             name='library',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='contents', to='mainApp.library'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='contents', to='main_app.library'),
         ),
         migrations.AlterField(
             model_name='content',
             name='shared_with_accounts',
-            field=models.ManyToManyField(related_name='shared_with_contents', to='mainApp.account'),
+            field=models.ManyToManyField(related_name='shared_with_contents', to='main_app.account'),
         ),
         migrations.AlterField(
             model_name='file',
             name='suffix',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='files', to='mainApp.suffix'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='files', to='main_app.suffix'),
         ),
         migrations.AlterField(
             model_name='library',
             name='account',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='libraries', to='mainApp.account'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='libraries', to='main_app.account'),
         ),
     ]
