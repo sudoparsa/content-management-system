@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('mainApp', '0001_initial'),
+        ('main_app', '0001_initial'),
     ]
 
     operations = [
@@ -96,16 +96,16 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='content',
             name='creator_account',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='creator', to='mainApp.account'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='creator', to='main_app.account'),
         ),
         migrations.AddField(
             model_name='content',
             name='shared_with_accounts',
-            field=models.ManyToManyField(to='mainApp.account'),
+            field=models.ManyToManyField(to='main_app.account'),
         ),
         migrations.AddField(
             model_name='library',
             name='account',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='mainApp.account'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='main_app.account'),
         ),
     ]

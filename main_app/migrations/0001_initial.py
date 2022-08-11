@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=30)),
-                ('allowed_attach_categories', models.ManyToManyField(to='mainApp.attachcategory')),
+                ('allowed_attach_categories', models.ManyToManyField(to='main_app.attachcategory')),
             ],
         ),
         migrations.CreateModel(
@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=30)),
                 ('is_private', models.BooleanField()),
-                ('category', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='mainApp.category')),
+                ('category', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='main_app.category')),
             ],
         ),
         migrations.CreateModel(
@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=30)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mainApp.category')),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main_app.category')),
             ],
         ),
         migrations.CreateModel(
@@ -63,7 +63,7 @@ class Migration(migrations.Migration):
                 ('creation_date', models.DateField(auto_now_add=True)),
                 ('modification_date', models.DateField()),
                 ('bytes', models.BinaryField(max_length=10000000)),
-                ('suffix', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='mainApp.suffix')),
+                ('suffix', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='main_app.suffix')),
             ],
         ),
         migrations.CreateModel(
@@ -72,38 +72,38 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('key', models.CharField(max_length=30)),
                 ('value', models.CharField(max_length=50)),
-                ('content', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mainApp.content')),
+                ('content', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main_app.content')),
             ],
         ),
         migrations.AddField(
             model_name='content',
             name='file',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mainApp.file'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main_app.file'),
         ),
         migrations.AddField(
             model_name='content',
             name='library',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='mainApp.library'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='main_app.library'),
         ),
         migrations.AddField(
             model_name='category',
             name='allowed_suffixes',
-            field=models.ManyToManyField(to='mainApp.suffix'),
+            field=models.ManyToManyField(to='main_app.suffix'),
         ),
         migrations.CreateModel(
             name='Attachment',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=30)),
-                ('category', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='mainApp.attachcategory')),
-                ('content', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mainApp.content')),
-                ('file', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mainApp.file')),
+                ('category', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='main_app.attachcategory')),
+                ('content', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main_app.content')),
+                ('file', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main_app.file')),
             ],
         ),
         migrations.AddField(
             model_name='attachcategory',
             name='allowed_suffixes',
-            field=models.ManyToManyField(to='mainApp.suffix'),
+            field=models.ManyToManyField(to='main_app.suffix'),
         ),
         migrations.CreateModel(
             name='Account',

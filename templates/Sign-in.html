@@ -1,3 +1,4 @@
+{%load static %}
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="en"><head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -5,10 +6,10 @@
     <meta name="keywords" content="Login Now">
     <meta name="description" content="">
     <title>Sign in</title>
-    <link rel="stylesheet" href="nicepage.css" media="screen">
-<link rel="stylesheet" href="Sign-in.css" media="screen">
-    <script class="u-script" type="text/javascript" src="jquery-1.9.1.min.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="nicepage.js" "="" defer=""></script>
+    <link rel="stylesheet" href="../static/nicepage.css" media="screen">
+<link rel="stylesheet" href="../static/Signin.css" media="screen">
+    <!-- <script class="u-script" type="text/javascript" src="jquery-1.9.1.min.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="nicepage.js" "="" defer=""></script> -->
     <meta name="generator" content="Nicepage 4.16.0, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
     
@@ -51,7 +52,7 @@
           </div>
         </nav>
         <a href="https://nicepage.com" class="u-image u-logo u-image-1" data-image-width="80" data-image-height="40">
-          <img class="u-logo-image u-logo-image-1" src="/images/default-logo.png">
+          <img class="u-logo-image u-logo-image-1" src="../static/images/defaultlogo.png">
         </a>
         <a href="/Sign-in.html" data-page-id="2616879" class="u-active-black u-border-1 u-border-active-black u-border-hover-black u-border-white u-btn u-btn-round u-button-style u-hover-black u-none u-radius-12 u-text-active-white u-text-hover-white u-btn-1">Sign in</a>
         <a href="/Sign-up.html" data-page-id="2620464" class="u-active-black u-border-1 u-border-active-black u-border-hover-black u-border-white u-btn u-btn-round u-button-style u-hover-black u-none u-radius-12 u-text-active-white u-text-hover-white u-btn-2">Sign up</a>
@@ -59,10 +60,11 @@
     <section class="u-clearfix u-image u-section-1" id="sec-38dc" data-image-width="1620" data-image-height="1080">
       <div class="u-clearfix u-sheet u-valign-middle-sm u-valign-middle-xs u-sheet-1">
         <div class="u-align-center u-border-14 u-border-no-left u-border-no-right u-border-no-top u-border-palette-2-base u-container-style u-custom-border u-custom-color-2 u-expanded-width-sm u-expanded-width-xs u-group u-opacity u-opacity-55 u-shape-rectangle u-group-1">
-          <div class="u-container-layout u-container-layout-1"><span class="u-file-icon u-icon u-icon-circle u-palette-2-base u-icon-1"><img src="/images/456212-32dc61a8.png" alt=""></span>
+          <div class="u-container-layout u-container-layout-1"><span class="u-file-icon u-icon u-icon-circle u-palette-2-base u-icon-1"><img src="../static/images/456212-32dc61a8.png" alt=""></span>
             <h2 class="u-text u-text-default u-text-palette-2-base u-text-1">Sign in Now</h2>
             <div class="u-expanded-width-xs u-form u-login-control u-form-1">
-              <form action="#" method="POST" class="u-clearfix u-form-custom-backend u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 0px;">
+              <form action="login" method="POST" class="u-clearfix u-form-custom-backend u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 0px;">
+                {%csrf_token%}
                 <div class="u-form-group u-form-name u-label-top">
                   <label for="username-a30d" class="u-label u-label-1">Username *</label>
                   <input type="text" placeholder="Enter your Username" id="username-a30d" name="username" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-input-1" required="">
@@ -76,8 +78,9 @@
                   <label for="checkbox-a30d" class="u-label u-label-3">Remember me</label>
                 </div>
                 <div class="u-align-left u-form-group u-form-submit u-label-top">
-                  <input type="submit" value="submit" class="u-form-control-hidden">
-                  <a href="#" class="u-active-palette-2-light-2 u-border-none u-btn u-btn-submit u-button-style u-hover-palette-2-light-2 u-palette-2-base u-btn-1">Login</a>
+                  <!-- <input type="submit" value="submit" class="u-form-control-hidden">
+                  <a  class="u-active-palette-2-light-2 u-border-none u-btn u-btn-submit u-button-style u-hover-palette-2-light-2 u-palette-2-base u-btn-1">Login</a> -->
+                  <input type="submit">
                 </div>
                 <input type="hidden" value="" name="recaptchaResponse">
               </form>
@@ -101,5 +104,14 @@
         <span>Best Website Builder</span>
       </a>. 
     </section>
+
+
+    <div>
+      {%for message in messages%}
+      <h3>
+          {{message}}
+      </h3>
+      {%endfor%}
+    </div>
   
 </body></html>
