@@ -238,5 +238,4 @@ pip-selfcheck.json
 # End of https://www.toptal.com/developers/gitignore/api/django,pycharm,venv
 
 .idea
-static
 files
