@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <form action="/create-suffix/" method="post"  >
+        {% csrf_token %}
+        <label for="suffix">Suffix: </label>
+        <input id="suffix" type="text" name="suffix" value="{{ current_name }}">
+        <input type="submit" value="OK">
+    </form>
+</head>
+<body>
+
+</body>
+</html>
