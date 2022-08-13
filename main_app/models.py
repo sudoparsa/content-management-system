@@ -45,12 +45,14 @@ class Content(models.Model):
     creator_account = models.ForeignKey(Account, on_delete=models.SET_NULL, null=True, related_name='created_contents')
     shared_with_accounts = models.ManyToManyField(Account, related_name='shared_with_contents')
 
+class ContentAttributeKey(models.Model):
+    key = models.CharField(max_length=30)
+    allowed_categories = models.ManyToManyField(Category, related_name='allowed_attribute_keys')
 
 class ContentAttribute(models.Model):
-    key = models.CharField(max_length=30)
+    key = models.ForeignKey(ContentAttributeKey, on_delete=models.CASCADE, related_name='content_attributes')
     value = models.CharField(max_length=50)
     content = models.ForeignKey(Content, on_delete=models.CASCADE)
-
 
 class Attachment(models.Model):
     title = models.CharField(max_length=30)
