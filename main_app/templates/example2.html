@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <form action="/create-attach-category/" method="post"  >
+        {% csrf_token %}
+        <label for="title">title: </label>
+        <input id="title" type="text" name="title" value="{{ title_name }}">
+        <label for="suffix-id">suffix-id: </label>
+        <input id="suffix-id" type="text" name="suffix-id" value="{{ suffix_id }}">
+        <input type="submit" value="OK">
+    </form>
+</head>
+<body>
+
+</body>
+</html>

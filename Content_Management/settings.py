@@ -78,10 +78,11 @@ WSGI_APPLICATION = 'Content_Management.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Content_Management_db',
+        'NAME': 'content_management_db',
         'USER': 'postgres',
-        'PASSWORD': '123456',
+        'PASSWORD': 'postgres',
         'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -132,4 +133,4 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# AUTH_USER_MODEL = 'mainApp.Account'
+# AUTH_USER_MODEL = 'main_app.Account'
