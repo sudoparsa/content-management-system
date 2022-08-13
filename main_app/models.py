@@ -1,3 +1,4 @@
+from operator import mod
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -47,7 +48,8 @@ class Content(models.Model):
 
 class ContentAttributeKey(models.Model):
     key = models.CharField(max_length=30)
-    allowed_categories = models.ManyToManyField(Category, related_name='allowed_attribute_keys')
+    category = models.ForeignKey(Category, on_delete= models.CASCADE)
+    account = models.ForeignKey(Account, on_delete= models.CASCADE)
 
 class ContentAttribute(models.Model):
     key = models.ForeignKey(ContentAttributeKey, on_delete=models.CASCADE, related_name='content_attributes')
