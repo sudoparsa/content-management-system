@@ -14,6 +14,8 @@ import templates
 def suffix(request):
     return render(request, 'example.html')
 
+#def content_main_page(request, content_id):
+
 
 @csrf_protect
 def create_suffix(request):
@@ -73,6 +75,7 @@ def login(request):
 
 
 def sign_up(request):
+    print("hello")
     if request.method == 'POST':
         name = request.POST['name']
         username = request.POST['username']
