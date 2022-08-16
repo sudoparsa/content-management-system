@@ -1,8 +1,8 @@
 from django.contrib import admin
-from models import *
+from main_app.models import *
 # Register your models here.
 
-from main_app.models import *
+
 admin.site.register(Category)
 admin.site.register(Content)
 admin.site.register(AttachCategory)
