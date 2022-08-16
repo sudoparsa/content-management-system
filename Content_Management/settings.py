@@ -78,9 +78,9 @@ WSGI_APPLICATION = 'Content_Management.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'content_management_db',
+        'NAME': 'Content_Management_db',
         'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'PASSWORD': '123456',
         'HOST': 'localhost',
         'PORT': '5432',
     }

@@ -1,7 +1,9 @@
+
+from multiprocessing.forkserver import connect_to_new_process
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_protect
-from main_app.models import Suffix, Category, AttachCategory
+from main_app.models import Content, Suffix, Category, AttachCategory, File
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
@@ -56,16 +58,20 @@ def create_category(request):
 
 
 def login(request):
-    print('7777777777')
+    print('77777777778')
+    print(request)
     if request.method == 'POST':
+        print('h')
         username = request.POST['username']
         password = request.POST['password']
         user = auth.authenticate(username=username, password=password)
 
         if user is not None:
             auth.login(request, user)
-            return redirect("signup")  # TODO
+            print('nnn')
+            return redirect("/")  
         else:
+            print('----')
             messages.info(request, 'invalid username or password')
             return redirect("login")
     else:
@@ -94,3 +100,23 @@ def sign_up(request):
             return redirect('login')
     else:
         return render(request, 'Sign-up.html')
+
+def my_page(request):
+    # file = File()
+    # file.save()
+    # content = Content (title = "hello", is_private = False, file = file)
+    # content.save()
+    # print(len(Content.objects.all()), 'hihihih')
+    return render(request, 'my-page3.html', {'contents': Content.objects.all()})
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect("/")
+
+
+def main(request):
+    return render(request, 'main.html')
+
+def test(request):
+    return render(request, 'category.html')

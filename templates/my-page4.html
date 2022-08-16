@@ -1,0 +1,215 @@
+{%load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'my-page-icon.css' %}">
+
+    <link rel="stylesheet" href="{% static 'owl.carousel.min.css' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="{% static 'my-page4.css' %}">
+
+
+
+    <!-- category -->
+    <!-- <link href="{% static 'category-style.css' %}" rel="stylesheet"> -->
+
+    <title>My Page</title>
+  </head>
+  <body>
+  
+    
+    <aside class="sidebar">
+      <div class="toggle">
+        <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
+              <span></span>
+            </a>
+      </div>
+      <div class="side-inner">
+
+        <div class="profile">
+          <img src="images/person_profile.jpg" alt="Image" class="img-fluid">
+          <h3 class="name">{{user.first_name}} {{user.last_name}}</h3>
+          <!-- <span class="country">New York, USA</span> -->
+        </div>
+
+        <!-- <div class="counter d-flex justify-content-center">
+            <div class="col">
+              <strong class="number">892</strong>
+              <span class="number-label">Posts</span>
+            </div>
+            <div class="col">
+              <strong class="number">22.5k</strong>
+              <span class="number-label">Followers</span>
+            </div>
+            <div class="col">
+              <strong class="number">150</strong>
+              <span class="number-label">Following</span>
+            </div>
+        </div> -->
+        
+        <div class="nav-menu">
+          <ul>
+            <li class="active"><a href="/"><span class="icon-home mr-3"></span>Home</a></li>
+            <!-- <li><a href="#"><span class="icon-search2 mr-3"></span>Explore</a></li>
+            <li><a href="#"><span class="icon-notifications mr-3"></span>Notifications</a></li> -->
+            <li><a href="#"><span class="icon-files-o mr-3"></span>Files</a></li>
+            <li><a href="#"><span class="icon-book mr-3"></span>Library</a></li>
+            <li><a href="/logout"><span class="icon-sign-out mr-3"></span>Logout</a></li>
+          </ul>
+        </div>
+      </div>
+      
+    </aside>
+    <div class="container-fluid bg-light position-relative shadow">
+      <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5">
+          <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+              <div class="navbar-nav font-weight-bold mx-auto py-0">
+                  <a href="index.html" class="nav-item nav-link active">Home</a>
+                  <a href="about.html" class="nav-item nav-link">About</a>
+                  <a href="class.html" class="nav-item nav-link">Classes</a>
+                  <a href="team.html" class="nav-item nav-link">Teachers</a>
+                  <a href="gallery.html" class="nav-item nav-link">Gallery</a>
+                  <!-- <div class="nav-item dropdown">
+                      <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                      <div class="dropdown-menu rounded-0 m-0">
+                          <a href="blog.html" class="dropdown-item">Blog Grid</a>
+                          <a href="single.html" class="dropdown-item">Blog Detail</a>
+                      </div>
+                  </div> -->
+                  <a href="contact.html" class="nav-item nav-link">Contact</a>
+              </div>
+          </div>
+      </nav>
+  </div>
+    <main>
+
+      <div class="site-section">
+        <div class="container-fluid bg-light position-relative shadow">
+          <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5">
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                  <div class="navbar-nav font-weight-bold mx-auto py-0">
+                      <a href="index.html" class="nav-item nav-link active">Home</a>
+                      <a href="about.html" class="nav-item nav-link">About</a>
+                      <a href="class.html" class="nav-item nav-link">Classes</a>
+                      <a href="team.html" class="nav-item nav-link">Teachers</a>
+                      <a href="gallery.html" class="nav-item nav-link">Gallery</a>
+                      <!-- <div class="nav-item dropdown">
+                          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                          <div class="dropdown-menu rounded-0 m-0">
+                              <a href="blog.html" class="dropdown-item">Blog Grid</a>
+                              <a href="single.html" class="dropdown-item">Blog Detail</a>
+                          </div>
+                      </div> -->
+                      <a href="contact.html" class="nav-item nav-link">Contact</a>
+                  </div>
+              </div>
+          </nav>
+      </div>
+        <div class="container">
+
+          <div class="container-fluid bg-light position-relative shadow">
+            <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5">
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav font-weight-bold mx-auto py-0">
+                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a href="about.html" class="nav-item nav-link">About</a>
+                        <a href="class.html" class="nav-item nav-link">Classes</a>
+                        <a href="team.html" class="nav-item nav-link">Teachers</a>
+                        <a href="gallery.html" class="nav-item nav-link">Gallery</a>
+                        <!-- <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                            <div class="dropdown-menu rounded-0 m-0">
+                                <a href="blog.html" class="dropdown-item">Blog Grid</a>
+                                <a href="single.html" class="dropdown-item">Blog Detail</a>
+                            </div>
+                        </div> -->
+                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+
+          <div class="row justify-content-center">
+            <div class="col-md-9">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="d-flex post-entry">
+                    <div class="custom-thumbnail">
+                      <img src="images/person_1.jpg" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="post-content">
+                      <h3>How the gut microbes you're born with affect your lifelong health</h3>
+                      <div class="post-meta"><span>Posted:</span> Dec 17, 2019</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="d-flex post-entry">
+                    <div class="custom-thumbnail">
+                      <img src="images/person_2.jpg" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="post-content">
+                      <h3>How the gut microbes you're born with affect your lifelong health</h3>
+                      <div class="post-meta"><span>Posted:</span> Dec 17, 2019</div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+                {%for content in contents%}
+                <div class="col-md-6">
+                  <div class="d-flex post-entry">
+                    <div class="custom-thumbnail">
+                      <img src="images/person_4.jpg" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="post-content">
+                      <h3>{{content.title}}</h3>
+                      <div class="post-meta"><span>Created:</span> {{content.file_id.creation_date}}</div>
+                    </div>
+                  </div>
+                </div>
+                {%endfor%}
+
+
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>  
+    </main>
+    
+    
+
+    <script src="{%static 'main-page-js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{%static 'main-page-js/popper.min.js' %}"></script>
+    <script src="{%static 'main-page-js/bootstrap.min.js' %}"></script>
+    <script src="{%static 'main-page-js/main.js' %}"></script>
+  </body>
+</html>
