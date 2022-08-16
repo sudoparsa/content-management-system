@@ -4,9 +4,11 @@
 
 #### Instructions to connect the project to postgresql database
 
-1. install psycopg2 library using
+1. clone the project
+
+1. install requirements using
 `
-$ pip install psycopg2
+$ pip install -r requirements.txt
 `
 1. install postgresql
 
