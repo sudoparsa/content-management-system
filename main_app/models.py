@@ -1,4 +1,3 @@
-from operator import mod
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -16,6 +15,7 @@ class Category(models.Model):
     title = models.CharField(max_length=30)
     allowed_attach_categories = models.ManyToManyField(AttachCategory, related_name='allowed_categories')
     allowed_suffixes = models.ManyToManyField(Suffix, related_name='allowed_categories')
+    image = models.ImageField(upload_to ='category_images/', null = True)
 
 
 class File(models.Model):
@@ -29,6 +29,7 @@ class File(models.Model):
 class Account(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name= 'account')
     storage = models.BigIntegerField(default=10 ** 6)
+    image = models.ImageField(upload_to ='user_images/', null= True)
 
 
 class Library(models.Model):
@@ -62,4 +63,6 @@ class Attachment(models.Model):
                                         related_name='attachments')
     content = models.ForeignKey(Content, on_delete=models.CASCADE, related_name='attachments')
     file = models.ForeignKey(File, on_delete=models.CASCADE)
+
+
 

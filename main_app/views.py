@@ -110,7 +110,7 @@ def my_page(request):
     # content = Content (title = "hello", is_private = False, file = file)
     # content.save()
     # print(len(Content.objects.all()), 'hihihih')
-    return render(request, 'my-page4.html', {'contents': Content.objects.all()})
+    return render(request, 'my-page4.html', {'contents': Content.objects.all(), 'categories':Category.objects.all()})
 
 
 def logout(request):
