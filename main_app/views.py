@@ -104,12 +104,21 @@ def sign_up(request):
     else:
         return render(request, 'Sign-up.html')
 
-def my_page(request):
+def my_page(request, type, category):
     # file = File()
     # file.save()
     # content = Content (title = "hello", is_private = False, file = file)
     # content.save()
     # print(len(Content.objects.all()), 'hihihih')
+    if type == 'files':
+        if category == 'all':
+            items = Content.objects.all()
+        else:
+            items = Content.objects.all()
+    elif type == 'libraries':
+        pass
+    elif type == 'shared':
+        pass
     return render(request, 'my-page4.html', {'contents': Content.objects.all(), 'categories':Category.objects.all()})
 
 

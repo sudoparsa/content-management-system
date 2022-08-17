@@ -16,6 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'styles/about_us2.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <script>
@@ -204,11 +205,11 @@
 										<!-- Intro Item -->
 										<div class="col-lg-4 intro_col">
 											<div class="intro_item d-flex flex-row align-items-end justify-content-start">
-												<div class="intro_icon"><img src="{% static 'images/beach.svg' %}" alt=""></div>
+												<div class="intro_icon"><img src="{% static 'images/data3.png' %}" alt="" style="filter: opacity(50%);"></div>
 												<div class="intro_content">
-													<div class="intro_title">Top Destinations</div>
+													<div class="intro_title">Free Storage</div>
 													<div class="intro_subtitle">
-														<p>Nulla pretium tincidunt felis, nec.</p>
+														<p>Store your files up to 15 GB for free</p>
 													</div>
 												</div>
 											</div>
@@ -217,12 +218,12 @@
 										<!-- Intro Item -->
 										<div class="col-lg-4 intro_col">
 											<div class="intro_item d-flex flex-row align-items-end justify-content-start">
-												<div class="intro_icon"><img src="{% static 'images/wallet.svg' %}" alt="">
+												<div class="intro_icon"><img src="{% static 'images/lib.png' %}" alt="" style="filter: opacity(50%);">
 												</div>
 												<div class="intro_content">
-													<div class="intro_title">The Best Prices</div>
+													<div class="intro_title">Library</div>
 													<div class="intro_subtitle">
-														<p>Sollicitudin mauris lobortis in.</p>
+														<p>Manage your files easily</p>
 													</div>
 												</div>
 											</div>
@@ -231,12 +232,12 @@
 										<!-- Intro Item -->
 										<div class="col-lg-4 intro_col">
 											<div class="intro_item d-flex flex-row align-items-end justify-content-start">
-												<div class="intro_icon"><img src="{%static 'images/suitcase.svg' %}" alt="">
+												<div class="intro_icon"><img src="{%static 'images/share.jpg' %}" alt="" style="filter: opacity(50%);">
 												</div>
 												<div class="intro_content">
-													<div class="intro_title">Amazing Services</div>
+													<div class="intro_title">File Sharing</div>
 													<div class="intro_subtitle">
-														<p>Nulla pretium tincidunt felis, nec.</p>
+														<p>Share your files with other users</p>
 													</div>
 												</div>
 											</div>
@@ -302,96 +303,111 @@
 		<!-- about us -->
 		<div class="about-section" id = "about_us">
 			<h1>About Us Page</h1>
-			<p>Some text about who we are and what we do.</p>
-			<p>Resize the browser window to see that this page is responsive by the way.</p>
+			<p>We try to make it easy for out users to store their files</p>
 		  </div>
 		  
 		  <h2 style="text-align:center">Our Team</h2>
-		  <div class="row">
-			<div class="column">
-			  <div class="card">
-				<img src="/w3images/team1.jpg" alt="Jane" style="width:100%">
-				<div class="container">
-				  <h2>Jane Doe</h2>
-				  <p class="title">CEO & Founder</p>
-				  <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-				  <p>jane@example.com</p>
-				  <p><button class="button">Contact</button></p>
-				</div>
-			  </div>
-			</div>
-		  
-			<div class="column">
-			  <div class="card">
-				<img src="/w3images/team2.jpg" alt="Mike" style="width:100%">
-				<div class="container">
-				  <h2>Mike Ross</h2>
-				  <p class="title">Art Director</p>
-				  <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-				  <p>mike@example.com</p>
-				  <p><button class="button">Contact</button></p>
-				</div>
-			  </div>
-			</div>
-		  
-			<div class="column">
-			  <div class="card">
-				<img src="/w3images/team3.jpg" alt="John" style="width:100%">
-				<div class="container">
-				  <h2>John Doe</h2>
-				  <p class="title">Designer</p>
-				  <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-				  <p>john@example.com</p>
-				  <p><button class="button">Contact</button></p>
-				</div>
-			  </div>
-			</div>
+		  <div style="display:grid; justify-items: center;">
+			<div style="grid:inline; width:85%">
+				<div class="row">
+					<div class="column">
+					<div class="card" style="width: 90%;">
+						<img src="../user_images/team-2.jpg" alt="Jane" style="width:100%; height: 300px">
+						<div class="container" style="text-align:center">
+						<h3 >Rouzbeh Pirayadi</h3>
+						<div style="height: 40px;"> </div>
+						<a href= "" class="fa fa-github fa-2x" style="margin-right: 50px; color: purple;"></a>
+						<a href= "" class="fa fa-envelope fa-2x" style="margin-right: 50px; color: gray;"></a>
+						<a href= "" class="fa fa-linkedin fa-2x"></a>
+						<div style="height: 20px;"> </div>
+						</div>
+					</div>
+					</div>
 
-			<div class="column">
-				<div class="card">
-				  <img src="/w3images/team3.jpg" alt="John" style="width:100%">
-				  <div class="container">
-					<h2>John Doe</h2>
-					<p class="title">Designer</p>
-					<p>Some text that describes me lorem ipsum ipsum lorem.</p>
-					<p>john@example.com</p>
-					<p><button class="button">Contact</button></p>
-				  </div>
-				</div>
-			  </div>
 
-			  <div class="column">
-				<div class="card">
-				  <img src="/w3images/team3.jpg" alt="John" style="width:100%">
-				  <div class="container">
-					<h2>John Doe</h2>
-					<p class="title">Designer</p>
-					<p>Some text that describes me lorem ipsum ipsum lorem.</p>
-					<p>john@example.com</p>
-					<p><button class="button">Contact</button></p>
-				  </div>
-				</div>
-			  </div>
+					<div class="column">
+						<div class="card" style="width: 90%;">
+							<img src="../user_images/team-2.jpg" alt="Jane" style="width:100%; height: 300px">
+							<div class="container" style="text-align:center">
+							<h3 >Arian Yazdanparast</h3>
+							<div style="height: 40px;"> </div>
+							<a href= "" class="fa fa-github fa-2x" style="margin-right: 50px; color: purple;"></a>
+							<a href= "" class="fa fa-envelope fa-2x" style="margin-right: 50px; color: gray;"></a>
+							<a href= "" class="fa fa-linkedin fa-2x"></a>
+							<div style="height: 20px;"> </div>
+							</div>
+						</div>
+						</div>
 
-			  <div class="column">
-				<div class="card">
-				  <img src="/w3images/team3.jpg" alt="John" style="width:100%">
-				  <div class="container">
-					<h2>John Doe</h2>
-					<p class="title">Designer</p>
-					<p>Some text that describes me lorem ipsum ipsum lorem.</p>
-					<p>john@example.com</p>
-					<p><button class="button">Contact</button></p>
-				  </div>
+
+						<div class="column">
+							<div class="card" style="width: 90%;">
+								<img src="../user_images/team-2.jpg" alt="Jane" style="width:100%; height: 300px">
+								<div class="container" style="text-align:center">
+								<h3 >Hamidreza Dehbashi</h3>
+								<div style="height: 40px;"> </div>
+								<a href= "" class="fa fa-github fa-2x" style="margin-right: 50px; color: purple;"></a>
+								<a href= "" class="fa fa-envelope fa-2x" style="margin-right: 50px; color: gray;"></a>
+								<a href= "" class="fa fa-linkedin fa-2x"></a>
+								<div style="height: 20px;"> </div>
+								</div>
+							</div>
+							</div>
+
+
+							<div class="column">
+								<div class="card" style="width: 90%;">
+									<img src="../user_images/team-2.jpg" alt="Jane" style="width:100%; height: 300px">
+									<div class="container" style="text-align:center">
+									<h3 >Parsa Hosseini</h3>
+									<div style="height: 40px;"> </div>
+									<a href= "" class="fa fa-github fa-2x" style="margin-right: 50px; color: purple;"></a>
+									<a href= "" class="fa fa-envelope fa-2x" style="margin-right: 50px; color: gray;"></a>
+									<a href= "" class="fa fa-linkedin fa-2x"></a>
+									<div style="height: 20px;"> </div>
+									</div>
+							</div>
+							</div>
+
+							<div class="column">
+								<div class="card" style="width: 90%;">
+									<img src="../user_images/team-2.jpg" alt="Jane" style="width:100%; height: 300px">
+									<div class="container" style="text-align:center">
+									<h3 >Parham Askarzadeh</h3>
+									<div style="height: 40px;"> </div>
+									<a href= "" class="fa fa-github fa-2x" style="margin-right: 50px; color: purple;"></a>
+									<a href= "" class="fa fa-envelope fa-2x" style="margin-right: 50px; color: gray;"></a>
+									<a href= "" class="fa fa-linkedin fa-2x"></a>
+									<div style="height: 20px;"> </div>
+									</div>
+							</div>
+							</div>
+
+
+							<div class="column">
+								<div class="card" style="width: 90%;">
+									<img src="../user_images/team-2.jpg" alt="Jane" style="width:100%; height: 300px">
+									<div class="container" style="text-align:center">
+									<h3 >Ghazaal Thaghavi</h3>
+									<div style="height: 40px;"> </div>
+									<a href= "" class="fa fa-github fa-2x" style="margin-right: 50px; color: purple;"></a>
+									<a href= "" class="fa fa-envelope fa-2x" style="margin-right: 50px; color: gray;"></a>
+									<a href= "" class="fa fa-linkedin fa-2x"></a>
+									<div style="height: 20px;"> </div>
+									</div>
+								</div>
+							</div>
+				
+
 				</div>
-			  </div>
-		  </div>
+			</div>
+			</div>
 
 
 		<!-- Footer -->
 
 		<footer class="footer">
-			<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{%static 'images/footer_1.jpg' %}" data-speed="0.8">
+			<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{%static 'images/mountains-4k.jpg' %}" data-speed="0.8">
 							</div>
 								<div class="row footer_contact_row">
 									<div class="col-xl-10 offset-xl-1">
