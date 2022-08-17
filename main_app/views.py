@@ -1,5 +1,3 @@
-
-from multiprocessing.forkserver import connect_to_new_process
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_protect
@@ -16,7 +14,8 @@ import templates
 def suffix(request):
     return render(request, 'example.html')
 
-#def content_main_page(request, content_id):
+
+# def content_main_page(request, content_id):
 
 
 @csrf_protect
@@ -71,7 +70,7 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             print('nnn')
-            return redirect("/")  
+            return redirect("/")
         else:
             print('----')
             messages.info(request, 'invalid username or password')
@@ -104,6 +103,7 @@ def sign_up(request):
     else:
         return render(request, 'Sign-up.html')
 
+
 def my_page(request, type, category):
     # file = File()
     # file.save()
@@ -114,15 +114,15 @@ def my_page(request, type, category):
         if category == 'all':
             items = Content.objects.all()
         else:
-            items = Content.objects.filter(category = category)
+            items = Content.objects.filter(category=category)
     elif type == 'libraries':
         if category == 'all':
             items = Library.objects.all()
         else:
-            items = Library.objects.filter(category = category)
+            items = Library.objects.filter(category=category)
     elif type == 'shared':
         pass
-    return render(request, 'my-page4.html', {'Contents': items, 'categories':Category.objects.all()})
+    return render(request, 'my-page4.html', {'Contents': items, 'categories': Category.objects.all()})
 
 
 def logout(request):
@@ -132,6 +132,7 @@ def logout(request):
 
 def main(request):
     return render(request, 'main.html')
+
 
 def test(request):
     return render(request, 'category.html')
