@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_protect
 from main_app.models import Content, Library, Suffix, Category, AttachCategory, File
@@ -6,8 +6,6 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from main_app.models import Account
-
-import templates
 
 
 # Create your views here.
