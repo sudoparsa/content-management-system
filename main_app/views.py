@@ -3,7 +3,7 @@ from multiprocessing.forkserver import connect_to_new_process
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_protect
-from main_app.models import Content, Suffix, Category, AttachCategory, File
+from main_app.models import Content, Library, Suffix, Category, AttachCategory, File
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
@@ -114,12 +114,15 @@ def my_page(request, type, category):
         if category == 'all':
             items = Content.objects.all()
         else:
-            items = Content.objects.all()
+            items = Content.objects.filter(category = category)
     elif type == 'libraries':
-        pass
+        if category == 'all':
+            items = Library.objects.all()
+        else:
+            items = Library.objects.filter(category = category)
     elif type == 'shared':
         pass
-    return render(request, 'my-page4.html', {'contents': Content.objects.all(), 'categories':Category.objects.all()})
+    return render(request, 'my-page4.html', {'Contents': items, 'categories':Category.objects.all()})
 
 
 def logout(request):

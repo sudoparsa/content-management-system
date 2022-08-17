@@ -14,7 +14,7 @@ urlpatterns = [
     path('create-attach-category/', views.create_attach_category, name='create-attach-category'),
     path('category/', views.category, name='category'),
     path('create-category/', views.create_category, name='create-category'),
-    path('my-page/<str:type>/<int:category>', views.my_page, name= 'my_page'),
+    path('my-page/<str:type>/<str:category>', views.my_page, name= 'my_page'),
     path('', views.main, name = 'main'),
     path('test', views.test, name = 'test'),
 ]
