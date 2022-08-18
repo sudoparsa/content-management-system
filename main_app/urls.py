@@ -17,4 +17,4 @@ urlpatterns = [
     path('my-page/', views.my_page, name= 'my_page'),
     path('', views.main, name = 'main'),
     path('test', views.test, name = 'test'),
-]
+    path('add-content', views.add_content, name='add-content')]
