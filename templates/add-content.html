@@ -1,70 +1,214 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-     {% load static %}
-	<link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
-	<link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
-    <script src="{% static 'jQuery/jquery-3.2.1.min.js' %}"></script>
-    <script src="{% static 'bootstrap4/bootstrap.bundle.min.js' %}"></script>
-</head>
-<body>
-    <div class="container mt-5">
-        <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-md-8">
-                <form id="regForm">
-                    <h1 id="register">Survey Form</h1>
-                    <div class="all-steps" id="all-steps">
-                      <span class="step"><i class="fa fa-user"></i></span>
-                      <span class="step"><i class="fa fa-map-marker"></i></span>
-                      <span class="step"><i class="fa fa-shopping-bag"></i></span>
-                      <span class="step"><i class="fa fa-car"></i></span>
-                      <span class="step"><i class="fa fa-spotify"></i></span>
-                      <span class="step"><i class="fa fa-mobile-phone"></i></span>
-                    </div>
+{% extends "layouts/base.html" %}
 
-                    <div class="tab">
-                      <h6>What's your name?</h6>
-                        <p>
-                          <input placeholder="Name..." oninput="this.className = ''" name="fname"></p>
+{% block title %} Add Content {% endblock %}
 
-                    </div>
-                    <div class="tab">
-                      <h6>What's your city?</h6>
-                        <p><input placeholder="City" oninput="this.className = ''" name="dd"></p>
-
-                    </div>
-                    <div class="tab">
-                        <h6>What's your Favourite Shopping site?</h6>
-                        <p><input placeholder="Favourite Shopping site" oninput="this.className = ''" name="email"></p>
-
-                    </div>
-                    <div class="tab">
-                        <h6>What's your Favourite car?</h6>
-                        <p><input placeholder="Favourite car" oninput="this.className = ''" name="uname"></p>
-                    </div>
-
-                    <div class="tab">
-                        <h6>What's your Favourite Song?</h6>
-                        <p><input placeholder="Favourite Song" oninput="this.className = ''" name="uname"></p>
-                    </div>
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+{% endblock stylesheets %}
 
 
-                    <div class="tab">
-                        <h6>What's your Favourite Mobile brand?</h6>
-                        <p><input placeholder="Favourite Mobile Brand" oninput="this.className = ''" name="uname"></p>
-                    </div>
-                    <div class="thanks-message text-center" id="text-message"> <img src="https://i.imgur.com/O18mJ1K.png" width="100" class="mb-4">
-                        <h3>Thankyou for your feedback!</h3> <span>Thanks for your valuable information. It helps us to improve our services!</span>
-                    </div>
-                    <div style="overflow:auto;" id="nextprevious">
-                        <div style="float:right;">
-                          <button type="button" id="prevBtn" onclick="nextPrev(-1)"><i class="fa fa-angle-double-left"></i></button>
-                          <button type="button" id="nextBtn" onclick="nextPrev(1)"><i class="fa fa-angle-double-right"></i></button> </div>
-                    </div>
-                </form>
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="title">Add Content</h5>
+      </div>
+      <div class="card-body">
+        <form id="form1">
+          <div class="row">
+            <div class="col-md-5 pr-md-1">
+              <div class="form-group">
+                <label>Title</label>
+                <input id="content-title" type="text" class="form-control" name="content-title">
+              </div>
             </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5 pr-md-1">
+              <div class="form-group">
+                <label>Category</label>
+                <select id="category" class="form-control" name="category">
+                  {% for option in categories %}
+                      <option value="{{option.id}}" class="dropdown-item">{{ option.title }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5 pr-md-1">
+              <div class="form-group">
+                <label>File Sharing</label>
+                <select id="is-private" class="form-control" name="is-private">
+                  {% for option in privates %}
+                      <option value="{{option}}" class="dropdown-item" >{{ option }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+          </div>
+
+        </form>
+        <div>
+          <label>Upload File</label>
+          <form enctype="multipart/form-data" id="form2">
+              {% csrf_token %}
+              <input id="content-file" type="file" name="content-file">
+          </form>
+          <button class="btn btn-round" data-toggle="modal" data-target="#attachModal" id="addAttach">
+            <i></i> Add Attachments
+          </button>
+
+          <div class="modal fade modal-primary" id="attachModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-login">
+              <div class="modal-content">
+                <div class="card card-login card-plain">
+                  <div class="modal-body ">
+                    <form class="form" id="form3">
+                      <div class="card-content">
+                        <div class="input-group no-border form-control-lg">
+                            <input id="attach-title" name="attach-title" type="text" class="form-control" placeholder="Title">
+                        </div>
+
+                        <div class="input-group no-border form-control-lg">
+                            <select id="attach-category" name="attach-category" class="form-control">
+                            </select>
+                        </div>
+                      </div>
+                    </form>
+                    <form enctype="multipart/form-data" id="form4">
+                      {% csrf_token %}
+                      <input id="attach" type="file" name="attach">
+                    </form>
+                  </div>
+                  <div class="modal-footer text-center pt-4">
+                    <button type="submit" class="btn btn-neutral btn-round btn-lg btn-block" onclick="submitAttachments()">Add</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button type="submit" class="btn btn-fill btn-primary" onclick="submitForms()">Save</button>
+          </div>
         </div>
+      </div>
     </div>
-</body>
-</html>
+  </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript">
+        $("#addAttach").click(function () {
+            $("#attach").val('');
+            $("#attach-title").val('');
+            var cat_id = $("#category").val();
+            console.log(cat_id);
+            $("#attach-category option").remove();
+            var s = {{attach_categories|safe}}
+            var items = $.grep(s, function(v) {
+                return v.category_id === parseInt(cat_id);
+            });
+            console.log(items)
+            $.each(items, function (i, item) {
+                $('#attach-category').append($('<option>', {
+                    value: item.value,
+                    text : item.title
+                }));
+            });
+            $("#attach-category option").each(function(){
+                $(this).prop("class", "dropdown-item");
+            });
+        });
+</script>
+<script>
+  var attachments = []
+  function submitForms() {
+    var form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("enctype", "multipart/form-data")
+    var title = document.getElementById("content-title")
+    var category = document.getElementById("category")
+    var is_private = document.getElementById("is-private")
+    var file = document.getElementById("content-file")
+    form.appendChild(title);
+    form.appendChild(category);
+    form.appendChild(is_private);
+    form.appendChild(file);
+
+    var attach_files = document.createElement("input");
+    attach_files.setAttribute("type", "file");
+    attach_files.setAttribute("name", "attachments");
+    attach_files.setAttribute("multiple", "multiple");
+
+    let list = new DataTransfer();
+
+    var attach_titles = "[ ";
+    var attach_categories = "[ ";
+    var i = 1;
+    for(const at of attachments) {
+      attach_titles = attach_titles.concat("\"");
+      attach_titles = attach_titles.concat(at['title'].value);
+      attach_titles = attach_titles.concat("\"");
+      attach_titles = attach_titles.concat(",")
+
+      attach_categories = attach_categories.concat("\"");
+      attach_categories = attach_categories.concat(at['category'].value);
+      attach_categories = attach_categories.concat("\"");
+      attach_categories = attach_categories.concat(",")
+      var attachment_file = at['file']
+      list.items.add(attachment_file.files[0])
+      i = i + 1;
+    }
+    console.log(list.items);
+    attach_files.files = list.files;
+    console.log(attach_files.files);
+    attach_titles = attach_titles.slice(0, -1) + ']';
+    attach_categories = attach_categories.slice(0, -1) + ']';
+    var at_title = document.createElement("input");
+    at_title.setAttribute("type", "text");
+    at_title.setAttribute("class", "form-control");
+    at_title.setAttribute("name", "attach-titles");
+    at_title.setAttribute("value", attach_titles);
+
+    var at_category = document.createElement("input");
+    at_category.setAttribute("type", "text");
+    at_category.setAttribute("class", "form-control");
+    at_category.setAttribute("name", "attach-categories");
+    at_category.setAttribute("value", attach_categories);
+
+    form.appendChild(at_title);
+    form.appendChild(at_category);
+    form.appendChild(attach_files);
+
+    $(document.body).append(form);
+    form.submit();
+  }
+  function submitAttachments() {
+    console.log(attachments)
+    var attachment_file = document.getElementById("attach")
+    if (attachment_file.value.length === 0) {
+      console.log("fuck")
+    }
+    else{
+      var attachment_title = document.getElementById("attach-title")
+      if (attachment_title.value === "") {
+        console.log("fuck2")
+      }
+      else {
+        var attachment_category = document.getElementById("attach-category")
+        attachments.push({'file': attachment_file.cloneNode(true), 'title': attachment_title.cloneNode(true), 'category': attachment_category.cloneNode(true)})
+        $('#attachModal').modal('hide');
+      }
+    }
+  }
+</script>
+{% endblock javascripts %}

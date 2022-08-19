@@ -1,9 +1,11 @@
+import json
+from datetime import datetime
 
-from multiprocessing.forkserver import connect_to_new_process
+from django.db import transaction
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_protect
-from main_app.models import Content, Suffix, Category, AttachCategory, File
+from main_app.models import Content, Suffix, Category, AttachCategory, File, Attachment
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
@@ -16,7 +18,8 @@ import templates
 def suffix(request):
     return render(request, 'example.html')
 
-#def content_main_page(request, content_id):
+
+# def content_main_page(request, content_id):
 
 
 @csrf_protect
@@ -71,7 +74,7 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             print('nnn')
-            return redirect("/")  
+            return redirect("/")
         else:
             print('----')
             messages.info(request, 'invalid username or password')
@@ -105,24 +108,34 @@ def sign_up(request):
         return render(request, 'Sign-up.html')
 
 
+@transaction.atomic
 def add_content(request):
-    # print(request.data)
     if request.method == 'GET':
-        return render(request, 'add-content.html')
+        all_categories = Category.objects.all()
+        attach_list = []
+        for category in all_categories:
+            attachs = category.allowed_attach_categories.all()
+            for attach in attachs:
+                attach_list.append({'category_id': category.pk, 'value': attach.pk, 'title': attach.title})
+        print(attach_list)
+        return render(request, 'add-content.html',
+                      {'categories': Category.objects.all(), 'privates': ['Private', 'Public'],
+                       'attach_categories': attach_list})
     if request.method == 'POST':
-        title = request.POST.get('title', '')
+        title = request.POST.get('content-title', '')
+        print(request.POST)
         if title == '':
             return error(request, "title is required")
         is_private = request.POST.get('is-private', None)
-        if is_private.lower() != 'false' and is_private.lower() != 'true':
+        if is_private.lower() != 'public' and is_private.lower() != 'private':
             return error(request, "is_private is required")
         else:
-            if is_private.lower() == 'false':
+            if is_private.lower() == 'public':
                 is_private = bool(False)
-            elif is_private.lower() == 'true':
+            elif is_private.lower() == 'private':
                 is_private = bool(True)
 
-        categoryID = request.POST.get('category-id', None)
+        categoryID = request.POST.get('category', None)
         try:
             categoryID = int(categoryID)
         except ValueError:
@@ -131,74 +144,20 @@ def add_content(request):
         if category is None:
             return error(request, "category does not exist")
 
-        """
-        libraryID = request.POST.get('library-id', None)
-        if libraryID is not None and libraryID != '':
-            try:
-                libraryID = int(libraryID)
-                library = Library.objects.filter(pk=libraryID).first()
-                if library is None:
-                    return error(request, "library does not exist")
-            except ValueError:
-                return error(request, "library does not exist")
-        else:
-            library = None
-        """
-        creator_accountID = request.POST.get('creator-account-id', -1)
+        user = User.objects.filter(pk=request.user.id).first()
+        if user is None:
+            return error(request, "user does not exist")
         try:
-            creator_accountID = int(creator_accountID)
-            creator_account = Account.objects.filter(pk=creator_accountID).first()
+            creator_account = Account.objects.filter(user=user).first()
             if creator_account is None:
-                return error(request, "creator account does not exist")
+                return error(request, "account creator does not exist")
         except ValueError:
             return error(request, "account is required")
 
-        """
-        shared_with_accountIDs_str = request.POST.get('shared-with-account-ids', None)
-        shared_with_accounts = []
-        if shared_with_accountIDs_str is not None and shared_with_accountIDs_str != "":
-            shared_with_accountIDs_str_lst = json.loads(shared_with_accountIDs_str)
-            for x in shared_with_accountIDs_str_lst:
-                try:
-                    shared_with_account_id = int(x)
-                    shared_with_account = Account.objects.filter(pk=shared_with_account_id).first()
-                    if shared_with_account is None:
-                        return error(request, "share account does not exist")
-                    shared_with_accounts.append(shared_with_account)
-                except ValueError:
-                    return error(request, "at least one of the shared accounts do not exist")
-
-        content_attributes_str = request.POST.get('content-attributes', None)
-        content_attributes_lst = json.loads(content_attributes_str)
-        content_attributes = []
-        for x in content_attributes_lst:
-            key = x['key']
-            value = x['value']
-            # ca = ContentAttribute.objects.filter(key=key).first()
-            # if ca is not None:
-                # if ca matches category:
-            content_attribute = ContentAttribute(key=key, value=value)
-            content_attributes.append(content_attribute)
-            #else:
-            #    return error(request, "content attribute does not exist")
-        """
-        attach_categories_str = request.POST.get('attach-categories', None)
-        attach_categories_str_lst = json.loads(attach_categories_str)
-        attach_categories = []
-        for x in attach_categories_str_lst:
-            try:
-                attach_category_id = int(x)
-                attach_category = AttachCategory.objects.filter(pk=attach_category_id).first()
-                if attach_category is None:
-                    return error(request, "attach category does not exist")
-                attach_categories.append(attach_category)
-            except ValueError:
-                return error(request, "at least on of attach categories do not exist")
-
-        attach_category_titles = request.POST.get('attach-category-titles', None)
-        attach_category_titles = json.loads(attach_category_titles)
-
         file = (request.FILES.get('content-file', None))
+        if file is None:
+            return error(request, 'File is None')
+
         idx_suffix = file.name.rfind('.')
         if idx_suffix == -1:
             return error(request, "file does not have suffix")
@@ -214,11 +173,33 @@ def add_content(request):
                                 bytes=file.read(), suffix=file_suffix)
         else:
             return error(request, "file-content is empty")
+
+        attach_categories_str = request.POST.get('attach-categories', None)
+        print(attach_categories_str)
+        attach_categories_str_lst = json.loads(attach_categories_str)
+        attach_categories = []
+        for x in attach_categories_str_lst:
+            try:
+                attach_category_id = int(x)
+                attach_category = AttachCategory.objects.filter(pk=attach_category_id).first()
+                if attach_category is None:
+                    return error(request, "attach category does not exist")
+                attach_categories.append(attach_category)
+            except ValueError:
+                return error(request, "at least on of attach categories do not exist")
+
+        attach_titles = request.POST.get('attach-titles', None)
+        attach_titles = json.loads(attach_titles)
+
         content_attachments = []
         attachments = request.FILES.getlist('attachments')
+        print(attachments)
         if attachments is not None:
             if len(attachments) != len(attach_categories):
                 return error(request, "attachments and attach_categories do not have same length")
+
+            if len(attachments) != len(attach_titles):
+                return error(request, "attachments and attach_titles do not have same length")
 
             for i in range(len(attachments)):
                 attachment = attachments[i]
@@ -235,25 +216,26 @@ def add_content(request):
                 if attachment is not None:
                     attachment_file = File(title=attachment.name, creation_date=datetime.now(),
                                            modification_date=datetime.now(),
-                                           bytes=file.read(), suffix=attach_suffix)
+                                           bytes=attachment.read(), suffix=attach_suffix)
                 attach_category = attach_categories[i]
-                content_attachment = Attachment(title=attach_category_titles[i], attach_category=attach_category,
+                content_attachment = Attachment(title=attach_titles[i], attach_category=attach_category,
                                                 file=attachment_file)
                 content_attachments.append(content_attachment)
 
-        if not category.allowed_suffixes.filter(content_file.suffix).exists():
-            error(request, "category allowed suffix")
+        if content_file.suffix not in category.allowed_suffixes.all():
+            print("sssss")
+            return error(request, "category allowed suffix")
         for content_attachment in content_attachments:
-            if not content_attachment.attach_category.allowed_suffixes.filter(content_attachment.file.suffix).exists():
-                error(request, "attachment allowed suffix")
-            if not category.allowed_attach_categories.filter(content_attachment.attach_category).exists():
-                error(request, "category, attachment, not match")
-        return HttpResponse("str", status=500)
-        content_file.save()
-        content = Content(title=title, is_private=is_private, category=category, file=content_file, library=library,
-                          creator_account=creator_account)
+            if content_attachment.attach_category not in category.allowed_attach_categories.all():
+                return error(request, "category, attachment, not match")
+            if content_attachment.file.suffix not in content_attachment.attach_category.allowed_suffixes.all():
+                return error(request, "attachment allowed suffix")
 
+        content_file.save()
+        content = Content(title=title, is_private=is_private, category=category, file=content_file,
+                          creator_account=creator_account)
         content.save()
+        """
         content.shared_with_accounts.set(shared_with_accounts)
         for content_attachment in content_attachments:
             content_attachment.content = content
@@ -262,9 +244,11 @@ def add_content(request):
         for content_attribute in content_attributes:
             content_attribute.content = content
             content_attribute.save()
+        """
     else:
         return error(request, "request is not post")
     return HttpResponse('<h1>Content saved</h1>')
+
 
 def error(request, str):
     messages.info(request, str)
@@ -277,14 +261,13 @@ def handle_uploaded_file(f):
             destination.write(chunk)
 
 
-
 def my_page(request):
     # file = File()
     # file.save()
     # content = Content (title = "hello", is_private = False, file = file)
     # content.save()
     # print(len(Content.objects.all()), 'hihihih')
-    return render(request, 'my-page4.html', {'contents': Content.objects.all(), 'categories':Category.objects.all()})
+    return render(request, 'my-page4.html', {'contents': Content.objects.all(), 'categories': Category.objects.all()})
 
 
 def logout(request):
@@ -294,6 +277,7 @@ def logout(request):
 
 def main(request):
     return render(request, 'main.html')
+
 
 def test(request):
     return render(request, 'category.html')
