@@ -104,25 +104,27 @@ def sign_up(request):
     else:
         return render(request, 'Sign-up.html')
 
-def my_page(request, type, category):
+def my_page(request, type, categoryTitle):
     # file = File()
     # file.save()
     # content = Content (title = "hello", is_private = False, file = file)
     # content.save()
     # print(len(Content.objects.all()), 'hihihih')
     if type == 'files':
-        if category == 'all':
+        if categoryTitle == 'all':
             items = Content.objects.all()
         else:
+            category = Category.objects.filter(title = categoryTitle)[0]
             items = Content.objects.filter(category = category)
     elif type == 'libraries':
-        if category == 'all':
+        if categoryTitle == 'all':
             items = Library.objects.all()
         else:
+            category = Category.objects.filter(title = categoryTitle)[0]
             items = Library.objects.filter(category = category)
     elif type == 'shared':
         pass
-    return render(request, 'my-page4.html', {'Contents': items, 'categories':Category.objects.all()})
+    return render(request, 'my-page4.html', {'contents': items, 'categories':Category.objects.all(),'categoryTitle': categoryTitle, 'type': type})
 
 
 def logout(request):
@@ -134,4 +136,4 @@ def main(request):
     return render(request, 'main.html')
 
 def test(request):
-    return render(request, 'category.html')
+    return render(request, 'test2.html')

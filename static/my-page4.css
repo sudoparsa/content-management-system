@@ -15,7 +15,9 @@ a {
   -o-transition: .3s all ease;
   transition: .3s all ease; }
   a, a:hover {
-    text-decoration: none !important; }
+    text-decoration: none !important;
+  color: red; }
+
 
 h2 {
   font-size: 20px; }

@@ -4100,6 +4100,11 @@ input[type="button"].btn-block {
   display: block;
 }
 
+
+.navbar-nav > .active > a { 
+  background-color: red ; 
+}
+
 .navbar {
   position: relative;
   display: flex;
