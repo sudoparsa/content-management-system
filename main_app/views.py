@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_protect
-from main_app.models import Content, Library, Suffix, Category, AttachCategory, File
+from main_app.models import Content, Library, Suffix, Category, AttachCategory, File, ContentAttributeKey, Account
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
@@ -134,3 +134,45 @@ def main(request):
 
 def test(request):
     return render(request, 'category.html')
+
+
+def show_library(request):
+    account = Account.objects.get(user=request.user.username)
+    query_set = Library.objects.get(account=account).values()
+    return render(request, 'library.html', query_set)
+
+
+def add_library(request):
+    if request.method == 'POST':
+        Library.objects.create(title="", category='', account='')
+        return HttpResponse("library has been successfully created")
+    else:
+        raise Http404("Request must be post")
+
+
+def delete_library(request):
+    if request.method == 'POST':
+        library = Library.objects.get(title=request.POST['title'])
+        library.delete()
+    return HttpResponse("library has been successfully deleted")
+
+
+def show_attribute_key(request):
+    account = Account.objects.get(user=request.user.username)
+    query_set = ContentAttributeKey.objects.get(account=account).values()
+    return render(request, 'attribute.html', query_set)
+
+
+def add_attribute_key(request):
+    if request.method == 'POST':
+        ContentAttributeKey.objects.create(key=request.POST['key'], category=request.POST['category'], account=request.POST['account'])
+        return HttpResponse("attribute has been successfully created")
+    else:
+        raise Http404("Request must be post")
+
+
+def delete_attribute_key(request):
+    if request.method == 'POST':
+        attribute = ContentAttributeKey.objects.get(key=request.POST['key'])
+        attribute.delete()
+    return HttpResponse("attribute has been successfully deleted")
