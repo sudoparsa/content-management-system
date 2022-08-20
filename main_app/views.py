@@ -5,7 +5,8 @@ from django.db import transaction
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_protect
-from main_app.models import Content, Suffix, Category, AttachCategory, File, Attachment
+from main_app.models import Content, Suffix, Category, AttachCategory, File, Attachment, ContentAttribute, Library, \
+    ContentAttributeKey
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
@@ -280,3 +281,170 @@ def main(request):
 
 def test(request):
     return render(request, 'category.html')
+
+
+def modify_content_page(content):
+    new_file = ""
+    file1 = open("templates/content/content.html", 'r')
+    lines = file1.readlines()
+    for line in lines:
+        new_file += line
+        if line.find("scroll") != -1:
+            for attachment in Attachment.objects.all():
+                if attachment.content == content:
+                    new_file += f'<b style="color: purple">{attachment.title}</b><br>\n'
+
+    file2 = open("templates/content/content2.html", 'w')
+    file2.write(new_file)
+    file2.close()
+
+
+def content_main_page(request, content_id):
+    content = Content.objects.get(pk=content_id)
+    context = {}
+    context['title'] = content.title
+    context['category'] = content.category.title
+    context['categoryID'] = content.category.pk
+    context['creator_user'] = content.creator_account.user.username
+    context['creation_date'] = content.file.creation_date
+    context['privacy'] = "Private"
+    if not content.is_private:
+        context['privacy'] = "Public"
+
+    all_categories = Category.objects.all()
+    attach_list = []
+    for category in all_categories:
+        attachs = category.allowed_attach_categories.all()
+        for attach in attachs:
+            attach_list.append({'category_id': category.pk, 'value': attach.pk, 'title': attach.title})
+
+    context['attach_categories'] = attach_list
+
+    attachments = list(Attachment.objects.filter(content=content))
+    attachments_send = []
+    for attachment in attachments:
+        attachments_send.append({'file': "", 'title': attachment.title, 'category': attachment.attach_category.pk})
+
+    context['attachments'] = attachments_send
+
+    attribute_keys_values = list(ContentAttribute.objects.filter(content=content))
+    used_attribute_keys = []
+    for akv in attribute_keys_values:
+        used_attribute_keys.append(akv.key.key)
+    attribute_keys = list(ContentAttributeKey.objects.filter(category=content.category))
+    attribute_key_values_send = []
+    counter = 0
+    for ak in attribute_keys:
+        if ak.key in used_attribute_keys:
+            attribute_key_values_send.append({"key": ak.key, "value": attribute_keys_values[counter].value})
+            counter += 1
+        else:
+            attribute_key_values_send.append({"key": ak.key, "value": ""})
+
+    context["attribute_key_values"] = attribute_key_values_send
+    context['error'] = "None"
+    return render(request, 'content.html', context)
+
+
+def add_content_to_library(request, content_id):
+    content = Content.objects.all().get(pk=content_id)
+    print(request.GET)
+    for library_dict in request.GET.items():
+        library_name = library_dict[1]
+        print(library_name)
+        library = Library.objects.all().filter(title=library_name)[0]
+        if library.category == content.category:
+            content.library = library
+            content.save()
+            return redirect('../../')
+        else:
+            new_file = ""
+            if request.method == "GET":
+                file1 = open("templates/library_error/Copy-of-Home.html", 'r')
+                lines = file1.readlines()
+                for line in lines:
+                    new_file += line
+                    if line.find("<header") != -1:
+                        new_file += '<div class=\"alert\">  <span class=\"closebtn\" onclick="this.parentElement.style.display=\'none\';\">&times;</span> This is an alert box </div>\n'
+                        print("ksjfa")
+                    if line.find("<form") != -1:
+                        print("hi")
+                        for library in Library.objects.all():
+                            new_file += f'<input type = \"radio\" id = \"{library.id} \" name = \"library\" value = \"{library.title}\" > <label style = \"color: white\" for =\"library{library.id}\" > {library.title} </label > <br>\n '
+
+            file2 = open("templates/library_error/Copy-of-Home2.html", 'w')
+            file2.write(new_file)
+            file2.close()
+            return render(request, "../templates/library_error/Copy-of-Home2.html")
+
+
+def add_to_library(request, content_id):
+    new_file = ""
+    if request.method == "GET":
+        file1 = open("templates/add_to_library/Copy-of-Home.html", 'r')
+        lines = file1.readlines()
+        for line in lines:
+            new_file += line
+            if line.find("<form") != -1:
+                print("hi")
+                for library in Library.objects.all():
+                    new_file += f'<input type = \"radio\" id = \"{library.id} \" name = \"library\" value = \"{library.title}\" > <label style = \"color: white\" for =\"library{library.id}\" > {library.title} </label > <br>\n '
+
+        file2 = open("templates/add_to_library/Copy-of-Home2.html", 'w')
+        file2.write(new_file)
+        file2.close()
+    return render(request, "../templates/add_to_library/Copy-of-Home2.html")
+
+
+@csrf_protect
+def create_suffix(request):
+    if request.method == 'POST':
+        suffix_ = Suffix.objects.create(title=request.POST['suffix'])
+        suffix_.save()
+        return HttpResponse("Suffix has been successfully created")
+    else:
+        raise Http404("Request must be post")
+
+
+def attach_category(request):
+    return render(request, 'example2.html')
+
+
+def create_attach_category(request):
+    if request.method == 'POST':
+        suffix_ = get_object_or_404(Suffix, pk=request.POST['suffix-id'])
+        attach_category = AttachCategory.objects.create(title=request.POST['title'])
+        attach_category.allowed_suffixes.add(suffix_)
+        return HttpResponse("Attach category has been successfully created")
+    else:
+        raise Http404("Request must be post")
+
+
+def category(request):
+    return render(request, 'example3.html')
+
+
+def create_category(request):
+    if request.method == 'POST':
+        suffix_ = get_object_or_404(Suffix, pk=request.POST['suffix-id'])
+        attach_category_ = get_object_or_404(AttachCategory, pk=request.POST['category-id'])
+        category_ = Category.objects.create(title=request.POST['title'])
+        category_.allowed_suffixes.add(suffix_)
+        category_.allowed_attach_categories.add(attach_category_)
+        return HttpResponse("Category has been successfully created")
+    else:
+        raise Http404("Request must be post")
+
+
+def download_content(request, content_id):
+    content = Content.objects.all().get(pk=content_id)
+    return render(request, '../templates/download_content/content.html',
+                  {'content_title': content.title, 'content_suffix': content.file.suffix})
+
+
+def create_download_link(request, content_id):
+    content = Content.objects.all().get(pk=content_id)
+    file = open(f'static/content/Downloads/{content.title}.{content.file.suffix}', 'wb')
+    file.write(content.file.bytes)
+    file.close()
+    return redirect("../download/")
