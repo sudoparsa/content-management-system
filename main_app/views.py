@@ -1,6 +1,4 @@
-
-from multiprocessing.forkserver import connect_to_new_process
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_protect
 from main_app.models import Content, Library, Suffix, Category, AttachCategory, File
@@ -9,14 +7,13 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from main_app.models import Account
 
-import templates
-
 
 # Create your views here.
 def suffix(request):
     return render(request, 'example.html')
 
-#def content_main_page(request, content_id):
+
+# def content_main_page(request, content_id):
 
 
 @csrf_protect
@@ -75,7 +72,7 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             print('nnn')
-            return redirect("/")  
+            return redirect("/")
         else:
             print('----')
             # messages.info(request, 'invalid username or password')
@@ -152,6 +149,7 @@ def logout(request):
 
 def main(request):
     return render(request, 'main.html')
+
 
 def test(request):
     return render(request, 'test2.html')

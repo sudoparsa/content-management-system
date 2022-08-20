@@ -5,10 +5,10 @@ from . import views
 urlpatterns = [
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
-    path('signup/', views.sign_up, name = 'signup'),
+    path('signup/', views.sign_up, name='signup'),
     path('suffix/', views.suffix, name='suffix'),
     path('create-suffix/', views.create_suffix, name='create_suffix'),
-    path('signup#/', views.sign_up, name='signup'),
+    # path('signup#/', views.sign_up, name='signup'),
     # path('content/<int:content_id>/', views.content_main_page, name='content_main_page'),
     path('attach-category/', views.attach_category, name='attach-category'),
     path('create-attach-category/', views.create_attach_category, name='create-attach-category'),
