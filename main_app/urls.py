@@ -18,8 +18,7 @@ urlpatterns = [
     path('', views.main, name = 'main'),
     path('test', views.test, name='test'),
     path('content', views.add_content, name='add-content'),
-    path('content/<int:content_id>/', views.content_main_page, name='content_main_page')]
+    path('content/<int:content_id>/', views.content_main_page, name='content_main_page'),
     path('my-page/<str:type>/<str:category>', views.my_page, name='my_page'),
     path('', views.main, name='main'),
-    path('test', views.test, name='test'),
-]
+    path('test', views.test, name='test')]
