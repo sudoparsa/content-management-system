@@ -14,15 +14,8 @@ urlpatterns = [
     path('create-attach-category/', views.create_attach_category, name='create-attach-category'),
     path('category/', views.category, name='category'),
     path('create-category/', views.create_category, name='create-category'),
-    path('my-page/', views.my_page, name= 'my_page'),
-    path('', views.main, name = 'main'),
-    path('test', views.test, name='test'),
     path('content', views.add_content, name='add-content'),
     path('content/<int:content_id>/', views.content_main_page, name='content_main_page'),
-    path('my-page/<str:type>/<str:category>', views.my_page, name='my_page'),
     path('', views.main, name='main'),
-    path('test', views.test, name='test')]
     path('my-page/<str:type>/<str:categoryTitle>/', views.my_page, name= 'my_page'),
-    path('', views.main, name = 'main'),
-    path('test', views.test, name = 'test'),
-]
+    path('test', views.test, name = 'test')]
