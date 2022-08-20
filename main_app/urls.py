@@ -22,3 +22,7 @@ urlpatterns = [
     path('my-page/<str:type>/<str:category>', views.my_page, name='my_page'),
     path('', views.main, name='main'),
     path('test', views.test, name='test')]
+    path('my-page/<str:type>/<str:categoryTitle>/', views.my_page, name= 'my_page'),
+    path('', views.main, name = 'main'),
+    path('test', views.test, name = 'test'),
+]

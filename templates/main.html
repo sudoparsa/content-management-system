@@ -6,17 +6,24 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="description" content="Travello template project">
+	<meta name="description" content="my page">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title> Shrive </title>
 	<link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
 	<link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+	<link rel="stylesheet" type="text/css" href="../static/main_styles.css">
+	<!-- <link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}"> -->
 	<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+
+	
 	<link rel="stylesheet" type="text/css" href="{% static 'styles/about_us2.css' %}">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+
+
+
 </head>
 
 <script>
@@ -54,7 +61,7 @@
 									<ul class="d-flex flex-row align-items-start justify-content-start">
 										<li class="active"><a href="">Home</a></li>
 										{% if user.is_authenticated %}
-										<li><a href="my-page/files/all">My Files2</a></li>
+										<li><a href="my-page/files/all/">My Files</a></li>
 										<li><a href="logout">Logout</a></li>
 										<li>Hello, {{user.first_name}}</li>
 										
@@ -407,7 +414,7 @@
 		<!-- Footer -->
 
 		<footer class="footer">
-			<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{%static 'images/mountains-4k.jpg' %}" data-speed="0.8">
+			<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{%static 'images/nature.jpeg' %}" data-speed="0.8">
 							</div>
 								<div class="row footer_contact_row">
 									<div class="col-xl-10 offset-xl-1">
@@ -423,8 +430,7 @@
 													<div class="footer_contact_title">give us a call</div>
 													<div class="footer_contact_list">
 														<ul>
-															<li>Office Landline: +44 5567 32 664 567</li>
-															<li>Mobile: +44 5567 89 3322 332</li>
+															<li>Office Landline: +44556732</li>
 														</ul>
 													</div>
 												</div>
@@ -439,8 +445,8 @@
 													</div>
 													<div class="footer_contact_title">come & drop by</div>
 													<div class="footer_contact_list">
-														<ul style="max-width:190px">
-															<li>4124 Barnes Street, Sanford, FL 32771</li>
+														<ul style="max-width:300px">
+															<li>Computer Department, Sharif University of Technology, Azadi Avenue, Tehran</li>
 														</ul>
 													</div>
 												</div>
@@ -457,8 +463,7 @@
 													</div>
 													<div class="footer_contact_list">
 														<ul>
-															<li>youremail@gmail.com</li>
-															<li>Office@yourbusinessname.com</li>
+															<li>shrive@gmail.com</li>
 														</ul>
 													</div>
 												</div>
@@ -471,14 +476,19 @@
 							</footer>
 						</div>
 
-						<script src="{% static 'js/jquery-3.2.1.min.js' %}">
+						<script src="static/main-page-js/jquery-3.3.1.min.js">
 						</script>
-						<script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+						<script src="static/bootstrap4/popper.js"></script>
 						<script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
 						<script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
 						<script src="{% static 'plugins/Isotope/isotope.pkgd.min.js' %}"></script>
 						<script src="{% static 'plugins/scrollTo/jquery.scrollTo.min.js' %}"></script>
 						<script src="{% static 'plugins/easing/easing.js' %}"></script>
 						<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+<<<<<<< HEAD
+						<script src="../static/main-page-js/custom.js"></script>
+</body>
+=======
 						<script src="{% static 'js/custom.js' %}"></script>
 </body>
+>>>>>>> 9df4f71b7e50755c692b8c42703fd8468c938971

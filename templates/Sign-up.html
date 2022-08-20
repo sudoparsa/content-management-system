@@ -21,7 +21,8 @@
 		"name": "",
 		"logo": "/images/default-logo.png",
 		"sameAs": []
-}</script>
+      }
+</script>
     <meta name="theme-color" content="#478ac9">
     <meta property="og:title" content="Sign up">
     <meta property="og:type" content="website">
@@ -55,8 +56,8 @@
         <a href="https://nicepage.com" class="u-image u-logo u-image-1" data-image-width="80" data-image-height="40">
           <img class="u-logo-image u-logo-image-1" src="../static/images/defaultlogo.png">
         </a>
-        <a href="/Sign-in.html" data-page-id="2616879" class="u-active-black u-border-1 u-border-active-black u-border-hover-black u-border-white u-btn u-btn-round u-button-style u-hover-black u-none u-radius-12 u-text-active-white u-text-hover-white u-btn-1">Sign in</a>
-        <a href="/Sign-up.html" data-page-id="2620464" class="u-active-black u-border-1 u-border-active-black u-border-hover-black u-border-white u-btn u-btn-round u-button-style u-hover-black u-none u-radius-12 u-text-active-white u-text-hover-white u-btn-2">Sign up</a>
+        <a href="/login" data-page-id="2616879" class="u-active-black u-border-1 u-border-active-black u-border-hover-black u-border-white u-btn u-btn-round u-button-style u-hover-black u-none u-radius-12 u-text-active-white u-text-hover-white u-btn-1">Sign in</a>
+        <a href="/signup" data-page-id="2620464" class="u-active-black u-border-1 u-border-active-black u-border-hover-black u-border-white u-btn u-btn-round u-button-style u-hover-black u-none u-radius-12 u-text-active-white u-text-hover-white u-btn-2">Sign up</a>
       </div></header>
     <section class="u-clearfix u-image u-section-1" id="sec-3f8f" data-image-width="1620" data-image-height="1080">
       <div class="u-clearfix u-gutter-44 u-layout-wrap u-layout-wrap-1">
@@ -89,7 +90,7 @@
                         <div class="u-align-right u-form-group u-form-submit">
                           <!-- <a href="#" class="u-active-palette-2-base u-border-5 u-border-active-palette-2-base u-border-hover-palette-2-base u-border-palette-4-base u-btn u-btn-round u-btn-submit u-button-style u-hover-palette-2-base u-palette-4-base u-radius-10 u-btn-1">Register</a> -->
                           <!-- <input type="submit" value="submit" class="u-form-control-hidden"> -->
-                          <input type="submit">
+                          <input class="u-active-palette-2-base u-border-5 u-border-active-palette-2-base u-border-hover-palette-2-base u-border-palette-4-base u-btn u-btn-round u-btn-submit u-button-style u-hover-palette-2-base u-palette-4-base u-radius-10 u-btn-1" type="submit">
                         </div>
                         <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
                         <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors then try again. </div>
@@ -105,8 +106,7 @@
             </div>
             <div class="u-container-style u-custom-color-7 u-layout-cell u-opacity u-opacity-65 u-size-30-lg u-size-30-xl u-size-60-md u-size-60-sm u-size-60-xs u-layout-cell-2">
               <div class="u-container-layout u-valign-middle u-container-layout-3">
-                <h2 class="u-text u-text-3">Create your Account in Library Web.</h2>
-                <p class="u-text u-text-4"> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <h2 class="u-text u-text-3">Create your Account in Shrive</h2>
               </div>
             </div>
           </div>
@@ -115,17 +115,15 @@
     </section>
     
     
-    
-    <section class="u-backlink u-clearfix u-grey-80">
-      <a class="u-link" href="https://nicepage.com/website-templates" target="_blank">
-        <span>Website Templates</span>
-      </a>
-      <p class="u-text">
-        <span>created with</span>
-      </p>
-      <a class="u-link" href="" target="_blank">
-        <span>Website Builder Software</span>
-      </a>. 
-    </section>
   
-</body></html>
+</body>
+
+
+<script>
+  window.onload = function() {
+    if ("{{error}}" !== "None"){
+        alert("{{error}}")
+    }
+  }
+</script>
+</html>

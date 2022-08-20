@@ -62,6 +62,10 @@ def create_category(request):
     else:
         raise Http404("Request must be post")
 
+def get_login(request, error_str):
+    return render(request, 'Sign-in.html', context= {'error': error_str})
+
+
 
 def login(request):
     print('77777777778')
@@ -78,11 +82,16 @@ def login(request):
             return redirect("/")
         else:
             print('----')
-            messages.info(request, 'invalid username or password')
-            return redirect("login")
+            # messages.info(request, 'invalid username or password')
+            return get_login(request, 'invalid username or password')
+            # return redirect("login")
     else:
-        return render(request, 'Sign-in.html')
+        return render(request, 'Sign-in.html', context= {'error': "None"})
 
+
+
+def get_sign_up(request, error_str):
+    return render(request, 'Sign-up.html', context= {'error': error_str})
 
 def sign_up(request):
     print("hello")
@@ -93,20 +102,18 @@ def sign_up(request):
         email = request.POST['email']
 
         if User.objects.filter(username=username).exists():
-            messages.info(request, 'username taken')
-            return redirect('signup')
+            return get_sign_up(request, 'username taken')
         elif User.objects.filter(email=email).exists():
-            messages.info(request, 'email taken')
-            return redirect('signup')
+            return get_sign_up(request, 'email taken')
         else:
-            user = User.objects.create_user(first_name=name.split()[0], last_name=name.split()[-1], username=username,
-                                            password=password, email=email)
+            user = User.objects.create_user(first_name=name.split()[0], last_name=name.split()[-1],
+                                                        username=username, password=password, email=email)
             account = Account.objects.create(user=user, storage=0)
             account.save()
             print("Salamamsadkjasdjasdjaksjd")
             return redirect('login')
     else:
-        return render(request, 'Sign-up.html')
+        return render(request, 'Sign-up.html', context= {'error': "None"})
 
 
 def get_add_content(request, err_str="None"):
@@ -261,25 +268,38 @@ def handle_uploaded_file(f):
             destination.write(chunk)
 
 
-def my_page(request, type, category):
+def my_page(request, type, categoryTitle):
     # file = File()
     # file.save()
     # content = Content (title = "hello", is_private = False, file = file)
     # content.save()
     # print(len(Content.objects.all()), 'hihihih')
+
+    account = request.user.account
+
     if type == 'files':
-        if category == 'all':
-            items = Content.objects.all()
+        if categoryTitle == 'all':
+            items = Content.objects.filter(creator_account = account)
         else:
-            items = Content.objects.filter(category=category)
+            category = Category.objects.filter(title = categoryTitle)[0]
+            items = Content.objects.filter(category = category)
     elif type == 'libraries':
-        if category == 'all':
+        if categoryTitle == 'all':
             items = Library.objects.all()
         else:
-            items = Library.objects.filter(category=category)
+            category = Category.objects.filter(title = categoryTitle)[0]
+            items = Library.objects.filter(category = category)
     elif type == 'shared':
-        pass
-    return render(request, 'my-page4.html', {'Contents': items, 'categories': Category.objects.all()})
+
+        contents = account.shared_with_contents.all()
+        if categoryTitle == 'all':
+            items = contents
+        else:
+            category = Category.objects.filter(title = categoryTitle)[0]
+            items = contents.filter(category = category)
+
+
+    return render(request, 'my-page4.html', {'contents': items, 'categories':Category.objects.all(),'categoryTitle': categoryTitle, 'type': type})
 
 
 def logout(request):
@@ -292,7 +312,7 @@ def main(request):
 
 
 def test(request):
-    return render(request, 'category.html')
+    return render(request, 'test2.html')
 
 
 def modify_content_page(content):

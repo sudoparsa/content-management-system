@@ -5,149 +5,231 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Styles used in sidebar -->
+
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="{% static 'my-page-icon.css' %}">
+    <link rel="stylesheet" href="{% static 'my-page/my-page-icon.css' %}">
 
-    <link rel="stylesheet" href="{% static 'owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'my-page/owl.carousel.min.css' %}"> 
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}"> -->
     
     <!-- Style -->
-    <link rel="stylesheet" href="{% static 'my-page4.css' %}">
+    <link rel="stylesheet" href="{% static 'my-page/my-page4.css' %}">
 
 
-    <link rel="stylesheet" href="{% static 'card_style.css' %}">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'my-page/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'my-page/lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet">
+
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Flaticon Font -->
+    <link href="{% static 'my-page/lib/flaticon/font/flaticon.css' %}" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="{% static 'my-page/card_style.css' %}">
 
     
 
     <!-- category -->
     <!-- <link href="{% static 'category-style.css' %}" rel="stylesheet"> -->
 
+    <link rel="stylesheet" href="{% static 'my-page/button.css' %}">
+
     <title>My Page</title>
   </head>
   <body>
+
+
+    <script src=
+    "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+        </script>
+    <script src=
+    "https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js">
+        </script>
+        <script src=
+    "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js">
+        </script>
+
+    <style>
+      .navbar-nav>.active>a {
+          background-color: #C0C0C0;
+          color: cyan;
+      }
+
+      .navbar-nav .nav-item a:hover{
+        color: fuchsia;
+        background-color: whitesmoke;
+      }
+
+    .navbar-nav{
+        text-align: center;
+      }
+
+    .navbar-nav li{
+      background-color: #e7e7e7;
+      display:inline;
+      padding: 25px;
+  }
+
+  .navbar-nav li a
+  {
+    padding:30px 30px;
+    font-size: large;
+    color: black;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 15px;
+  }
+
+  .hello{
+    position:fixed;
+    top:0;
+    left:0;
+    height: 300px;
+    width: 100%;
+    z-index: 1;
+  }
+
+
+  </style>
+
   
+
+  
+
+<script>
+  $(document).ready(function () {
+
+      $('ul.navbar-nav > li')
+              .click(function (e) {
+          $('ul.navbar-nav > li')
+              .removeClass('active');
+          $(this).addClass('active');
+      });
+  });
+</script>
+
+<!-- <div style="background-image: url({% static 'images/banner3.jpg' %}); height: 150px; repeat: no-repeat"> -->
     
-    <aside class="sidebar">
-      <div class="toggle">
-        <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
-              <span></span>
-            </a>
-      </div>
-      <div class="side-inner">
 
-        <div class="profile">
-          <img src= "../{{user.account.image}}" >
-          <h3 class="name">{{user.first_name}} {{user.last_name}}</h3>
-          <!-- <span class="country">New York, USA</span> -->
+  <div class="hello" style="margin:0; height:100px; background-image: linear-gradient( 135deg, #9f05ff69 10%, #fd5e086b 100%);"> 
+    
+      <aside class="sidebar">
+        <div class="toggle" style="overflow:hidden;">
+          <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar" style="color:white;">
+                <span></span>
+              </a>
         </div>
+        <div class="side-inner">
+  
+          <div class="profile">
+            <img src= "../../../dynamic/{{user.account.image}}" alt="arian" >
+            <h3 class="name">{{user.first_name}} {{user.last_name}}</h3>
+          </div>        
+  
+          <div class="nav-menu">
+            <ul>
+              <!-- <li class="active"><a href="/" style="white-space: pre;"><span class="icon-home mr-3"></span>   Home</a></li> -->
 
-        <!-- <div class="counter d-flex justify-content-center">
-            <div class="col">
-              <strong class="number">892</strong>
-              <span class="number-label">Posts</span>
-            </div>
-            <div class="col">
-              <strong class="number">22.5k</strong>
-              <span class="number-label">Followers</span>
-            </div>
-            <div class="col">
-              <strong class="number">150</strong>
-              <span class="number-label">Following</span>
-            </div>
-        </div> -->
+              {% if type == 'files' %}
+                <li class="active"><a href="/my-page/files/all/" style="white-space: pre;"><span class="icon-files-o mr-3"></span>   Files</a></li>
+              {%else%}
+                <li><a href="/my-page/files/all/" style="white-space: pre;"><span class="icon-files-o mr-3"></span>   Files</a></li>
+              {%endif%}
+
+              {% if type == 'libraries' %}
+                <li class="active"><a href="/my-page/libraries/all/" style="white-space: pre;"><span class="icon-book mr-3"></span>   Library</a></li>
+              {%else%}
+                <li><a href="/my-page/libraries/all/" style="white-space: pre;"><span class="icon-book mr-3"></span>   Library</a></li>
+              {%endif%}
+
+
+              {% if type == 'shared' %}
+                <li class="active"><a href="/my-page/shared/all" style="white-space: pre;"><span class="icon-share2 mr-3"></span>   Shared with me</a></li>
+              {%else%}
+                <li><a href="/my-page/shared/all" style="white-space: pre;"><span class="icon-share2 mr-3"></span>   Shared with me</a></li>
+              {%endif%}
+
+              <li><a href="/logout" style="white-space: pre;"><span class="icon-sign-out mr-3"></span>   Logout</a></li>
+            </ul>
+          </div>
+        </div>
         
+      </aside>
 
-        <div class="nav-menu">
-          <ul>
-            <li class="active"><a href="/"><span class="icon-home mr-3"></span>Home</a></li>
-            <!-- <li><a href="#"><span class="icon-search2 mr-3"></span>Explore</a></li>
-            <li><a href="#"><span class="icon-notifications mr-3"></span>Notifications</a></li> -->
-            <li><a href="#"><span class="icon-files-o mr-3"></span>Files</a></li>
-            <li><a href="#"><span class="icon-book mr-3"></span>Library</a></li>
-            <li><a href="#"><span class="icon-share2 mr-3"></span>Shared with me</a></li>
-            <li><a href="/logout"><span class="icon-sign-out mr-3"></span>Logout</a></li>
-          </ul>
-        </div>
-      </div>
-      
-    </aside>
 
-    <div style="height: 100px;">
+    </div>
+
+    <div style="height: 120px;">
             
     </div>
 
-    <div class="container-fluid bg-light position-relative shadow" style="width: 90%;">
-      <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5">
-          <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-              <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-              <div class="navbar-nav font-weight-bold mx-auto py-0" >
-                  <a href="/my-page/files/all" class="nav-item nav-link active">All</a>
-                  {%for category in categories%}
-                    <a href="/my-page/files/{{categorty.title}}" class="nav-item nav-link">{{category.title}}</a>
-                  {%endfor%}
 
-                  <!-- <div class="nav-item dropdown">
-                      <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                      <div class="dropdown-menu rounded-0 m-0">
-                          <a href="blog.html" class="dropdown-item">Blog Grid</a>
-                          <a href="single.html" class="dropdown-item">Blog Detail</a>
-                      </div>
-                  </div> -->
-              </div>
-          </div>
-      </nav>
-  </div>
+    <ul class="navbar-nav">
+      {% if categoryTitle == 'all' %}
+        <li class = "nav-item active">
+            <a class="nav-link" href="../all/" > All </a>
+        </li>
+      {%else%}
+        <li class = "nav-item">
+          <a class="nav-link" href="../all/" > All </a>
+        </li>
+      {%endif%}
+
+      {%for category in categories%}
+        {% if categoryTitle == category.title %}
+          <li class="nav-item active">
+            <a href="../{{category.title}}/" class="nav-link">{{category.title}}</a>
+          </li>
+        {%else%}
+          <li class="nav-item">
+            <a href="../{{category.title}}/" class="nav-link">{{category.title}}</a>
+          </li>
+        {%endif%}
+      {%endfor%}
+    </ul>
+
+
+  <div style="height: 25px;"> </div>
 
   <div class="grid-container2">
     <div class="grid-container" style="align-self: center;">
-      <div class="grid-item">
-        <div class="card">
-          <img src="img_avatar.png" alt="Avatar" style="width:100%">
-          <div class="container">
-            <h4><b>John Doe</b></h4>
-            <p>Architect & Engineer</p>
-          </div>
-        </div>
-      </div>
-      <div class="grid-item">
-        <div class="card">
-          <img src="img_avatar.png" alt="Avatar" style="width:100%">
-          <div class="container">
-            <h4><b>John Doe</b></h4>
-            <p>Architect & Engineer</p>
-          </div>
-        </div>
-      </div>
-      <div class="grid-item">
-        <div class="card">
-          <img src="img_avatar.png" alt="Avatar" style="width:100%">
-          <div class="container">
-            <h4><b>John Doe</b></h4>
-            <p>Architect & Engineer</p>
-          </div>
-        </div>
-      </div>
-
-
+    
       {%for content in contents%}
       <div class="grid-item">
         <div class="card">
-          <img src="img_avatar.png" alt="Avatar" style="width:100%">
-          <div class="container">
-            <h4><b>John Doe</b></h4>
-            <p>Architect & Engineer</p>
-          </div>
+          <img src="../../../dynamic/{{content.category.image}}" alt="Category image" style="height:150px;">
           <h3>{{content.title}}</h3>
           <div class="post-meta"><span>Created:</span> {{content.file_id.creation_date}}</div>
+
+
+          <div class="title" style="justify-content: space-between; display: flex; padding: 20px 20px;">
+            
+              {%if content.is_private%}
+                <span class="icon-lock mr-3" style = "margin-left: 20px;"></span>
+              {%else%}
+              {%endif%}
+
+            <span><a href="/hi" style="color:grey; margin-right: 20px;"><span class="icon-trash mr-3"></span></a></span>
+
+          </div>
+          
+
         </div>
       </div>
       {%endfor%}
@@ -157,14 +239,30 @@
 
   </div>
 
+  <button class="button-3"> + add library </button>
+
     <main>
     </main>
     
+
     
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{%static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{%static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="{%static 'lib/isotope/isotope.pkgd.min.js' %}"></script>
+    <script src="{%static 'lib/lightbox/js/lightbox.min.js' %}"></script>
+
+
 
     <script src="{%static 'main-page-js/jquery-3.3.1.min.js' %}"></script>
     <script src="{%static 'main-page-js/popper.min.js' %}"></script>
     <script src="{%static 'main-page-js/bootstrap.min.js' %}"></script>
     <script src="{%static 'main-page-js/main.js' %}"></script>
+
+
+
   </body>
 </html>
