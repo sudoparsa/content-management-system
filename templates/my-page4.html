@@ -14,21 +14,21 @@
 
     <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="{% static 'my-page-icon.css' %}">
+    <link rel="stylesheet" href="{% static 'my-page/my-page-icon.css' %}">
 
-    <link rel="stylesheet" href="{% static 'owl.carousel.min.css' %}"> 
+    <link rel="stylesheet" href="{% static 'my-page/owl.carousel.min.css' %}"> 
 
     <!-- Bootstrap CSS -->
     <!-- <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}"> -->
     
     <!-- Style -->
-    <link rel="stylesheet" href="{% static 'my-page4.css' %}">
+    <link rel="stylesheet" href="{% static 'my-page/my-page4.css' %}">
 
 
 
     <!-- Libraries Stylesheet -->
-    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
-    <link href="{% static 'lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'my-page/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'my-page/lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet">
 
 
     <!-- Google Web Fonts -->
@@ -39,15 +39,17 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Flaticon Font -->
-    <link href="{% static 'lib/flaticon/font/flaticon.css' %}" rel="stylesheet">
+    <link href="{% static 'my-page/lib/flaticon/font/flaticon.css' %}" rel="stylesheet">
 
 
-    <link rel="stylesheet" href="{% static 'card_style.css' %}">
+    <link rel="stylesheet" href="{% static 'my-page/card_style.css' %}">
 
     
 
     <!-- category -->
     <!-- <link href="{% static 'category-style.css' %}" rel="stylesheet"> -->
+
+    <link rel="stylesheet" href="{% static 'my-page/button.css' %}">
 
     <title>My Page</title>
   </head>
@@ -125,7 +127,6 @@
 <!-- <div style="background-image: url({% static 'images/banner3.jpg' %}); height: 150px; repeat: no-repeat"> -->
     
 
-
   <div class="hello" style="margin:0; height:100px; background-image: linear-gradient( 135deg, #9f05ff69 10%, #fd5e086b 100%);"> 
     
       <aside class="sidebar">
@@ -137,9 +138,8 @@
         <div class="side-inner">
   
           <div class="profile">
-            <img src= "../../../{{user.account.image}}" >
+            <img src= "../../../dynamic/{{user.account.image}}" alt="arian" >
             <h3 class="name">{{user.first_name}} {{user.last_name}}</h3>
-            <!-- <span class="country">New York, USA</span> -->
           </div>        
   
           <div class="nav-menu">
@@ -175,11 +175,6 @@
 
     </div>
 
-
-
-
-    
-
     <div style="height: 120px;">
             
     </div>
@@ -210,52 +205,31 @@
     </ul>
 
 
-    <div style="height: 25px;"> </div>
+  <div style="height: 25px;"> </div>
 
   <div class="grid-container2">
     <div class="grid-container" style="align-self: center;">
-      <div class="grid-item">
-        <div class="card">
-          <img src="img_avatar.png" alt="Avatar" style="width:100%">
-          <div class="container">
-            <h4><b>John Doe</b></h4>
-            <p>Architect & Engineer</p>
-
-            <a href="/hi"><span class="icon-trash mr-3"></span></a>
-          </div>
-        </div>
-      </div>
-      <div class="grid-item">
-        <div class="card">
-          <img src="img_avatar.png" alt="Avatar" style="width:100%">
-          <div class="container">
-            <h4><b>John Doe</b></h4>
-            <p>Architect & Engineer</p>
-          </div>
-        </div>
-      </div>
-      <div class="grid-item">
-        <div class="card">
-          <img src="img_avatar.png" alt="Avatar" style="width:100%">
-          <div class="container">
-            <h4><b>John Doe</b></h4>
-            <p>Architect & Engineer</p>
-          </div>
-        </div>
-      </div>
-
-
-      
+    
       {%for content in contents%}
       <div class="grid-item">
         <div class="card">
-          <img src="img_avatar.png" alt="Avatar" style="width:100%">
-          <div class="container">
-            <h4><b>John Doe</b></h4>
-            <p>Architect & Engineer</p>
-          </div>
+          <img src="../../../dynamic/{{content.category.image}}" alt="Category image" style="height:150px;">
           <h3>{{content.title}}</h3>
           <div class="post-meta"><span>Created:</span> {{content.file_id.creation_date}}</div>
+
+
+          <div class="title" style="justify-content: space-between; display: flex; padding: 20px 20px;">
+            
+              {%if content.is_private%}
+                <span class="icon-lock mr-3" style = "margin-left: 20px;"></span>
+              {%else%}
+              {%endif%}
+
+            <span><a href="/hi" style="color:grey; margin-right: 20px;"><span class="icon-trash mr-3"></span></a></span>
+
+          </div>
+          
+
         </div>
       </div>
       {%endfor%}
@@ -264,6 +238,8 @@
     </div>  
 
   </div>
+
+  <button class="button-3"> + add library </button>
 
     <main>
     </main>

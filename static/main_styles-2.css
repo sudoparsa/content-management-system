@@ -6,7 +6,7 @@
 [Table of Contents]
 
 1. Fonts
-2. Body and some general stufaf
+2. Body and some general stuff
 3. Header
 4. Menu
 5. Home
@@ -777,12 +777,9 @@ section
 
 .intro
 {
-	position: absolute;
-	right: 119px;
-	top: 44.2%;
-	z-index: 2;
-
-
+	width: 100%;
+	background: #FFFFFF;
+	z-index: 1;
 }
 .intro_background
 {
@@ -797,11 +794,10 @@ section
 }
 .intro_container
 {
-	width: 10%;
+	width: 100%;
 	border-bottom: solid 2px #e4e6e8;
-	padding-top: 0px;
+	padding-top: 142px;
 	padding-bottom: 121px;
-	
 }
 .intro_icon
 {
