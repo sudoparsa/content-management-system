@@ -160,9 +160,9 @@
 
 
               {% if type == 'shared' %}
-                <li class="active"><a href="#" style="white-space: pre;"><span class="icon-share2 mr-3"></span>   Shared with me</a></li>
+                <li class="active"><a href="/my-page/shared/all" style="white-space: pre;"><span class="icon-share2 mr-3"></span>   Shared with me</a></li>
               {%else%}
-                <li><a href="#" style="white-space: pre;"><span class="icon-share2 mr-3"></span>   Shared with me</a></li>
+                <li><a href="/my-page/shared/all" style="white-space: pre;"><span class="icon-share2 mr-3"></span>   Shared with me</a></li>
               {%endif%}
 
               <li><a href="/logout" style="white-space: pre;"><span class="icon-sign-out mr-3"></span>   Logout</a></li>
@@ -220,6 +220,8 @@
           <div class="container">
             <h4><b>John Doe</b></h4>
             <p>Architect & Engineer</p>
+
+            <a href="/hi"><span class="icon-trash mr-3"></span></a>
           </div>
         </div>
       </div>
