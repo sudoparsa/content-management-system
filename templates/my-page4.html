@@ -71,6 +71,7 @@
             <li><a href="#"><span class="icon-notifications mr-3"></span>Notifications</a></li> -->
             <li><a href="#"><span class="icon-files-o mr-3"></span>Files</a></li>
             <li><a href="#"><span class="icon-book mr-3"></span>Library</a></li>
+            <li><a href="#"><span class="icon-share2 mr-3"></span>Shared with me</a></li>
             <li><a href="/logout"><span class="icon-sign-out mr-3"></span>Logout</a></li>
           </ul>
         </div>
@@ -89,9 +90,9 @@
           </button>
           <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
               <div class="navbar-nav font-weight-bold mx-auto py-0" >
-                  <a href="index.html" class="nav-item nav-link active">All</a>
+                  <a href="/my-page/files/all" class="nav-item nav-link active">All</a>
                   {%for category in categories%}
-                    <a href="gallery.html" class="nav-item nav-link">{{category.title}}</a>
+                    <a href="/my-page/files/{{categorty.title}}" class="nav-item nav-link">{{category.title}}</a>
                   {%endfor%}
 
                   <!-- <div class="nav-item dropdown">

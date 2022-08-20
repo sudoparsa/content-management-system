@@ -3,16 +3,16 @@ from datetime import datetime
 
 from django.db import transaction
 from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_protect
 from main_app.models import Content, Suffix, Category, AttachCategory, File, Attachment, ContentAttribute, Library, \
     ContentAttributeKey
+from main_app.models import Content, Library, Suffix, Category, AttachCategory, File
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from main_app.models import Account
-
-import templates
 
 
 # Create your views here.
@@ -261,13 +261,25 @@ def handle_uploaded_file(f):
             destination.write(chunk)
 
 
-def my_page(request):
+def my_page(request, type, category):
     # file = File()
     # file.save()
     # content = Content (title = "hello", is_private = False, file = file)
     # content.save()
     # print(len(Content.objects.all()), 'hihihih')
-    return render(request, 'my-page4.html', {'contents': Content.objects.all(), 'categories': Category.objects.all()})
+    if type == 'files':
+        if category == 'all':
+            items = Content.objects.all()
+        else:
+            items = Content.objects.filter(category=category)
+    elif type == 'libraries':
+        if category == 'all':
+            items = Library.objects.all()
+        else:
+            items = Library.objects.filter(category=category)
+    elif type == 'shared':
+        pass
+    return render(request, 'my-page4.html', {'Contents': items, 'categories': Category.objects.all()})
 
 
 def logout(request):
