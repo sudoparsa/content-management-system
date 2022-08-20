@@ -15,7 +15,7 @@ class Category(models.Model):
     title = models.CharField(max_length=30)
     allowed_attach_categories = models.ManyToManyField(AttachCategory, related_name='allowed_categories')
     allowed_suffixes = models.ManyToManyField(Suffix, related_name='allowed_categories')
-    image = models.ImageField(upload_to ='category_images/', null = True)
+    image = models.ImageField(upload_to='category_images/', null = True)
 
 
 class File(models.Model):
