@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/my-page.css">
+
+
+    <!-- The sidebar -->
+    <div class="sidebar">
+    <a href="#home"><i class="fa fa-fw fa-home"></i> Home</a>
+    <a href="#services"><i class="fa fa-fw fa-wrench"></i> Services</a>
+    <a href="#clients"><i class="fa fa-fw fa-user"></i> Clients</a>
+    <a href="#contact"><i class="fa fa-fw fa-envelope"></i> Contact</a>
+    <a href="#contact"><i class="fa fa-fw fa-envelope"></i> {{user.first_name}}</a>
+    </div>
+
+
+    <!-- <div>
+        <img  style="line-height: 0;" src="../static/images/4.jpg" alt="Avatar" width="100%" height="50px">
+    </div> -->
+    <!-- <div class="head-rectangle"> </div> -->
+
+    
+
+    <div class="main">
+
+        <div class="head-rectangle"> </div>
+        
+        <div class="grid-container">
+            <div class="grid-item">1</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">3</div>  
+            <div class="grid-item">4</div>
+            <div class="grid-item">5</div>
+            <div class="grid-item">6</div>  
+            <div class="grid-item">7</div>
+            <div class="grid-item">8</div>
+            <div class="grid-item">9</div>  
+          </div>
+
+
+        {%for message in contents%}
+        <h3>
+            {{message.title}}
+        </h3>
+        {%endfor%}
+
+
+        {%for content in contents%}
+        <div class="card">
+            <img src="../static/images/defaultlogo.png" alt="Avatar" style="width:100%">
+            <div class="container">
+              <h4><b>content.title</b></h4>
+            </div>
+          </div>
+        {% endfor%}
+
+
+        <div class="row destinations_row">
+            <div class="col">
+                <div class="destinations_container item_grid">
+                    <!-- Destination -->
+                    {%for content in contents%}
+                    <div class="destination item">
+                        <div class="destination_image">
+                            <img src="{{content.category.img.url}}" alt="image">
+                        </div>
+                        <div class="destination_content">
+                            <div class="destination_title"><a href="destinations.html">{{content.title}}</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor%}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+<!-- Load an icon library -->
