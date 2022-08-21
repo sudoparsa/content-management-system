@@ -19,5 +19,10 @@ urlpatterns = [
     path('', views.main, name='main'),
     path('my-page/<str:type>/<str:categoryTitle>/', views.my_page, name= 'my_page'),
     path('test', views.test, name = 'test'),
+
+    path('show-library/', views.show_library, name='show-library'),
+    path('add-library/', views.add_library, name='add-library'),
+    path('add-attribute-key/', views.add_attribute_key, name='add-attribute-key'),
+
     path('delete-library', views.delete_library, name='delete-library')
     ]

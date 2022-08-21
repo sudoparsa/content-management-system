@@ -7,13 +7,10 @@ from django.shortcuts import render, get_object_or_404
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_protect
-from main_app.models import Content, Suffix, Category, AttachCategory, File, Attachment, ContentAttribute, Library, \
-    ContentAttributeKey
-from main_app.models import Content, Library, Suffix, Category, AttachCategory, File
+from main_app.models import Content, Library, Suffix, Category, AttachCategory, File, ContentAttributeKey, Account
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
-from main_app.models import Account
 
 
 # Create your views here.
@@ -513,4 +510,60 @@ def delete_library(request):
         library = Library.objects.get(title=request.POST['title'], category_id=category.id, account_id=account.user_id)
         library.delete()
         
+
         return redirect('/my-page/libraries/all/')
+
+def show_library(request):
+    account = Account.objects.get(id=request.user.id)
+    libraries = {'libraries': Library.objects.get(account_id=account.user_id).values()}
+    return render(request, 'Library.html', context=libraries)
+
+
+# Done
+def add_library(request):
+    if request.method == 'POST':
+        account = Account.objects.get(id=request.user.id)
+        category = Category.objects.get(title=request.POST['category'])
+        Library.objects.create(title=request.POST['library_name'], category_id=category.id, account_id=account.user_id)
+        return HttpResponse("library has been successfully created")
+    elif request.method == 'GET':
+        categories = Category.objects.all().values()
+        categories = {
+            'categories': categories
+        }
+        return render(request, 'Add-library.html', context=categories)
+
+
+def delete_library(request):
+    if request.method == 'POST':
+        account = Account.objects.get(id=request.user.id)
+        category = Category.objects.get(title=request.POST['category'])
+        library = Library.objects.get(title=request.POST['title'], category_id=category.id, account_id=account.user_id)
+        library.delete()
+    return HttpResponse("library has been successfully deleted")
+
+
+def show_attribute_key(request):
+    account = Account.objects.get(id=request.user.id)
+    attribute_keys = {'attribute_keys': ContentAttributeKey.objects.get(account_id=account.user_id).values()}
+    return render(request, 'attribute-key.html', context=attribute_keys)
+
+
+def add_attribute_key(request):
+    if request.method == 'POST':
+        account = Account.objects.get(id=request.user.id)
+        category = Category.objects.get(title=request.POST['category'])
+        ContentAttributeKey.objects.create(key=request.POST['attribute_name'], category_id=category.id,
+                                           account_id=account.user_id)
+        return HttpResponse("attribute has been successfully created")
+    elif request.method == 'GET':
+        categories = {
+            'categories': Category.objects.all().values()
+        }
+        return render(request, 'attribute-key.html', context=categories)
+
+
+def delete_attribute_key(request):
+    if request.method == 'POST':
+        ContentAttributeKey.objects.get(key=request.POST['attribute_key']).delete()
+    return HttpResponse("attribute has been successfully deleted")
