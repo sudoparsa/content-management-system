@@ -1,11 +1,10 @@
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_protect
-from main_app.models import Content, Library, Suffix, Category, AttachCategory, File
+from main_app.models import Content, Library, Suffix, Category, AttachCategory, File, ContentAttributeKey, Account
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
-from main_app.models import Account
 
 
 # Create your views here.
@@ -136,25 +135,58 @@ def test(request):
     return render(request, 'category.html')
 
 
-def show_all_attribute():
-    pass
 
 
-def add_attribute():
-    pass
 
 
-def remove_attribute():
-    pass
 
 
-def show_all_library():
-    pass
 
 
-def add_library():
-    pass
 
 
-def remove_library():
-    pass
+
+
+
+def show_library(request):
+    account = Account.objects.get(user=request.user.username)
+    query_set = Library.objects.get(account=account).values()
+    return render(request, 'library.html', query_set)
+
+
+def add_library(request):
+    if request.method == 'POST':
+        account = Account.objects.get(user=request.user.username)
+        Library.objects.create(title=request.POST['library_name'], category=request.POST['category'], account=account)
+        return HttpResponse("library has been successfully created")
+    else:
+        raise Http404("Request must be post")
+
+
+def delete_library(request):
+    if request.method == 'POST':
+        library = Library.objects.get(title=request.POST['title'])
+        library.delete()
+    return HttpResponse("library has been successfully deleted")
+
+
+def show_attribute_key(request):
+    account = Account.objects.get(user=request.user.username)
+    query_set = ContentAttributeKey.objects.get(account=account).values()
+    return render(request, 'attribute.html', query_set)
+
+
+def add_attribute_key(request):
+    if request.method == 'POST':
+        account = Account.objects.get(user=request.user.username)
+        ContentAttributeKey.objects.create(key=request.POST['attribute_name'], category=request.POST['category'], account=account)
+        return HttpResponse("attribute has been successfully created")
+    else:
+        raise Http404("Request must be post")
+
+
+def delete_attribute_key(request):
+    if request.method == 'POST':
+        attribute = ContentAttributeKey.objects.get(key=request.POST['key'])
+        attribute.delete()
+    return HttpResponse("attribute has been successfully deleted")

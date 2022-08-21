@@ -2,216 +2,48 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b861eff9-544e-4c2a-8850-4da0f33db2be" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_app/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_app/migrations/0004_alter_account_user_alter_file_modification_date_and_more.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_app/migrations/0005_account_image_category_image_alter_content_library.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_app/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_app/templates/example.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_app/templates/example2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_app/templates/example3.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_app/tests/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_app/tests/test_urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_app/tests/test_views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_app/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_app/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/Signin.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/Signup.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/about-us.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/aboutus.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/bootstrap4/bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/bootstrap4/bootstrap.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/bootstrap4/popper.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/card_style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/cards.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/category-style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/category-style.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/fonts/icomoon.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/fonts/icomoon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/fonts/icomoon.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/fonts/icomoon.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/home.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/456212-32dc61a8.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/456212.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/7.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/Digital-library-4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/Digitallibrary4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/back.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/data.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/data2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/data3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/defaultlogo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/download.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/drtre.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/ff.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/ghh-min.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/ghhmin.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/home_slider.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/lib.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/lib.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/lib2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/mountains-4k.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/original.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/share.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/share.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/share2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/v1072-037-c-copy-min.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/v1072037ccopymin.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/wall.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/wall2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/zzz.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/easing/easing.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/easing/easing.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/flaticon/font/Flaticon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/flaticon/font/Flaticon.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/flaticon/font/Flaticon.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/flaticon/font/Flaticon.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/flaticon/font/_flaticon.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/flaticon/font/flaticon.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/flaticon/font/flaticon.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/flaticon/license/license.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/isotope/isotope.pkgd.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/isotope/isotope.pkgd.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/lightbox/css/lightbox.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/lightbox/css/lightbox.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/lightbox/images/close.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/lightbox/images/loading.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/lightbox/images/next.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/lightbox/images/prev.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/lightbox/js/lightbox.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/lightbox/js/lightbox.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/lightbox/links.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/owlcarousel/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/owlcarousel/assets/ajax-loader.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/owlcarousel/assets/owl.carousel.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/owlcarousel/assets/owl.carousel.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/owlcarousel/assets/owl.theme.default.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/owlcarousel/assets/owl.theme.default.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/owlcarousel/assets/owl.theme.green.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/owlcarousel/assets/owl.theme.green.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/owlcarousel/assets/owl.video.play.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/owlcarousel/owl.carousel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/owlcarousel/owl.carousel.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/tempusdominus/css/tempusdominus-bootstrap-4.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/tempusdominus/js/moment-timezone.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/tempusdominus/js/moment.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/tempusdominus/js/tempusdominus-bootstrap-4.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/main-page-js/bootstrap.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/main-page-js/jquery-3.3.1.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/main-page-js/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/main-page-js/owl.carousel.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/main-page-js/popper.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/main_styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/my-page-icon.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/my-page.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/my-page3.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/my-page4.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/nicepage.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/nicepage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/not-found.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/notfound.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/owl.carousel.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/Isotope/isotope.pkgd.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/OwlCarousel2-2.2.1/ajax-loader.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/OwlCarousel2-2.2.1/animate.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/OwlCarousel2-2.2.1/owl.carousel.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/OwlCarousel2-2.2.1/owl.carousel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/OwlCarousel2-2.2.1/owl.theme.default.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/OwlCarousel2-2.2.1/owl.video.play.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/easing/easing.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/HELP-US-OUT.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/css/font-awesome.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/css/font-awesome.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/fonts/FontAwesome.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/fonts/fontawesome-webfont.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/fonts/fontawesome-webfont.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/fonts/fontawesome-webfont.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/fonts/fontawesome-webfont.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/fonts/fontawesome-webfont.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/less/animated.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/less/bordered-pulled.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/less/core.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/less/fixed-width.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/less/font-awesome.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/less/icons.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/less/larger.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/less/list.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/less/mixins.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/less/path.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/less/rotated-flipped.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/less/screen-reader.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/less/stacked.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/less/variables.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/scss/_animated.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/scss/_bordered-pulled.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/scss/_core.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/scss/_fixed-width.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/scss/_icons.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/scss/_larger.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/scss/_list.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/scss/_mixins.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/scss/_path.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/scss/_rotated-flipped.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/scss/_screen-reader.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/scss/_stacked.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/scss/_variables.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/font-awesome-4.7.0/scss/font-awesome.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/greensock/ScrollToPlugin.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/greensock/TimelineMax.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/greensock/TweenMax.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/greensock/animation.gsap.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/parallax-js-master/parallax.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/progressbar/progressbar.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/scrollTo/jquery.scrollTo.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/plugins/scrollmagic/ScrollMagic.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/styles/about.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/styles/about_responsive.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/styles/about_us2.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/styles/bootstrap4/bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/styles/bootstrap4/bootstrap.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/styles/bootstrap4/popper.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/styles/contact.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/styles/contact_responsive.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/styles/destinations.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/styles/destinations_responsive.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/styles/elements.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/styles/elements_responsive.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/styles/main_styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/styles/news.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/styles/news_responsive.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/styles/responsive.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/category.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/main.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/my-page.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/my-page2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/my-page3.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/my-page4.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user_images/image.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user_images/movie-image.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user_images/team-2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/content-management-system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/content-management-system.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/Add-library.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/Add-library.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/Blog-Template.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/Library-x.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/Library-x.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/Library.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/Library.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/Post-Template.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/attribute-key.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/attribute-key.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/blog/blog.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/blog/post-1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/blog/post-2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/blog/post-3.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/blog/post-4.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/blog/post-5.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/blog/post.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/images/0fd3416c.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/images/1828911-56a1a196.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/images/1828911.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/images/1828919-54779a87.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/images/1828919.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/images/1828954-63e55194.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/images/1828954.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/images/3096687-50734963.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/images/3096687-56d35a29.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/images/3096687.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/images/636103_file_512x512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/images/68f64b9d.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/images/724933-69170453.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/images/724933.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/images/8ad73f3c.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/images/default-image.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/images/download.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/jquery.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/nicepage.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/nicepage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content_Management/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Content_Management/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content_Management/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Content_Management/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainApp/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainApp/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainApp/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/apps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainApp/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainApp/migrations/0002_alter_account_options_alter_account_managers_and_more.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/migrations/0002_alter_account_options_alter_account_managers_and_more.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainApp/migrations/0003_remove_attachment_category_and_more.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/migrations/0003_remove_attachment_category_and_more.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainApp/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/migrations/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainApp/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainApp/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainApp/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/Sign-in.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Sign-in.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/Sign-up.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Sign-up.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/about-us.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/about-us.html" afterDir="false" />
@@ -237,18 +69,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/parham/Projects/SUT/content-management-system",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/parham/Projects/SUT/content-management-system/templates2&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="JavaScript Debug.home.html">
-    <configuration name="Sign-up.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/content-management-system/templates/Sign-up.html" useBuiltInWebServerPort="true">
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates2" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static/images" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JavaScript Debug.Library-x.html">
+    <configuration name="Add-library.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/content-management-system/templates2/Add-library.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="Library-x.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/content-management-system/templates2/Library-x.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="Library.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/content-management-system/templates2/Library.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="attribute-key.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/content-management-system/templates2/attribute-key.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <configuration name="home.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/content-management-system/templates/home.html" useBuiltInWebServerPort="true">
@@ -279,8 +128,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.Library-x.html" />
+        <item itemvalue="JavaScript Debug.attribute-key.html" />
+        <item itemvalue="JavaScript Debug.Add-library.html" />
+        <item itemvalue="JavaScript Debug.Library.html" />
         <item itemvalue="JavaScript Debug.home.html" />
-        <item itemvalue="JavaScript Debug.Sign-up.html" />
       </list>
     </recent_temporary>
   </component>
@@ -293,10 +145,23 @@
       <option name="presentableId" value="Default" />
       <updated>1660160738857</updated>
       <workItem from="1660160740296" duration="380000" />
+      <workItem from="1661003272001" duration="4094000" />
+      <workItem from="1661044713869" duration="2208000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
