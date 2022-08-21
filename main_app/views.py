@@ -375,6 +375,9 @@ def content_main_page(request, content_id):
 
     context["attribute_key_values"] = attribute_key_values_send
     context['error'] = "None"
+    context['image_address'] = content.category.image
+    print(content.category.image)
+    print(context)
     return render(request, 'content.html', context)
 
 
