@@ -495,6 +495,7 @@ def create_download_link(request, content_id):
     file = open(f'static/content/Downloads/{content.title}.{content.file.suffix}', 'wb')
     file.write(content.file.bytes)
     file.close()
+
     return redirect("../download/")
 
 

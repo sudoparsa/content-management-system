@@ -26,12 +26,10 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-
                             </div>
                             <div class="col-md-4">
                                 <img src="../../dynamic/{{ image_address }}" height="90px">
                             </div>
-
                         </div>
                         <div class="row">
                             <div class="col-md-5 pr-md-1">
@@ -40,12 +38,8 @@
                                     <input id="category-title" type="text" class="form-control" name="category"
                                            disabled>
                                 </div>
-
-
                             </div>
-
                         </div>
-
                         <div class="row">
                             <div class="col-md-5 pr-md-1">
                                 <div class="form-group">
@@ -54,10 +48,9 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-
                             </div>
                             <div class="col-md-4">
-                                <button type="button" class="btn btn-primary" style="height: 50px"> Create download
+                                <button id="download-link" onclick="get_download_link()" type="button" class="btn btn-primary" style="height: 50px"> Create download
                                     link
                                 </button>
                             </div>
@@ -68,8 +61,6 @@
                                     <label>Creator</label>
                                     <input id="creator" type="text" class="form-control" name="creator" disabled>
                                 </div>
-
-
                             </div>
                             <div class="col-md-3">
                             </div>
@@ -78,31 +69,32 @@
                                 </button>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-5 pr-md-1">
+                                <div class="form-group">
+                                    <label>Creation Date</label>
+                                    <input id="creation-date" type="text" class="form-control" name="creation-date"
+                                           disabled>
+                                </div>
+                            </div>
+                        </div>
                     </form>
-                </div>
-                <div class="row">
-                    <div class="col-md-5 pr-md-1">
-                        <div class="form-group">
-                            <label>Creation Date</label>
-                            <input id="creation-date" type="text" class="form-control" name="creation-date"
-                                   disabled>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label>Attachments:</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <button data-toggle="modal" data-target="#attachModal" id="addAttach">
+                                <i></i> Add Attachments
+                            </button>
                         </div>
                     </div>
+                    <div class="container" id="attachList"></div>
+                        <hr color="white"/>
+                        <form id="form_attribute" onSubmit="return false">
 
-                </div>
-
-                </form>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <label>Attachments:</label>
+                        </form>
                     </div>
-                    <div class="col-sm-3">
-                        <button data-toggle="modal" data-target="#attachModal" id="addAttach">
-                            <i></i> Add Attachments
-                        </button>
-                    </div>
-                </div>
-                <div class="container" id="attachList"></div>
                 <div>
                     <div class="modal fade modal-primary" id="attachModal" tabindex="-1" role="dialog"
                          aria-labelledby="myModalLabel" aria-hidden="true">
@@ -139,10 +131,6 @@
                         </div>
                     </div>
                 </div>
-                <hr color="white"/>
-                <form id="form_attribute" onSubmit="return false">
-
-                </form>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-fill btn-primary" id="btn-submit">Save</button>
                 </div>
@@ -217,6 +205,12 @@
             }
         }
     </script>
+    <script>
+        function get_download_link() {
+
+        }
+    </script>
+
     <script type="text/javascript">
         $("#addAttach").click(function () {
             $("#attach").val('');
@@ -346,7 +340,7 @@
                 akv1 = arr[2 * i]
 
                 div1 = document.createElement("div");
-                div1.setAttribute("class", "col");
+                div1.setAttribute("class", "col-md-6");
 
                 div3 = document.createElement("div");
                 div3.setAttribute("class", "form-group");
@@ -371,7 +365,7 @@
                     akv2 = arr[2 * i + 1]
 
                     div1 = document.createElement("div");
-                    div1.setAttribute("class", "col");
+                    div1.setAttribute("class", "col-md-6");
 
                     div3 = document.createElement("div");
                     div3.setAttribute("class", "form-group");
