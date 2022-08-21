@@ -2,52 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b861eff9-544e-4c2a-8850-4da0f33db2be" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/templates2/Add-library.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/Add-library.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/Blog-Template.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/Library-x.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/Library-x.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/Library.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/Library.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/Post-Template.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/attribute-key.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/attribute-key.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/blog/blog.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/blog/post-1.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/blog/post-2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/blog/post-3.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/blog/post-4.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/blog/post-5.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/blog/post.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/images/0fd3416c.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/images/1828911-56a1a196.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/images/1828911.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/images/1828919-54779a87.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/images/1828919.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/images/1828954-63e55194.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/images/1828954.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/images/3096687-50734963.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/images/3096687-56d35a29.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/images/3096687.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/images/636103_file_512x512.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/images/68f64b9d.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/images/724933-69170453.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/images/724933.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/images/8ad73f3c.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/images/default-image.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/images/download.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/jquery.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/nicepage.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/nicepage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/Library-x.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/Library.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/Add-library.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/Add-library.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/Blog-Template.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/Library-x.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/Library-x.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/Library.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/Library.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/Post-Template.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/attribute-key.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/attribute-key.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/jquery.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content_Management/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Content_Management/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Sign-in.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Sign-in.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Sign-up.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Sign-up.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/about-us.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/about-us.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,25 +39,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/parham/Projects/SUT/content-management-system/templates2&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/home/parham/Projects/SUT/content-management-system/static",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static" />
+      <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$/templates2" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/static/images" />
     </key>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.Library-x.html">
+  <component name="RunManager" selected="JavaScript Debug.attribute-key.html (1)">
     <configuration name="Add-library.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/content-management-system/templates2/Add-library.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
@@ -97,10 +69,10 @@
     <configuration name="Library.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/content-management-system/templates2/Library.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
-    <configuration name="attribute-key.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/content-management-system/templates2/attribute-key.html" useBuiltInWebServerPort="true">
+    <configuration name="attribute-key.html (1)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/content-management-system/templates/attribute-key.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
-    <configuration name="home.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/content-management-system/templates/home.html" useBuiltInWebServerPort="true">
+    <configuration name="attribute-key.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/content-management-system/templates2/attribute-key.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <configuration name="content-management-system" type="Python.DjangoServer" factoryName="Django server">
@@ -128,11 +100,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JavaScript Debug.Library-x.html" />
+        <item itemvalue="JavaScript Debug.attribute-key.html (1)" />
         <item itemvalue="JavaScript Debug.attribute-key.html" />
+        <item itemvalue="JavaScript Debug.Library-x.html" />
         <item itemvalue="JavaScript Debug.Add-library.html" />
         <item itemvalue="JavaScript Debug.Library.html" />
-        <item itemvalue="JavaScript Debug.home.html" />
       </list>
     </recent_temporary>
   </component>
@@ -146,7 +118,8 @@
       <updated>1660160738857</updated>
       <workItem from="1660160740296" duration="380000" />
       <workItem from="1661003272001" duration="4094000" />
-      <workItem from="1661044713869" duration="2208000" />
+      <workItem from="1661044713869" duration="2530000" />
+      <workItem from="1661080387745" duration="11066000" />
     </task>
     <servers />
   </component>

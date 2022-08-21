@@ -18,4 +18,8 @@ urlpatterns = [
     path('', views.main, name='main'),
     path('test', views.test, name='test'),
 
+    path('show-library/', views.show_library, name='show-library'),
+    path('add-library/', views.add_library, name='add-library'),
+    path('add-attribute-key/', views.add_attribute_key, name='add-attribute-key'),
+
 ]

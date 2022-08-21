@@ -135,58 +135,57 @@ def test(request):
     return render(request, 'category.html')
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 def show_library(request):
-    account = Account.objects.get(user=request.user.username)
-    query_set = Library.objects.get(account=account).values()
-    return render(request, 'library.html', query_set)
+    account = Account.objects.get(id=request.user.id)
+    libraries = {'libraries': Library.objects.get(account_id=account.user_id).values()}
+    return render(request, 'Library.html', context=libraries)
 
 
+# Done
 def add_library(request):
     if request.method == 'POST':
-        account = Account.objects.get(user=request.user.username)
-        Library.objects.create(title=request.POST['library_name'], category=request.POST['category'], account=account)
+        account = Account.objects.get(id=request.user.id)
+        category = Category.objects.get(title=request.POST['category'])
+        Library.objects.create(title=request.POST['library_name'], category_id=category.id, account_id=account.user_id)
         return HttpResponse("library has been successfully created")
-    else:
-        raise Http404("Request must be post")
+    elif request.method == 'GET':
+        categories = Category.objects.all().values()
+        categories = {
+            'categories': categories
+        }
+        return render(request, 'Add-library.html', context=categories)
 
 
 def delete_library(request):
     if request.method == 'POST':
-        library = Library.objects.get(title=request.POST['title'])
+        account = Account.objects.get(id=request.user.id)
+        category = Category.objects.get(title=request.POST['category'])
+        library = Library.objects.get(title=request.POST['title'], category_id=category.id, account_id=account.user_id)
         library.delete()
     return HttpResponse("library has been successfully deleted")
 
 
 def show_attribute_key(request):
-    account = Account.objects.get(user=request.user.username)
-    query_set = ContentAttributeKey.objects.get(account=account).values()
-    return render(request, 'attribute.html', query_set)
+    account = Account.objects.get(id=request.user.id)
+    attribute_keys = {'attribute_keys': ContentAttributeKey.objects.get(account_id=account.user_id).values()}
+    return render(request, 'attribute-key.html', context=attribute_keys)
 
 
 def add_attribute_key(request):
     if request.method == 'POST':
-        account = Account.objects.get(user=request.user.username)
-        ContentAttributeKey.objects.create(key=request.POST['attribute_name'], category=request.POST['category'], account=account)
+        account = Account.objects.get(id=request.user.id)
+        category = Category.objects.get(title=request.POST['category'])
+        ContentAttributeKey.objects.create(key=request.POST['attribute_name'], category_id=category.id,
+                                           account_id=account.user_id)
         return HttpResponse("attribute has been successfully created")
-    else:
-        raise Http404("Request must be post")
+    elif request.method == 'GET':
+        categories = {
+            'categories': Category.objects.all().values()
+        }
+        return render(request, 'attribute-key.html', context=categories)
 
 
 def delete_attribute_key(request):
     if request.method == 'POST':
-        attribute = ContentAttributeKey.objects.get(key=request.POST['key'])
-        attribute.delete()
+        ContentAttributeKey.objects.get(key=request.POST['attribute_key']).delete()
     return HttpResponse("attribute has been successfully deleted")
