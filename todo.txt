@@ -1,8 +1,8 @@
-- Logged in user cannot access login (redirect to main page)
-- Shrive clicked fucked up
+- Logged in user cannot access login (redirect to main page) (ok)
+- Shrive clicked fucked up (ok)
 - Image Upload for Account
 - Image Upload for Category
-- Redirect admin user to admin
+- Redirect admin user to admin (ok)
 - Library and content relationship, Many to Many
 
 - Sharing in content page

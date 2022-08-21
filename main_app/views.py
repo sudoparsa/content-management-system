@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+from tkinter.messagebox import NO
 
 from django.db import transaction
 from django.shortcuts import render, get_object_or_404
@@ -19,8 +20,6 @@ from main_app.models import Account
 def suffix(request):
     return render(request, 'example.html')
 
-
-# def content_main_page(request, content_id):
 
 
 @csrf_protect
@@ -62,29 +61,33 @@ def create_category(request):
     else:
         raise Http404("Request must be post")
 
+
+def redirect_not_authenticated(request):
+    if not request.user.is_authenticated:
+        return redirect('/')
+
+def redirect_admin(request):
+    if request.user.is_superuser:
+        return redirect('/admin')
+    
+
+
 def get_login(request, error_str):
     return render(request, 'Sign-in.html', context= {'error': error_str})
 
 
 
 def login(request):
-    print('77777777778')
-    print(request)
     if request.method == 'POST':
-        print('h')
         username = request.POST['username']
         password = request.POST['password']
         user = auth.authenticate(username=username, password=password)
 
         if user is not None:
             auth.login(request, user)
-            print('nnn')
             return redirect("/")
         else:
-            print('----')
-            # messages.info(request, 'invalid username or password')
             return get_login(request, 'invalid username or password')
-            # return redirect("login")
     else:
         return render(request, 'Sign-in.html', context= {'error': "None"})
 
@@ -146,6 +149,7 @@ def add_content(request):
                 is_private = bool(True)
 
         categoryID = request.POST.get('category', None)
+        print('h999', categoryID)
         try:
             categoryID = int(categoryID)
         except ValueError:
@@ -169,6 +173,7 @@ def add_content(request):
             return error(request, 'File is required')
 
         idx_suffix = file.name.rfind('.')
+        print('hhhhhh', idx_suffix)
         if idx_suffix == -1:
             return error(request, "File does not have suffix")
         suffix_title = file.name[idx_suffix + 1:]
@@ -236,6 +241,8 @@ def add_content(request):
                                                 file=attachment_file)
                 content_attachments.append(content_attachment)
 
+        print(category.title)
+        print(category.allowed_suffixes.all()[0].title)
         if content_file.suffix not in category.allowed_suffixes.all():
             return error(request, "Suffix is not proper for content file")
         for content_attachment in content_attachments:
@@ -269,11 +276,15 @@ def handle_uploaded_file(f):
 
 
 def my_page(request, type, categoryTitle):
-    # file = File()
-    # file.save()
-    # content = Content (title = "hello", is_private = False, file = file)
-    # content.save()
-    # print(len(Content.objects.all()), 'hihihih')
+    
+    auth_result = redirect_not_authenticated(request)
+    if auth_result is not None:
+        return auth_result
+
+    admin_result = redirect_admin(request)
+    if admin_result is not None:
+        return admin_result
+    
 
     account = request.user.account
 
@@ -297,11 +308,11 @@ def my_page(request, type, categoryTitle):
         else:
             category = Category.objects.filter(title = categoryTitle)[0]
             items = contents.filter(category = category)
-
-
+        
     return render(request, 'my-page4.html', {'contents': items, 'categories':Category.objects.all(),'categoryTitle': categoryTitle, 'type': type})
 
 
+    
 def logout(request):
     auth.logout(request)
     return redirect("/")
@@ -312,7 +323,12 @@ def main(request):
 
 
 def test(request):
-    return render(request, 'test2.html')
+    print('hhhh')
+    if request.method == 'POST':
+        print('--------------------------------')
+        print(request.FILES)
+    else:
+        return render(request, 'personal-info.html')
 
 
 def modify_content_page(content):

@@ -137,8 +137,15 @@
         </div>
         <div class="side-inner">
   
+
           <div class="profile">
-            <img src= "../../../dynamic/{{user.account.image}}" alt="arian" >
+            <div style="position: relative;">
+              <img src= "../../../dynamic/{{user.account.image}}" alt="user image" style="display: block;">
+              <a href="" style="color: black;">
+                <span class="icon-pencil mr-3" style="position: absolute; bottom:0px; left:175px;"></span>
+              </a>
+            </div>
+
             <h3 class="name">{{user.first_name}} {{user.last_name}}</h3>
           </div>        
   
@@ -165,6 +172,9 @@
                 <li><a href="/my-page/shared/all" style="white-space: pre;"><span class="icon-share2 mr-3"></span>   Shared with me</a></li>
               {%endif%}
 
+              
+
+              <li><a href="/test" style="white-space: pre;"><span class="icon-person mr-3"></span>   Personal Info</a></li>
               <li><a href="/logout" style="white-space: pre;"><span class="icon-sign-out mr-3"></span>   Logout</a></li>
             </ul>
           </div>
@@ -215,6 +225,7 @@
         <div class="card">
           <img src="../../../dynamic/{{content.category.image}}" alt="Category image" style="height:150px;">
           <h3>{{content.title}}</h3>
+          <a href="/content/{{content.id}}">{{content.title}}</a>
           <div class="post-meta"><span>Created:</span> {{content.file_id.creation_date}}</div>
 
 
