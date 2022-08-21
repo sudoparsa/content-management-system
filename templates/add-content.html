@@ -197,10 +197,10 @@ window.onload = function() {
     form.setAttribute("method", "post");
     form.setAttribute("enctype", "multipart/form-data")
     form.setAttribute("onSubmit", "return false")
-    var title = document.getElementById("content-title").cloneNode(true);
-    var category = document.getElementById("category").cloneNode(true)
-    var is_private = document.getElementById("is-private").cloneNode(true)
-    var file = document.getElementById("content-file").cloneNode(true)
+    var title = document.getElementById("content-title")
+    var category = document.getElementById("category")
+    var is_private = document.getElementById("is-private")
+    var file = document.getElementById("content-file")
     form.appendChild(title);
     form.appendChild(category);
     form.appendChild(is_private);
