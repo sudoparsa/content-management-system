@@ -50,7 +50,8 @@
                             <div class="col-md-3">
                             </div>
                             <div class="col-md-4">
-                                <button id="download-link" onclick="get_download_link()" type="button" class="btn btn-primary" style="height: 50px"> Create download
+                                <button id="download-link" onclick="get_download_link()" type="button"
+                                        class="btn btn-primary" style="height: 50px"> Create download
                                     link
                                 </button>
                             </div>
@@ -65,19 +66,49 @@
                             <div class="col-md-3">
                             </div>
                             <div class="col-md-4">
-                                <button type="button" class="btn btn-success" style="height: 50px"> Add to library
+                                <button data-toggle="modal" data-target="#libraryModal" id="addLibrary" type="button"
+                                        class="btn btn-success" style="height: 50px "> Add to library
                                 </button>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-5 pr-md-1">
-                                <div class="form-group">
-                                    <label>Creation Date</label>
-                                    <input id="creation-date" type="text" class="form-control" name="creation-date"
-                                           disabled>
+                        <div>
+                            <div class="modal fade modal-primary" id="libraryModal" tabindex="-1" role="dialog"
+                                 aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-login">
+                                    <div class="modal-content">
+                                        <div class="card card-login card-plain">
+                                            <div class="modal-body ">
+                                                <form class="form" id="form7" onSubmit="return false">
+                                                    <div class="card-content">
+                                                        <div class="input-group no-border form-control-lg">
+                                                            <select id="libraryA" name="libraryA"
+                                                                    class="form-control">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                            <div class="modal-footer text-center pt-4">
+                                                <form action="" id = 'form9' method="post">
+                                                    <button type="submit"
+                                                            class="btn btn-neutral btn-round btn-lg btn-block">Add
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="row">
+                                <div class="col-md-5 pr-md-1">
+                                    <div class="form-group">
+                                        <label>Creation Date</label>
+                                        <input id="creation-date" type="text" class="form-control" name="creation-date"
+                                               disabled>
+                                    </div>
+                                </div>
+                            </div>
                     </form>
                     <div class="row">
                         <div class="col-sm-3">
@@ -90,11 +121,11 @@
                         </div>
                     </div>
                     <div class="container" id="attachList"></div>
-                        <hr color="white"/>
-                        <form id="form_attribute" onSubmit="return false">
+                    <hr color="white"/>
+                    <form id="form_attribute" onSubmit="return false">
 
-                        </form>
-                    </div>
+                    </form>
+                </div>
                 <div>
                     <div class="modal fade modal-primary" id="attachModal" tabindex="-1" role="dialog"
                          aria-labelledby="myModalLabel" aria-hidden="true">
@@ -209,6 +240,26 @@
         function get_download_link() {
 
         }
+    </script>
+
+    <script type="text/javascript">
+        $("#addLibrary").click(function () {
+
+            $("#libraryA option").remove();
+            var items = {{libraries|safe}}
+                $.each(items, function (i, item) {
+                    $('#libraryA').append($('<option>', {
+                        value: item.value,
+                        text: item.title
+                    }));
+                });
+            $("#libraryA option").each(function () {
+                $(this).prop("class", "dropdown-item");
+            });
+            var libId = $('#libraryA').val()
+            var url = 'addLibrary/' + libId + '/'
+            document.getElementById("form9").setAttribute("action", url)
+        });
     </script>
 
     <script type="text/javascript">
