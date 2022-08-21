@@ -499,3 +499,18 @@ def create_download_link(request, content_id):
     file.write(content.file.bytes)
     file.close()
     return redirect("../download/")
+
+
+def delete_library(request):
+    if request.method == 'POST':
+        print('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
+        print(request)
+        print(request.POST['category'] + '  hello')
+        print(request.POST['title'] + '  hello')
+
+        account = Account.objects.get(id=request.user.id)
+        category = Category.objects.get(title=request.POST['category'])
+        library = Library.objects.get(title=request.POST['title'], category_id=category.id, account_id=account.user_id)
+        library.delete()
+        
+        return redirect('/my-page/libraries/all/')

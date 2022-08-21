@@ -236,7 +236,64 @@
               {%else%}
               {%endif%}
 
-            <span><a href="/hi" style="color:grey; margin-right: 20px;"><span class="icon-trash mr-3"></span></a></span>
+
+
+              <div id = 'why'>
+                
+              </div>
+
+
+
+              
+              <input id = {{content.category.title}} type="button" value="dorost" onclick="my_func()">
+
+              <script>
+                //async function my_func(event){
+                  //console.log(event)
+                  //let response = await fetch('http://127.0.0.1:8000/delete-library', {method: 'POST' ,
+                  //headers:{'Content-Type': 'application/json',} , body: JSON.stringify({category: event, title: 'batman'})})
+                //}
+
+
+                function my_func(){
+                  var form = document.createElement('form')
+                  var inp1 = document.createElement("input")
+                  var inp2 = document.createElement("input")
+                  form.setAttribute("method", "post")
+                  form.setAttribute("action", "/delete-library")
+                  inp1.setAttribute("type", "text")
+                  inp2.setAttribute("type", "text")
+                  inp1.setAttribute("value", "{{content.category.title}}")
+                  inp2.setAttribute("value", "{{content.title}}")
+                  inp1.setAttribute("name", "category")
+                  inp2.setAttribute("name", "title")
+                  inp1.setAttribute("class", "form-control");
+                  inp2.setAttribute("class", "form-control");
+  
+                  form.appendChild(inp1)
+                  form.appendChild(inp2)
+  
+                  $(document.body).append(form);
+                  console.log(form)
+                  form.submit();
+                }
+                
+              </script>
+
+              <form id = 'form' action="/delete-library" method="POST">
+                {% csrf_token %}
+                <input type="submit">
+              </form>
+
+            
+
+              
+                
+
+    
+              </button>
+
+              <span><a style="color:grey; margin-right: 20px;"><span class="icon-trash mr-3"></span></a></span>
 
           </div>
           
@@ -272,6 +329,8 @@
     <script src="{%static 'main-page-js/popper.min.js' %}"></script>
     <script src="{%static 'main-page-js/bootstrap.min.js' %}"></script>
     <script src="{%static 'main-page-js/main.js' %}"></script>
+
+
 
 
 

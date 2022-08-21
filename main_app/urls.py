@@ -18,4 +18,6 @@ urlpatterns = [
     path('content/<int:content_id>/', views.content_main_page, name='content_main_page'),
     path('', views.main, name='main'),
     path('my-page/<str:type>/<str:categoryTitle>/', views.my_page, name= 'my_page'),
-    path('test', views.test, name = 'test')]
+    path('test', views.test, name = 'test'),
+    path('delete-library', views.delete_library, name='delete-library')
+    ]
