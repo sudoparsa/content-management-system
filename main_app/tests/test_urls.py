@@ -81,6 +81,10 @@ class TestUrls(SimpleTestCase):
         url = reverse('delete-library')
         self.assertEquals(resolve(url).func, delete_library)
 
+    def test_delete_content_url_is_resolved(self):
+        url = reverse('delete-content')
+        self.assertEquals(resolve(url).func, delete_content)
+
     def test_add_to_library_url_is_resolved(self):
         url = reverse('add_library', args=[1, 1])
         self.assertEquals(resolve(url).func, add_to_library)
