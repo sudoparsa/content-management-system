@@ -15,6 +15,8 @@ from main_app.models import Library, ContentAttribute, Attachment, Content, Libr
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User, auth
 from django.template import loader
+from django.db.models import Q
+
 
 from zipfile import ZipFile
 
@@ -375,16 +377,17 @@ def my_page(request, type, categoryTitle):
 
     if type == 'files':
         if categoryTitle == 'all':
-            privates = list(Content.objects.filter(creator_account=account))
-            publics = list(Content.objects.filter(is_private=False))
+            # privates = list(Content.objects.filter(creator_account=account))
+            # publics = list(Content.objects.filter(is_private=False))
 
-            items = publics + privates
+            # items = publics + privates
+            items = Content.objects.filter(Q(creator_account=account) | Q(is_private=False ))
         else:
             category = Category.objects.get(title=categoryTitle)
-            privates = list(Content.objects.filter(creator_account=account, category=category))
-            publics = list(Content.objects.filter(is_private=False, category=category))
+            # privates = list(Content.objects.filter(creator_account=account, category=category))
+            # publics = list(Content.objects.filter(is_private=False, category=category))
 
-            items = publics + privates
+        items = Content.objects.filter(Q(creator_account=account, category=category), Q(is_private=False, category=category))
         file_or_lib = 'file'
 
     elif type == 'libraries':
