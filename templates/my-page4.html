@@ -110,8 +110,6 @@
 
   
 
-  
-
 <script>
   $(document).ready(function () {
 
@@ -124,7 +122,6 @@
   });
 </script>
 
-<!-- <div style="background-image: url({% static 'images/banner3.jpg' %}); height: 150px; repeat: no-repeat"> -->
     
 
   <div class="hello" style="margin:0; height:100px; background-image: linear-gradient( 135deg, #9f05ff69 10%, #fd5e086b 100%);"> 
@@ -140,8 +137,8 @@
 
           <div class="profile">
             <div style="position: relative;">
-              <img src= "../../../dynamic/{{user.account.image}}" alt="user image" style="display: block;">
-              <a href="" style="color: black;">
+              <img src= "../../../{{user.account.image}}" alt="user image" style="display: block;">
+              <a href="/personal-info" style="color: black;">
                 <span class="icon-pencil mr-3" style="position: absolute; bottom:0px; left:175px;"></span>
               </a>
             </div>
@@ -151,30 +148,33 @@
   
           <div class="nav-menu">
             <ul>
-              <!-- <li class="active"><a href="/" style="white-space: pre;"><span class="icon-home mr-3"></span>   Home</a></li> -->
-
-              {% if type == 'files' %}
-                <li class="active"><a href="/my-page/files/all/" style="white-space: pre;"><span class="icon-files-o mr-3"></span>   Files</a></li>
-              {%else%}
-                <li><a href="/my-page/files/all/" style="white-space: pre;"><span class="icon-files-o mr-3"></span>   Files</a></li>
-              {%endif%}
-
-              {% if type == 'libraries' %}
-                <li class="active"><a href="/my-page/libraries/all/" style="white-space: pre;"><span class="icon-book mr-3"></span>   Library</a></li>
-              {%else%}
-                <li><a href="/my-page/libraries/all/" style="white-space: pre;"><span class="icon-book mr-3"></span>   Library</a></li>
-              {%endif%}
-
-
-              {% if type == 'shared' %}
-                <li class="active"><a href="/my-page/shared/all" style="white-space: pre;"><span class="icon-share2 mr-3"></span>   Shared with me</a></li>
-              {%else%}
-                <li><a href="/my-page/shared/all" style="white-space: pre;"><span class="icon-share2 mr-3"></span>   Shared with me</a></li>
-              {%endif%}
 
               
+              {% if view == 'my-page'%}
+                  {% if type == 'files' %}
+                    <li class="active"><a href="/my-page/files/all/" style="white-space: pre;"><span class="icon-files-o mr-3"></span>   Files</a></li>
+                  {%else%}
+                    <li><a href="/my-page/files/all/" style="white-space: pre;"><span class="icon-files-o mr-3"></span>   Files</a></li>
+                  {%endif%}
 
-              <li><a href="/test" style="white-space: pre;"><span class="icon-person mr-3"></span>   Personal Info</a></li>
+                  {% if type == 'libraries' %}
+                    <li class="active"><a href="/my-page/libraries/all/" style="white-space: pre;"><span class="icon-book mr-3"></span>   Library</a></li>
+                  {%else%}
+                    <li><a href="/my-page/libraries/all/" style="white-space: pre;"><span class="icon-book mr-3"></span>   Library</a></li>
+                  {%endif%}
+
+
+                  {% if type == 'shared' %}
+                    <li class="active"><a href="/my-page/shared/all" style="white-space: pre;"><span class="icon-share2 mr-3"></span>   Shared with me</a></li>
+                  {%else%}
+                    <li><a href="/my-page/shared/all" style="white-space: pre;"><span class="icon-share2 mr-3"></span>   Shared with me</a></li>
+                  {%endif%}
+
+              {% else %}
+              {%endif%}
+
+              <li><a href="/" style="white-space: pre;"><span class="icon-home mr-3"></span>   Home</a></li>
+              <li><a href="/personal-info" style="white-space: pre;"><span class="icon-person mr-3"></span>   Personal Info</a></li>
               <li><a href="/logout" style="white-space: pre;"><span class="icon-sign-out mr-3"></span>   Logout</a></li>
             </ul>
           </div>
@@ -189,30 +189,32 @@
             
     </div>
 
+    {% if view == 'my-page'%}
+        <ul class="navbar-nav">
+          {% if categoryTitle == 'all' %}
+            <li class = "nav-item active">
+                <a class="nav-link" href="../all/" > All </a>
+            </li>
+          {%else%}
+            <li class = "nav-item">
+              <a class="nav-link" href="../all/" > All </a>
+            </li>
+          {%endif%}
 
-    <ul class="navbar-nav">
-      {% if categoryTitle == 'all' %}
-        <li class = "nav-item active">
-            <a class="nav-link" href="../all/" > All </a>
-        </li>
-      {%else%}
-        <li class = "nav-item">
-          <a class="nav-link" href="../all/" > All </a>
-        </li>
-      {%endif%}
-
-      {%for category in categories%}
-        {% if categoryTitle == category.title %}
-          <li class="nav-item active">
-            <a href="../{{category.title}}/" class="nav-link">{{category.title}}</a>
-          </li>
-        {%else%}
-          <li class="nav-item">
-            <a href="../{{category.title}}/" class="nav-link">{{category.title}}</a>
-          </li>
-        {%endif%}
-      {%endfor%}
-    </ul>
+          {%for category in categories%}
+            {% if categoryTitle == category.title %}
+              <li class="nav-item active">
+                <a href="../{{category.title}}/" class="nav-link">{{category.title}}</a>
+              </li>
+            {%else%}
+              <li class="nav-item">
+                <a href="../{{category.title}}/" class="nav-link">{{category.title}}</a>
+              </li>
+            {%endif%}
+          {%endfor%}
+        </ul>
+    {% else %}
+    {%endif%}
 
 
   <div style="height: 25px;"> </div>
@@ -220,35 +222,92 @@
   <div class="grid-container2">
     <div class="grid-container" style="align-self: center;">
     
-      {%for content in contents%}
+      {%for item in items%}
       <div class="grid-item">
         <div class="card">
-          <img src="../../../dynamic/{{content.category.image}}" alt="Category image" style="height:150px;">
-          <h3>{{content.title}}</h3>
-          <a href="/content/{{content.id}}">{{content.title}}</a>
-          <div class="post-meta"><span>Created:</span> {{content.file_id.creation_date}}</div>
+          <img src="../../../dynamic/{{item.category.image}}" alt="Category image" style="height:150px;">
 
+          <div style="height: 10px;"></div>
+
+          {% if file_or_lib == 'file'%}
+            <div>
+              <a class = 'name'  href="/content/{{item.id}}">{{item.title}}</a>
+            </div>
+          {%else%}
+            <div>
+              <a class = 'name'  href="/library/{{item.id}}">{{item.title}}</a>
+            </div>
+          {%endif%}
+
+          <div style="height: 10px;"></div>
+
+          {% if file_or_lib == 'file'%}
+            <div style="font-size:medium" class="post-meta"><span>created:</span> {{item.file.creation_date}}</div>
+          {%else%}
+          {%endif%}
+
+          <div style="height: 10px;"></div>
+
+          {% if file_or_lib == 'file'%}
+            <div style="font-size:medium" class="post-meta"><span>owner:</span> {{item.creator_account.user.username}}</div>
+          {%else%}
+          {%endif%}
+
+          {% if file_or_lib == 'lib'%}
+            <div> contains {{item.contents|length}} files</div>
+          {%else%}
+          {%endif%}
 
           <div class="title" style="justify-content: space-between; display: flex; padding: 20px 20px;">
             
-              {%if content.is_private%}
+              {%if item.is_private%}
                 <span class="icon-lock mr-3" style = "margin-left: 20px;"></span>
               {%else%}
+                <span style = "margin-left: 20px;"></span>
               {%endif%}
 
 
+              <!-- {%if file_or_lib == 'lib' %}
+                  {%if  user.account == item.account%}
+                      <a style="color: black; margin-right: 20px;" class="icon-trash mr-3" href="" onclick="my_func()"> </a>
 
-              <div id = 'why'>
-                
-              </div>
+                      <script>
+                        function my_func(){
+                          var form = document.createElement('form')
+                          var inp1 = document.createElement("input")
+                          var inp2 = document.createElement("input")
+                          form.setAttribute("method", "post")
+                          form.setAttribute("action", "/delete-library")
+                          inp1.setAttribute("type", "text")
+                          inp2.setAttribute("type", "text")
+                          inp1.setAttribute("value", "{{item.category.title}}")
+                          inp2.setAttribute("value", "{{item.title}}")
+                          inp1.setAttribute("name", "category")
+                          inp2.setAttribute("name", "title")
+                          inp1.setAttribute("class", "form-control");
+                          inp2.setAttribute("class", "form-control");
+                  
+                          form.appendChild(inp1)
+                          form.appendChild(inp2)
+                  
+                          $(document.body).append(form);
+                          console.log(form)
+                          form.submit();
+                        }
+                      </script>
+                  {%else%}
+                  {%endif%}
+              {%else%}
+                  {%if  user.account == item.creator_account%}
+                      <a style="color: black; margin-right: 20px;" class="icon-trash mr-3" href="" onclick="post_delete_content()"> </a>
+                  {%else%}
+                  {%endif%}
+              {%endif%} -->
 
-
-
-              
-              <input class="icon-trash mr-3" type="button" value="dorost" onclick="my_func()">
+              <input id = {{content.category.title}} type="button" value="dorost" onclick="my_func()">
+              <a style="color: black; margin-right: 20px;" class="icon-trash mr-3" href="" onclick="my_func()"> </a>
 
               <script>
-
                 function my_func(){
                   var form = document.createElement('form')
                   var inp1 = document.createElement("input")
@@ -257,36 +316,53 @@
                   form.setAttribute("action", "/delete-library")
                   inp1.setAttribute("type", "text")
                   inp2.setAttribute("type", "text")
-                  inp1.setAttribute("value", "{{content.category.title}}")
-                  inp2.setAttribute("value", "{{content.title}}")
+                  inp1.setAttribute("value", "{{item.category.title}}")
+                  inp2.setAttribute("value", "{{item.title}}")
                   inp1.setAttribute("name", "category")
                   inp2.setAttribute("name", "title")
                   inp1.setAttribute("class", "form-control");
                   inp2.setAttribute("class", "form-control");
-  
+
                   form.appendChild(inp1)
                   form.appendChild(inp2)
-  
+
                   $(document.body).append(form);
                   console.log(form)
                   form.submit();
                 }
-                
               </script>
 
-{#              <form id = 'form' action="/delete-library" method="POST">#}
-{#                {% csrf_token %}#}
-{#                <input type="submit">#}
-{#              </form>#}
 
             
 
 
+              <!-- <a style="color: black; margin-right: 20px;" class="icon-trash mr-3" href="" onclick="my_func()"> </a>
 
-
-
-
-              <span><a style="color:grey; margin-right: 20px;"><span class="icon-trash mr-3"></span></a></span>
+              <script>
+                function my_func(){
+                  var form = document.createElement('form')
+                  var inp1 = document.createElement("input")
+                  var inp2 = document.createElement("input")
+                  form.setAttribute("method", "post");
+                  form.setAttribute("action", "/delete-library");
+                  inp1.setAttribute("type", "text");
+                  inp2.setAttribute("type", "text");
+                  inp1.setAttribute("value", "{{item.category.title}}");
+                  inp2.setAttribute("value", "{{item.title}}");
+                  inp1.setAttribute("name", "category");
+                  inp2.setAttribute("name", "title");
+                  inp1.setAttribute("class", "form-control");
+                  inp2.setAttribute("class", "form-control");
+          
+                  form.appendChild(inp1)
+                  form.appendChild(inp2)
+          
+                  $(document.body).append(form);
+                  console.log('lnt')
+                  form.submit();
+                }
+              </script> -->
+          
 
           </div>
           
@@ -300,7 +376,12 @@
 
   </div>
 
-  <button  class="button-3"> + add library </button>
+
+  {%if file_or_lib == 'lib'%}
+      <a href="/add-library" class="button-3"> + add library </a>
+  {%else%}
+      <a href="/content" class="button-3"> + add file </a>
+  {%endif%}
 
     <main>
     </main>
@@ -326,6 +407,25 @@
 
 
 
+
+    <!-- <script>
+      function post_delete_content(){
+        var form = document.createElement('form')
+        var inp1 = document.createElement("input")
+        form.setAttribute("method", "post")
+        form.setAttribute("action", "/delete-content")
+        inp1.setAttribute("type", "number")
+        inp1.setAttribute("value", "{{item.id}}")
+        inp1.setAttribute("name", "conent_id")
+        inp1.setAttribute("class", "form-control")
+
+        form.appendChild(inp1)
+
+        $(document.body).append(form);
+        console.log(form)
+        form.submit();
+      }
+    </script> -->
 
   </body>
 </html>

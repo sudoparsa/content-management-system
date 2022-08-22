@@ -1,5 +1,7 @@
 import json
 from datetime import datetime
+from tkinter.messagebox import NO
+from urllib import response
 
 from django.db import transaction
 from django.shortcuts import get_object_or_404
@@ -12,6 +14,11 @@ from main_app.models import Library, ContentAttribute, Attachment, Content, Libr
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User, auth
 from django.template import loader
+
+from zipfile import ZipFile
+
+import os
+from os.path import basename
 
 
 # Create your views here.
@@ -88,6 +95,10 @@ def login(request):
         return render(request, 'Sign-in.html', context={'error': "None"})
 
 
+def save_attr(request, content_id):
+    print(request.GET)
+
+
 def get_sign_up(request, error_str):
     return render(request, 'Sign-up.html', context={'error': error_str})
 
@@ -106,10 +117,16 @@ def sign_up(request):
             return get_sign_up(request, 'email taken')
         else:
             user = User.objects.create_user(first_name=name.split()[0], last_name=name.split()[-1],
-                                            username=username, password=password, email=email)
-            account = Account.objects.create(user=user, storage=0)
+                                                        username=username, password=password, email=email)         
+
+            static_file = open('static/images/default.png', 'rb')
+            dynamic_file = open('dynamic/user_images/' + username +'.png', 'wb')
+            dynamic_file.write(static_file.read())
+
+            account = Account.objects.create(user=user, storage=0, image = 'dynamic/user_images/' + username +'.png')
+
             account.save()
-            print("Salamamsadkjasdjasdjaksjd")
+
             return redirect('login')
     else:
         return render(request, 'Sign-up.html', context={'error': "None"})
@@ -125,6 +142,17 @@ def get_add_content(request, err_str="None"):
     return render(request, 'add-content.html',
                   {'categories': Category.objects.all(), 'privates': ['Private', 'Public'],
                    'attach_categories': attach_list, 'error': err_str})
+
+
+def share_content(request, content_id, username):
+    content = Content.objects.get(pk=content_id)
+    user = User.objects.get(username=username)
+    account = Account.objects.get(user=user)
+    content.shared_with_accounts.add(account)
+    content.save()
+    account.save()
+    user.save()
+    return redirect('../../')
 
 
 @transaction.atomic
@@ -169,7 +197,6 @@ def add_content(request):
             return error(request, 'File is required')
 
         idx_suffix = file.name.rfind('.')
-        print('hhhhhh', idx_suffix)
         if idx_suffix == -1:
             return error(request, "File does not have suffix")
         suffix_title = file.name[idx_suffix + 1:]
@@ -284,28 +311,48 @@ def my_page(request, type, categoryTitle):
 
     if type == 'files':
         if categoryTitle == 'all':
-            items = Content.objects.filter(creator_account=account)
+            privates = list(Content.objects.filter(creator_account = account))
+            publics = list(Content.objects.filter(is_private = False))
+
+            items = publics + privates
         else:
-            category = Category.objects.filter(title=categoryTitle)[0]
-            items = Content.objects.filter(category=category)
+            category = Category.objects.get(title = categoryTitle)
+            privates = list(Content.objects.filter(creator_account = account, category = category))
+            publics = list(Content.objects.filter(is_private = False, category = category))
+
+            items = publics + privates
+        file_or_lib = 'file'
+
     elif type == 'libraries':
         if categoryTitle == 'all':
-            items = Library.objects.all()
+            items = Library.objects.filter(account = account)
         else:
-            category = Category.objects.filter(title=categoryTitle)[0]
-            items = Library.objects.filter(category=category)
-    elif type == 'shared':
+            category = Category.objects.get(title = categoryTitle)
+            items = Library.objects.filter(category = category, account = account)
+        file_or_lib = 'lib'
 
+    elif type == 'shared':
         contents = account.shared_with_contents.all()
         if categoryTitle == 'all':
             items = contents
         else:
-            category = Category.objects.filter(title=categoryTitle)[0]
-            items = contents.filter(category=category)
 
-    return render(request, 'my-page4.html',
-                  {'contents': items, 'categories': Category.objects.all(), 'categoryTitle': categoryTitle,
-                   'type': type})
+            category = Category.objects.get(title = categoryTitle)
+            items = contents.filter(category = category)
+        file_or_lib = 'file'
+        
+    categories = Category.objects.all()
+
+    return render(request, 'my-page4.html', {'view':'my-page', 'file_or_lib': file_or_lib, 'items': items, 'categories': categories,'categoryTitle': categoryTitle, 'type': type})
+
+
+def library_page(request, libraryId):
+    library = Library.objects.get(pk = libraryId)
+    contents = library.contents.all()
+
+    return render(request, 'my-page4.html', {'view':'library', 'file_or_lib': 'file', 'items': contents})
+
+
 
 
 def logout(request):
@@ -317,13 +364,45 @@ def main(request):
     return render(request, 'main.html')
 
 
-def test(request):
+
+def get_personal_info(request, error_str):
+    return render(request, 'personal-info.html', context= {'error': error_str})
+
+
+def personal_info(request):
     print('hhhh')
     if request.method == 'POST':
         print('--------------------------------')
-        print(request.FILES)
+        file = (request.FILES.get('content-file', None))
+        if file is None:
+            return get_personal_info(request, 'File is required')
+
+        idx_suffix = file.name.rfind('.')
+        if idx_suffix == -1:
+            return get_personal_info(request, "File does not have suffix")
+
+        suffix_title = file.name[idx_suffix + 1:]
+        if len(suffix_title) == 0:
+            return get_personal_info(request, "File does not have proper suffix")
+        if suffix_title == 'jpg' or suffix_title == 'png':
+            
+            account = request.user.account
+            username = request.user.username
+
+            try:
+
+                result_file = open('dynamic/user_images/' + username +'.png', "wb")
+                result_file.write(file.read())
+                request.user.account.image = 'dynamic/user_images/' + username +'.png'
+                request.user.account.save()
+
+                return get_personal_info(request, "None")
+            except:
+                return Http404
+        else:
+            return get_personal_info(request, "Suffix not acceptable")
     else:
-        return render(request, 'personal-info.html')
+        return get_personal_info(request, "None")
 
 
 def modify_content_page(content):
@@ -345,6 +424,7 @@ def modify_content_page(content):
 def content_main_page(request, content_id):
     content = Content.objects.get(pk=content_id)
     context = {}
+    context['content_id'] = content_id
     context['title'] = content.title
     context['category'] = content.category.title
     context['categoryID'] = content.category.pk
@@ -393,6 +473,10 @@ def content_main_page(request, content_id):
     for item in l:
         ll.append({'title': item.title, 'value': item.pk})
     context['libraries'] = ll
+    usernames_values = []
+    for user in list(User.objects.all()):
+        usernames_values.append(user.username)
+    context['usernames_values'] = usernames_values
     print(context)
     return render(request, 'content.html', context)
 
@@ -429,23 +513,12 @@ def add_content_to_library(request, content_id):
             return render(request, "../templates/library_error/Copy-of-Home2.html")
 
 
-def add_to_library(request, content_id):
-    new_file = ""
-    if request.method == "GET":
-        file1 = open("templates/add_to_library/Copy-of-Home.html", 'r')
-        lines = file1.readlines()
-        for line in lines:
-            new_file += line
-            if line.find("<form") != -1:
-                print("hi")
-                for library in Library.objects.all():
-                    new_file += f'<input type = \"radio\" id = \"{library.id} \" name = \"library\" value = \"{library.title}\" > <label style = \"color: white\" for =\"library{library.id}\" > {library.title} </label > <br>\n '
-
-        file2 = open("templates/add_to_library/Copy-of-Home2.html", 'w')
-        file2.write(new_file)
-        file2.close()
-    return render(request, "../templates/add_to_library/Copy-of-Home2.html")
-
+def add_to_library(request, content_id, library_id):
+    content = Content.objects.get(pk=content_id)
+    library = Library.objects.get(pk=library_id)
+    content.library = library
+    content.save()
+    return redirect('../../')
 
 @csrf_protect
 def create_suffix(request):
@@ -487,23 +560,32 @@ def create_category(request):
         raise Http404("Request must be post")
 
 
-def download_content(request, content_id):
-    content = Content.objects.all().get(pk=content_id)
-    return render(request, '../templates/download_content/content.html',
-                  {'content_title': content.title, 'content_suffix': content.file.suffix})
-
-
 def create_download_link(request, content_id):
+    file_paths = []
     content = Content.objects.all().get(pk=content_id)
-    file = open(f'static/content/Downloads/{content.title}.{content.file.suffix}', 'wb')
+    file = open(f'static/content/Downloads/content/{content.pk}_{content.title}.{content.file.suffix.title}', 'wb')
     file.write(content.file.bytes)
     file.close()
 
-    return redirect("../download/")
+    file_paths.append(f'static/content/Downloads/content/{content.pk}_{content.title}.{content.file.suffix.title}')
+    for attachment in Attachment.objects.filter(content=content):
+        path = f'static/content/Downloads/attachment/{attachment.pk}_{attachment.title}.{attachment.file.suffix.title}'
+        file = open(path, 'wb')
+        file.write(attachment.file.bytes)
+        file.close()
+        file_paths.append(path)
+    with ZipFile(f'static/content/Downloads/{content.title}_{content_id}.zip', 'w') as zip:
+        for file in file_paths:
+            zip.write(file, basename(file))
+        print(zip)
+    return HttpResponse(f'/static/content/Downloads/{content.title}_{content_id}.zip')
 
 
 def delete_library(request):
+    print('hhhhhh')
     if request.method == 'POST':
+        print(request.POST['category'])
+        print(request.POST['title'])
         account = Account.objects.get(user_id=request.user.id)
         category = Category.objects.get(title=request.POST['category'])
         library = Library.objects.get(title=request.POST['title'], category_id=category.id, account_id=account.id)
@@ -574,6 +656,25 @@ def add_attribute_key(request):
         return render(request, 'add-attribute-key.html', context=categories)
 
 
+
+# def delete_attribute_key(request):
+#     if request.method == 'POST':
+#         ContentAttributeKey.objects.get(key=request.POST['attribute_key']).delete()
+#     return redirect('/my-page/libraries/all/')
+
+
+def delete_content(request):
+    if request.method == 'POST':
+        print('yyyy')
+        content_id = request.POST['content_id']
+        content = Content.objects.get(pk = content_id)
+        file = content.file
+        print(content.title)
+        # file.delete()
+        # content.delete()
+        return redirect('/my-page/files/all/')
+
 def delete_attribute_key(request, item_id):
     ContentAttributeKey.objects.get(id=item_id).delete()
     return redirect('/content-attribute-key/')
+
