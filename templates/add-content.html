@@ -174,8 +174,7 @@
             $("#attach-title").val('');
             var cat_id = $("#category").val();
             $("#attach-category option").remove();
-            var s =
-            {{attach_categories|safe}}
+            var s = {{attach_categories|safe}}
             var items = $.grep(s, function (v) {
                 return v.category_id === parseInt(cat_id);
             });
