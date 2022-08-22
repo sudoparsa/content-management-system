@@ -108,10 +108,15 @@ def sign_up(request):
             return get_sign_up(request, 'email taken')
         else:
             user = User.objects.create_user(first_name=name.split()[0], last_name=name.split()[-1],
-                                                        username=username, password=password, email=email)
-            account = Account.objects.create(user=user, storage=0)
+                                                        username=username, password=password, email=email)         
+
+            static_file = open('static/images/default.png', 'rb')
+            dynamic_file = open('dynamic/user_images/' + username +'.png', 'wb')
+            dynamic_file.write(static_file.read())
+
+            account = Account.objects.create(user=user, storage=0, image = 'dynamic/user_images/' + username +'.png')
             account.save()
-            print("Salamamsadkjasdjasdjaksjd")
+
             return redirect('login')
     else:
         return render(request, 'Sign-up.html', context= {'error': "None"})
@@ -353,12 +358,16 @@ def personal_info(request):
             return get_personal_info(request, "File does not have proper suffix")
         if suffix_title == 'jpg' or suffix_title == 'png':
             
+            account = request.user.account
+            username = request.user.username
+
             try:
-                print(request.user.account.image)
-                file2 = open("dynamic/user_images/t.png", "wb")
-                file2.write(file.read())
-                request.user.account.image = "dynamic/user_images/t.png"
-                request.user.account.save()
+
+                result_file = open('dynamic/user_images/' + username +'.png', "wb")
+                result_file.write(file.read())
+                account.image = 'dynamic/user_images/' + username +'.png'
+                account.save()
+
                 return get_personal_info(request, "None")
             except:
                 return Http404
