@@ -49,10 +49,9 @@
                             </div>
                             <div class="col-md-3">
                             </div>
-                            <div class="col-md-4">
-                                <button id="download-link" onclick="get_download_link()" type="button"
-                                        class="btn btn-primary" style="height: 50px"> Create download
-                                    link
+                            <div class="col-md-4" id="place-download">
+                                <button id="download-link" onclick="download_link()" class="btn btn-neutral btn-round btn-lg btn-block">
+                                    Create Download Link
                                 </button>
                             </div>
                         </div>
@@ -274,9 +273,26 @@
             }
         }
     </script>
-    <script>
-        function get_download_link() {
 
+
+    <script>
+        function download_link(){
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open( "POST", 'download-link-content', false); // false for synchronous request
+            xmlHttp.onreadystatechange = function() {
+              if (xmlHttp.readyState === 4)  {
+                document.getElementById("download-link").remove();
+                var btn = document.createElement("a");
+                btn.setAttribute("class", "btn btn-neutral btn-round btn-lg btn-block");
+                btn.innerHTML = "Download";
+                console.log(xmlHttp.response)
+                btn.setAttribute("href", xmlHttp.response);
+                btn.setAttribute("download", "");
+                document.getElementById("place-download").appendChild(btn);
+              }
+            };
+            xmlHttp.send( null );
+            return xmlHttp;
         }
     </script>
 
@@ -323,9 +339,7 @@
         });
     </script>
     <script>
-
         handleAttributes();
-
         var attachments =
         {{attachments|safe}}
         var attach_titles = []
