@@ -584,6 +584,8 @@ def create_download_link(request, content_id):
 def delete_library(request):
     print('hhhhhh')
     if request.method == 'POST':
+        print(request.POST['category'])
+        print(request.POST['title'])
         account = Account.objects.get(user_id=request.user.id)
         category = Category.objects.get(title=request.POST['category'])
         library = Library.objects.get(title=request.POST['title'], category_id=category.id, account_id=account.id)
