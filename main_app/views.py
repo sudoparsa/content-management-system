@@ -19,6 +19,7 @@ from zipfile import ZipFile
 import os
 from os.path import basename
 
+
 # Create your views here.
 def suffix(request):
     return render(request, 'example.html')
@@ -93,6 +94,10 @@ def login(request):
         return render(request, 'Sign-in.html', context={'error': "None"})
 
 
+def save_attr(request, content_id):
+    print(request.GET)
+
+
 def get_sign_up(request, error_str):
     return render(request, 'Sign-up.html', context={'error': error_str})
 
@@ -139,7 +144,7 @@ def get_add_content(request, err_str="None"):
 
 
 def share_content(request, content_id, username):
-    content = Content.objects.get(pk = content_id)
+    content = Content.objects.get(pk=content_id)
     user = User.objects.get(username=username)
     account = Account.objects.get(user=user)
     content.shared_with_accounts.add(account)
@@ -507,23 +512,12 @@ def add_content_to_library(request, content_id):
             return render(request, "../templates/library_error/Copy-of-Home2.html")
 
 
-def add_to_library(request, content_id):
-    new_file = ""
-    if request.method == "GET":
-        file1 = open("templates/add_to_library/Copy-of-Home.html", 'r')
-        lines = file1.readlines()
-        for line in lines:
-            new_file += line
-            if line.find("<form") != -1:
-                print("hi")
-                for library in Library.objects.all():
-                    new_file += f'<input type = \"radio\" id = \"{library.id} \" name = \"library\" value = \"{library.title}\" > <label style = \"color: white\" for =\"library{library.id}\" > {library.title} </label > <br>\n '
-
-        file2 = open("templates/add_to_library/Copy-of-Home2.html", 'w')
-        file2.write(new_file)
-        file2.close()
-    return render(request, "../templates/add_to_library/Copy-of-Home2.html")
-
+def add_to_library(request, content_id, library_id):
+    content = Content.objects.get(pk=content_id)
+    library = Library.objects.get(pk=library_id)
+    content.library = library
+    content.save()
+    return redirect('../../')
 
 @csrf_protect
 def create_suffix(request):
@@ -586,9 +580,6 @@ def create_download_link(request, content_id):
     return HttpResponse(f'/static/content/Downloads/{content.title}_{content_id}.zip')
 
 
-
-
-
 def delete_library(request):
     if request.method == 'POST':
         account = Account.objects.get(user_id=request.user.id)
@@ -602,7 +593,7 @@ def delete_library(request):
 def show_library(request):
     account = Account.objects.get(user_id=request.user.id)
     libraries = {'libraries': Library.objects.get(account_id=account.id).values()}
-    #todo: change templates
+    # todo: change templates
     return render(request, 'Library.html', context=libraries)
 
 
@@ -618,7 +609,6 @@ def add_library(request):
             'categories': categories
         }
         return render(request, 'Add-library.html', context=categories)
-
 
 
 def show_attribute_key(request):
