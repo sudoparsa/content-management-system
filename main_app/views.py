@@ -571,7 +571,7 @@ def create_download_link(request, content_id):
         path = f'static/content/Downloads/attachment/{attachment.pk}_{attachment.title}.{attachment.file.suffix.title}'
         file = open(path, 'wb')
         file.write(attachment.file.bytes)
-        file.close
+        file.close()
         file_paths.append(path)
     with ZipFile(f'static/content/Downloads/{content.title}_{content_id}.zip', 'w') as zip:
         for file in file_paths:
@@ -581,6 +581,7 @@ def create_download_link(request, content_id):
 
 
 def delete_library(request):
+    print('hhhhhh')
     if request.method == 'POST':
         account = Account.objects.get(user_id=request.user.id)
         category = Category.objects.get(title=request.POST['category'])
@@ -635,3 +636,16 @@ def delete_attribute_key(request):
     if request.method == 'POST':
         ContentAttributeKey.objects.get(key=request.POST['attribute_key']).delete()
     return redirect('/my-page/libraries/all/')
+
+
+def delete_content(request):
+    if request.method == 'POST':
+        print('yyyy')
+        content_id = request.POST['content_id']
+        content = Content.objects.get(pk = content_id)
+        file = content.file
+        print(content.title)
+        # file.delete()
+        # content.delete()
+        return redirect('/my-page/files/all/')
+

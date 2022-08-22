@@ -28,5 +28,6 @@ urlpatterns = [
     path('add-library/', views.add_library, name='add-library'),
     path('add-attribute-key/', views.add_attribute_key, name='add-attribute-key'),
 
-    path('delete-library', views.delete_library, name='delete-library')
+    path('delete-library', views.delete_library, name='delete-library'),
+    path('delete-content', views.delete_content, name='delete-content')
 ]
