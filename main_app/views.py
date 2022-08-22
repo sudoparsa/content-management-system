@@ -502,34 +502,32 @@ def create_download_link(request, content_id):
     return redirect("../download/")
 
 
+
+
+
 def delete_library(request):
     if request.method == 'POST':
-        print('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
-        print(request)
-        print(request.POST['category'] + '  hello')
-        print(request.POST['title'] + '  hello')
-
-        account = Account.objects.get(id=request.user.id)
+        account = Account.objects.get(user_id=request.user.id)
         category = Category.objects.get(title=request.POST['category'])
-        library = Library.objects.get(title=request.POST['title'], category_id=category.id, account_id=account.user_id)
+        library = Library.objects.get(title=request.POST['title'], category_id=category.id, account_id=account.id)
         library.delete()
 
         return redirect('/my-page/libraries/all/')
 
 
 def show_library(request):
-    account = Account.objects.get(id=request.user.id)
-    libraries = {'libraries': Library.objects.get(account_id=account.user_id).values()}
+    account = Account.objects.get(user_id=request.user.id)
+    libraries = {'libraries': Library.objects.get(account_id=account.id).values()}
+    #todo: change templates
     return render(request, 'Library.html', context=libraries)
 
 
-# Done
 def add_library(request):
     if request.method == 'POST':
-        account = Account.objects.get(id=request.user.id)
+        account = Account.objects.get(user_id=request.user.id)
         category = Category.objects.get(title=request.POST['category'])
-        Library.objects.create(title=request.POST['library_name'], category_id=category.id, account_id=account.user_id)
-        return HttpResponse("library has been successfully created")
+        Library.objects.create(title=request.POST['library_name'], category_id=category.id, account_id=account.id)
+        return redirect('/my-page/libraries/all/')
     elif request.method == 'GET':
         categories = Category.objects.all().values()
         categories = {
@@ -537,14 +535,6 @@ def add_library(request):
         }
         return render(request, 'Add-library.html', context=categories)
 
-
-def delete_library(request):
-    if request.method == 'POST':
-        account = Account.objects.get(id=request.user.id)
-        category = Category.objects.get(title=request.POST['category'])
-        library = Library.objects.get(title=request.POST['title'], category_id=category.id, account_id=account.user_id)
-        library.delete()
-    return HttpResponse("library has been successfully deleted")
 
 
 def show_attribute_key(request):
@@ -555,27 +545,19 @@ def show_attribute_key(request):
 
 def add_attribute_key(request):
     if request.method == 'POST':
-        account = Account.objects.get(id=request.user.id)
+        account = Account.objects.get(user_id=request.user.id)
         category = Category.objects.get(title=request.POST['category'])
         ContentAttributeKey.objects.create(key=request.POST['attribute_name'], category_id=category.id,
-                                           account_id=account.user_id)
+                                           account_id=account.id)
         return HttpResponse("attribute has been successfully created")
     elif request.method == 'GET':
         categories = {
             'categories': Category.objects.all().values()
         }
-        return render(request, 'attribute-key.html', context=categories)
+        return render(request, 'add-attribute-key.html', context=categories)
 
 
 def delete_attribute_key(request):
     if request.method == 'POST':
         ContentAttributeKey.objects.get(key=request.POST['attribute_key']).delete()
-    return HttpResponse("attribute has been successfully deleted")
-
-
-def add_to_library(request, content_id, library_id):
-    content = Content.objects.get(pk=content_id)
-    library = Library.objects.get(pk=library_id)
-    content.library = library
-    content.save()
-    return redirect('../../')
+    return redirect('/my-page/libraries/all/')
