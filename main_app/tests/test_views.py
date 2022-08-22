@@ -51,6 +51,7 @@ class TestViews(TestCase):
         self.main_url = reverse('main')
         self.add_content_url = reverse('add-content')
         self.delete_library_url = reverse('delete-library')
+        self.add_attribute_key_url = reverse('add-attribute-key')
 
     def test_suffix_GET(self):
         response = self.client.get(self.suffix_url)
@@ -259,3 +260,18 @@ class TestViews(TestCase):
 
         self.assertEquals(response.status_code, 302)
         self.assertRedirects(response, '/my-page/libraries/all/')
+
+    def test_add_attribute_key_POST(self):
+        self.test_login_POST()
+        response = self.client.post(self.add_attribute_key_url, {
+            'category': self.category1.title,
+            'attribute_name': 'test',
+        })
+
+        self.assertEquals(response.status_code, 200)
+
+    def test_add_attribute_key_GET(self):
+        response = self.client.get(self.add_attribute_key_url)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'add-attribute-key.html')
