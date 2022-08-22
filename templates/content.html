@@ -515,6 +515,10 @@
         function share() {
             var flag = 0;
             var username = $('#username').val();
+            var username_login = '{{username_login}}';
+            var content_privacy = '{{ privacy }}';
+            console.log(username_login)
+
             var usernames_values = {{ usernames_values|safe }};
 
             for (username_value in usernames_values) {
@@ -524,6 +528,14 @@
             }
             if (flag == 0) {
                 alert("User name is not valid");
+                document.getElementById("form10").setAttribute("action", "");
+                document.getElementById("form10").setAttribute("method", "GET");
+            } else if (username == username_login) {
+                alert("You cant share file with Yourself");
+                document.getElementById("form10").setAttribute("action", "");
+                document.getElementById("form10").setAttribute("method", "GET");
+            } else if (content_privacy == 'False') {
+                alert("You cant share public files");
                 document.getElementById("form10").setAttribute("action", "");
                 document.getElementById("form10").setAttribute("method", "GET");
             } else {

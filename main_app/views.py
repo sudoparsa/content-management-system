@@ -17,7 +17,6 @@ from django.contrib.auth.models import User, auth
 from django.template import loader
 from django.db.models import Q
 
-
 from zipfile import ZipFile
 
 import os
@@ -381,13 +380,14 @@ def my_page(request, type, categoryTitle):
             # publics = list(Content.objects.filter(is_private=False))
 
             # items = publics + privates
-            items = Content.objects.filter(Q(creator_account=account) | Q(is_private=False ))
+            items = Content.objects.filter(Q(creator_account=account) | Q(is_private=False))
         else:
             category = Category.objects.get(title=categoryTitle)
             # privates = list(Content.objects.filter(creator_account=account, category=category))
             # publics = list(Content.objects.filter(is_private=False, category=category))
 
-            items = Content.objects.filter(Q(creator_account=account, category=category)| Q(is_private=False, category=category))
+            items = Content.objects.filter(
+                Q(creator_account=account, category=category) | Q(is_private=False, category=category))
 
         file_or_lib = 'file'
 
@@ -546,6 +546,9 @@ def content_main_page(request, content_id):
     for user in list(User.objects.all()):
         usernames_values.append(user.username)
     context['usernames_values'] = usernames_values
+    context['username_login'] = User.objects.get(pk=request.user.id).username
+    context['privacy'] = str(content.is_private)
+    print(context)
     if request.method == 'POST':
         return save_content(request, content_id, context)
     return render(request, 'content.html', context)
@@ -835,7 +838,7 @@ def add_attribute_key(request):
 def delete_content(request):
     if request.method == 'POST':
         content_id = request.POST['content_id']
-        content = Content.objects.get(pk = content_id)
+        content = Content.objects.get(pk=content_id)
         if request.user.account == content.creator_account:
             file = content.file
             file.delete()
