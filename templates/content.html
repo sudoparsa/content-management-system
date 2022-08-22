@@ -302,8 +302,7 @@
     </script>
     <script>
         handleAttributes();
-        var attachments =
-        {{attachments|safe}}
+        var attachments = {{attachments|safe}}
         var attach_titles = []
         for (const at of attachments) {
             attach_titles.push(at.title)
@@ -397,8 +396,7 @@
         function handleAttributes() {
             var arr =
             {{attribute_key_values|safe}}
-            for (let i = 0; i < (arr.length + 1) / 2; i = i + 1) {
-
+            for (let i = 0; i < Math.floor( (arr.length + 1) / 2 ); i = i + 1) {
                 div_m = document.createElement("div");
                 div_m.setAttribute("class", "row");
 

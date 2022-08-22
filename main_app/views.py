@@ -18,6 +18,7 @@ from zipfile import ZipFile
 import os
 from os.path import basename
 
+
 # Create your views here.
 def suffix(request):
     return render(request, 'example.html')
@@ -512,9 +513,6 @@ def create_download_link(request, content_id):
     return HttpResponse(f'/static/content/Downloads/{content.title}_{content_id}.zip')
 
 
-
-
-
 def delete_library(request):
     if request.method == 'POST':
         account = Account.objects.get(user_id=request.user.id)
@@ -528,7 +526,7 @@ def delete_library(request):
 def show_library(request):
     account = Account.objects.get(user_id=request.user.id)
     libraries = {'libraries': Library.objects.get(account_id=account.id).values()}
-    #todo: change templates
+    # todo: change templates
     return render(request, 'Library.html', context=libraries)
 
 
@@ -544,7 +542,6 @@ def add_library(request):
             'categories': categories
         }
         return render(request, 'Add-library.html', context=categories)
-
 
 
 def show_attribute_key(request):
