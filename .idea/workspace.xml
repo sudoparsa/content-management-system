@@ -1,22 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="99e897d6-0993-4aa7-a72c-d034c895ba17" name="Default Changelist" comment="download-link">
-    <list default="true" id="99e897d6-0993-4aa7-a72c-d034c895ba17" name="Default Changelist" comment="toDo">
-      <change afterPath="$PROJECT_DIR$/static/Add-library.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/Blog-Template.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/Post-Template.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/attribute-key.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates2/images/download1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="99e897d6-0993-4aa7-a72c-d034c895ba17" name="Default Changelist" comment="save content edition">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Add-library.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Add-library.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Library-x.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Library-x.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Library.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Library.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/attribute-key.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/add-attribute-key.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates2/attribute-key.css" beforeDir="false" afterPath="$PROJECT_DIR$/templates2/attribute-key.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates2/images/download.png" beforeDir="false" afterPath="$PROJECT_DIR$/templates/images/download1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content_Management/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Content_Management/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/content.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/content.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,18 +28,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/New WinRAR ZIP archive/content.html" />
-  </component>
-  <component name="PropertiesComponent">
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/images" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
+  }
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/templates/images" />
       <recent name="$PROJECT_DIR$/static" />
       <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$/templates2" />
@@ -70,7 +56,7 @@
     <configuration name="Library.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/content-management-system/templates2/Library.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
-    <configuration name="add-attribute-key.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/content-management-system/templates/add-attribute-key.html" useBuiltInWebServerPort="true">
+    <configuration name="attribute-key.html (1)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/content-management-system/templates/attribute-key.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <configuration name="attribute-key.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/content-management-system/templates2/attribute-key.html" useBuiltInWebServerPort="true">
@@ -100,11 +86,19 @@
       <option name="customRunCommand" value="" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.Library.html" />
+        <item itemvalue="JavaScript Debug.Library-x.html" />
+        <item itemvalue="JavaScript Debug.attribute-key.html (1)" />
+        <item itemvalue="JavaScript Debug.attribute-key.html" />
+        <item itemvalue="JavaScript Debug.Add-library.html" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="99e897d6-0993-4aa7-a72c-d034c895ba17" name="Default Changelist" comment="toDo" />
       <created>1660160738857</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -113,23 +107,37 @@
       <workItem from="1661003272001" duration="4094000" />
       <workItem from="1661044713869" duration="2530000" />
       <workItem from="1661080387745" duration="11066000" />
-      <workItem from="1661152472718" duration="4125000" />
+      <workItem from="1661156894687" duration="21542000" />
     </task>
-    <task id="LOCAL-00001" summary="toDo">
-      <created>1661115543716</created>
+    <task id="LOCAL-00001" summary="addLibrary">
+      <created>1661120305191</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1661115543716</updated>
+      <updated>1661120305191</updated>
     </task>
-    <task id="LOCAL-00002" summary="download-link">
-      <created>1661166386656</created>
+    <task id="LOCAL-00002" summary="share content">
+      <created>1661172015851</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1661166386656</updated>
+      <updated>1661172015851</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add to library Merge!">
+      <created>1661185891284</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1661185891284</updated>
+    </task>
+    <task id="LOCAL-00004" summary="save content edition">
+      <created>1661187458134</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1661187458134</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -145,20 +153,21 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="toDo" />
-    <MESSAGE value="download-link" />
-    <option name="LAST_COMMIT_MESSAGE" value="download-link" />
+    <MESSAGE value="addLibrary" />
+    <MESSAGE value="share content" />
+    <MESSAGE value="add to library Merge!" />
+    <MESSAGE value="save content edition" />
+    <option name="LAST_COMMIT_MESSAGE" value="save content edition" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main_app/views.py</url>
-          <line>566</line>
-          <option name="timeStamp" value="2" />
+          <line>97</line>
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

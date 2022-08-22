@@ -50,7 +50,8 @@
                             <div class="col-md-3">
                             </div>
                             <div class="col-md-4" id="place-download">
-                                <button id="download-link" onclick="download_link()" class="btn btn-neutral btn-round btn-lg btn-block">
+                                <button id="download-link" onclick="download_link()"
+                                        class="btn btn-neutral btn-round btn-lg btn-block">
                                     Create Download Link
                                 </button>
                             </div>
@@ -89,7 +90,7 @@
 
                                             </div>
                                             <div class="modal-footer text-center pt-4">
-                                                <form action="" id = 'form9' method="post">
+                                                <form action="" id='form9' method="post">
                                                     <button type="submit"
                                                             class="btn btn-neutral btn-round btn-lg btn-block">Add
                                                     </button>
@@ -99,15 +100,53 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-5 pr-md-1">
-                                    <div class="form-group">
-                                        <label>Creation Date</label>
-                                        <input id="creation-date" type="text" class="form-control" name="creation-date"
-                                               disabled>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 pr-md-1">
+                                <div class="form-group">
+                                    <label>Creation Date</label>
+                                    <input id="creation-date" type="text" class="form-control" name="creation-date"
+                                           disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                            </div>
+                            <div class="col-md-4">
+                                <button data-toggle="modal" data-target="#shareModal" id="shareContent" type="button"
+                                        class="btn btn-info" style="height: 50px"> Share content
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="modal fade modal-primary" id="shareModal" tabindex="-1" role="dialog"
+                                 aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-login">
+                                    <div class="modal-content">
+                                        <div class="card card-login card-plain">
+                                            <div class="modal-body ">
+                                                <form class="form" id="form3" onSubmit="return false">
+                                                    <div class="card-content">
+                                                        <div class="input-group no-border form-control-lg">
+                                                            <input id="username" name="username" type="text"
+                                                                   class="form-control" placeholder="Username">
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer text-center pt-4">
+                                                <form action="" id='form10' method="post">
+                                                    <button type="Share"
+                                                            class="btn btn-neutral btn-round btn-lg btn-block"
+                                                            onclick="share()">Share
+                                                    </button>
+                                                </form>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </form>
                     <div class="row">
                         <div class="col-sm-3">
@@ -121,7 +160,7 @@
                     </div>
                     <div class="container" id="attachList"></div>
                     <hr color="white"/>
-                    <form id="form_attribute" onSubmit="return false">
+                    <form id="form_attribute" onSubmit="return false" action="save/">
 
                     </form>
                 </div>
@@ -139,7 +178,7 @@
                                                            class="form-control" placeholder="Title">
                                                 </div>
 
-                                                <div class="input-group no-border form-control-lg">
+                                                <div class="input-group no-border form-control-lg" id = "attachments">
                                                     <select id="attach-category" name="attach-category"
                                                             class="form-control">
                                                     </select>
@@ -162,7 +201,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-fill btn-primary" id="btn-submit">Save</button>
+                    <button type="submit" class="btn btn-fill btn-primary" id="btn-submit" onclick="submitForms1()">Save</button>
                 </div>
             </div>
         </div>
@@ -238,22 +277,22 @@
 
 
     <script>
-        function download_link(){
+        function download_link() {
             var xmlHttp = new XMLHttpRequest();
-            xmlHttp.open( "POST", 'download-link-content', false); // false for synchronous request
-            xmlHttp.onreadystatechange = function() {
-              if (xmlHttp.readyState === 4)  {
-                document.getElementById("download-link").remove();
-                var btn = document.createElement("a");
-                btn.setAttribute("class", "btn btn-neutral btn-round btn-lg btn-block");
-                btn.innerHTML = "Download";
-                console.log(xmlHttp.response)
-                btn.setAttribute("href", xmlHttp.response);
-                btn.setAttribute("download", "");
-                document.getElementById("place-download").appendChild(btn);
-              }
+            xmlHttp.open("POST", 'download-link-content', false); // false for synchronous request
+            xmlHttp.onreadystatechange = function () {
+                if (xmlHttp.readyState === 4) {
+                    document.getElementById("download-link").remove();
+                    var btn = document.createElement("a");
+                    btn.setAttribute("class", "btn btn-neutral btn-round btn-lg btn-block");
+                    btn.innerHTML = "Download";
+                    console.log(xmlHttp.response)
+                    btn.setAttribute("href", xmlHttp.response);
+                    btn.setAttribute("download", "");
+                    document.getElementById("place-download").appendChild(btn);
+                }
             };
-            xmlHttp.send( null );
+            xmlHttp.send(null);
             return xmlHttp;
         }
     </script>
@@ -302,7 +341,8 @@
     </script>
     <script>
         handleAttributes();
-        var attachments = {{attachments|safe}}
+        var attachments =
+        {{attachments|safe}}
         var attach_titles = []
         for (const at of attachments) {
             attach_titles.push(at.title)
@@ -455,6 +495,7 @@
             }
         }
 
+
         function submitAttachments() {
             var attachment_file = document.getElementById("attach")
             if (attachment_file.value.length === 0) {
@@ -526,6 +567,147 @@
                     }
                 }
             }
+        }
+    </script>
+    <script>
+
+        function share() {
+            var flag = 0;
+            var username = $('#username').val();
+            var usernames_values = {{ usernames_values|safe }};
+
+            for (username_value in usernames_values) {
+                if (username.valueOf() == usernames_values[username_value].valueOf()) {
+                    flag = 1;
+                }
+            }
+            if (flag == 0) {
+                alert("User name is not valid");
+            } else {
+                var url = 'shareContent/' + username + '/'
+                document.getElementById("form10").setAttribute("action", url)
+            }
+        }
+    </script>
+    <script>
+        function submitForms1() {
+            var form = document.createElement("form");
+            form.setAttribute("method", "post");
+            form.setAttribute("enctype", "multipart/form-data")
+            form.setAttribute("onSubmit", "return false")
+            form.setAttribute("action","save/")
+            var arr =
+            {{attribute_key_values|safe}}
+            for (i in arr) {
+                var attr_elem = document.getElementById(arr[i].key)
+                form.appendChild(attr_elem);
+            }
+            var attach_files = document.createElement("input").cloneNode(true)
+            attach_files.setAttribute("type", "file");
+            attach_files.setAttribute("name", "attachments");
+            attach_files.setAttribute("multiple", "multiple");
+
+            let list = new DataTransfer();
+
+            var attach_titles = "[ ";
+            var attach_categories = "[ ";
+            var i = 1;
+            for (const at of attachments) {
+                attach_titles = attach_titles.concat("\"");
+                attach_titles = attach_titles.concat(at['title'].value);
+                attach_titles = attach_titles.concat("\"");
+                attach_titles = attach_titles.concat(",")
+
+                attach_categories = attach_categories.concat("\"");
+                attach_categories = attach_categories.concat(at['category'].value);
+                attach_categories = attach_categories.concat("\"");
+                attach_categories = attach_categories.concat(",")
+                var attachment_file = at['file']
+                list.items.add(attachment_file.files[0])
+                i = i + 1;
+            }
+            attach_files.files = list.files;
+            attach_titles = attach_titles.slice(0, -1) + ']';
+            attach_categories = attach_categories.slice(0, -1) + ']';
+            var at_title = document.createElement("input").cloneNode(true);
+            at_title.setAttribute("type", "text");
+            at_title.setAttribute("class", "form-control");
+            at_title.setAttribute("name", "attach-titles");
+            at_title.setAttribute("value", attach_titles);
+
+            var at_category = document.createElement("input").cloneNode(true);
+            at_category.setAttribute("type", "text");
+            at_category.setAttribute("class", "form-control");
+            at_category.setAttribute("name", "attach-categories");
+            at_category.setAttribute("value", attach_categories);
+
+            form.appendChild(at_title);
+            form.appendChild(at_category);
+            form.appendChild(attach_files);
+            $(document.body).append(form);
+            form.submit();
+        }
+    </script>
+    <script>
+        function submitForms() {
+            var form = document.createElement("form");
+            form.setAttribute("method", "post");
+            form.setAttribute("enctype", "multipart/form-data")
+            form.setAttribute("onSubmit", "return false")
+            var title = document.getElementById("content-title")
+            var category = document.getElementById("category")
+            var is_private = document.getElementById("is-private")
+            var file = document.getElementById("content-file")
+            form.appendChild(title);
+            form.appendChild(category);
+            form.appendChild(is_private);
+            form.appendChild(file);
+
+            var attach_files = document.createElement("input").cloneNode(true)
+            attach_files.setAttribute("type", "file");
+            attach_files.setAttribute("name", "attachments");
+            attach_files.setAttribute("multiple", "multiple");
+
+            let list = new DataTransfer();
+
+            var attach_titles = "[ ";
+            var attach_categories = "[ ";
+            var i = 1;
+            for (const at of attachments) {
+                attach_titles = attach_titles.concat("\"");
+                attach_titles = attach_titles.concat(at['title'].value);
+                attach_titles = attach_titles.concat("\"");
+                attach_titles = attach_titles.concat(",")
+
+                attach_categories = attach_categories.concat("\"");
+                attach_categories = attach_categories.concat(at['category'].value);
+                attach_categories = attach_categories.concat("\"");
+                attach_categories = attach_categories.concat(",")
+                var attachment_file = at['file']
+                list.items.add(attachment_file.files[0])
+                i = i + 1;
+            }
+            attach_files.files = list.files;
+            attach_titles = attach_titles.slice(0, -1) + ']';
+            attach_categories = attach_categories.slice(0, -1) + ']';
+            var at_title = document.createElement("input").cloneNode(true);
+            at_title.setAttribute("type", "text");
+            at_title.setAttribute("class", "form-control");
+            at_title.setAttribute("name", "attach-titles");
+            at_title.setAttribute("value", attach_titles);
+
+            var at_category = document.createElement("input").cloneNode(true);
+            at_category.setAttribute("type", "text");
+            at_category.setAttribute("class", "form-control");
+            at_category.setAttribute("name", "attach-categories");
+            at_category.setAttribute("value", attach_categories);
+
+            form.appendChild(at_title);
+            form.appendChild(at_category);
+            form.appendChild(attach_files);
+            $(document.body).append(form);
+            form.submit();
+
         }
     </script>
 {% endblock javascripts %}
