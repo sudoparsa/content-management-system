@@ -178,7 +178,7 @@
                                                            class="form-control" placeholder="Title">
                                                 </div>
 
-                                                <div class="input-group no-border form-control-lg" id = "attachments">
+                                                <div class="input-group no-border form-control-lg">
                                                     <select id="attach-category" name="attach-category"
                                                             class="form-control">
                                                     </select>
@@ -201,7 +201,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-fill btn-primary" id="btn-submit" onclick="submitForms1()">Save</button>
+                    <button type="submit" class="btn btn-fill btn-primary" id="btn-submit" onclick="submitForms()">Save</button>
                 </div>
             </div>
         </div>
@@ -372,67 +372,6 @@
         creator.value = "{{creator_user}}";
         creation_date.value = "{{creation_date}}";
 
-        /*function submitForms() {
-          var form = document.createElement("form");
-          form.setAttribute("method", "post");
-          form.setAttribute("enctype", "multipart/form-data")
-          form.setAttribute("onSubmit", "return false")
-          var title = document.getElementById("content-title").cloneNode(true);
-          var category = document.getElementById("category").cloneNode(true)
-          var is_private = document.getElementById("is-private").cloneNode(true)
-          var file = document.getElementById("content-file").cloneNode(true)
-          form.appendChild(title);
-          form.appendChild(category);
-          form.appendChild(is_private);
-          form.appendChild(file);
-
-          var attach_files = document.createElement("input").cloneNode(true)
-          attach_files.setAttribute("type", "file");
-          attach_files.setAttribute("name", "attachments");
-          attach_files.setAttribute("multiple", "multiple");
-
-          let list = new DataTransfer();
-
-          var attach_titles = "[ ";
-          var attach_categories = "[ ";
-          var i = 1;
-          for(const at of attachments) {
-            attach_titles = attach_titles.concat("\"");
-            attach_titles = attach_titles.concat(at['title'].value);
-            attach_titles = attach_titles.concat("\"");
-            attach_titles = attach_titles.concat(",")
-
-            attach_categories = attach_categories.concat("\"");
-            attach_categories = attach_categories.concat(at['category'].value);
-            attach_categories = attach_categories.concat("\"");
-            attach_categories = attach_categories.concat(",")
-            var attachment_file = at['file']
-            list.items.add(attachment_file.files[0])
-            i = i + 1;
-          }
-          attach_files.files = list.files;
-          attach_titles = attach_titles.slice(0, -1) + ']';
-          attach_categories = attach_categories.slice(0, -1) + ']';
-          var at_title = document.createElement("input").cloneNode(true);
-          at_title.setAttribute("type", "text");
-          at_title.setAttribute("class", "form-control");
-          at_title.setAttribute("name", "attach-titles");
-          at_title.setAttribute("value", attach_titles);
-
-          var at_category = document.createElement("input").cloneNode(true);
-          at_category.setAttribute("type", "text");
-          at_category.setAttribute("class", "form-control");
-          at_category.setAttribute("name", "attach-categories");
-          at_category.setAttribute("value", attach_categories);
-
-          form.appendChild(at_title);
-          form.appendChild(at_category);
-          form.appendChild(attach_files);
-          $(document.body).append(form);
-          form.submit();
-
-        }*/
-
         function handleAttributes() {
             var arr =
             {{attribute_key_values|safe}}
@@ -510,7 +449,7 @@
                     var attachment_category = document.getElementById("attach-category")
                     attachments.push({
                         'file': attachment_file.cloneNode(true),
-                        'title': attachment_title.cloneNode(true).value,
+                        'title': (' ' + attachment_title.value).slice(1),
                         'category': attachment_category.cloneNode(true)
                     })
                     attach_titles.push(attachment_title.value);
@@ -590,7 +529,7 @@
         }
     </script>
     <script>
-        function submitForms1() {
+        function submitForms() {
             var form = document.createElement("form");
             form.setAttribute("method", "post");
             form.setAttribute("enctype", "multipart/form-data")
@@ -611,20 +550,26 @@
 
             var attach_titles = "[ ";
             var attach_categories = "[ ";
-            var i = 1;
+            console.log(attachments)
             for (const at of attachments) {
                 attach_titles = attach_titles.concat("\"");
-                attach_titles = attach_titles.concat(at['title'].value);
+                attach_titles = attach_titles.concat(at['title']);
                 attach_titles = attach_titles.concat("\"");
                 attach_titles = attach_titles.concat(",")
 
-                attach_categories = attach_categories.concat("\"");
-                attach_categories = attach_categories.concat(at['category'].value);
-                attach_categories = attach_categories.concat("\"");
-                attach_categories = attach_categories.concat(",")
                 var attachment_file = at['file']
-                list.items.add(attachment_file.files[0])
-                i = i + 1;
+                if (attachment_file !== ''){
+                    attach_categories = attach_categories.concat("\"");
+                    attach_categories = attach_categories.concat(at['category'].value);
+                    attach_categories = attach_categories.concat("\"");
+                    attach_categories = attach_categories.concat(",")
+                    list.items.add(attachment_file.files[0])
+                } else {
+                    console.log("OO")
+                    attach_categories = attach_categories.concat("\"");
+                    attach_categories = attach_categories.concat("\"");
+                    attach_categories = attach_categories.concat(",")
+                }
             }
             attach_files.files = list.files;
             attach_titles = attach_titles.slice(0, -1) + ']';
@@ -646,68 +591,6 @@
             form.appendChild(attach_files);
             $(document.body).append(form);
             form.submit();
-        }
-    </script>
-    <script>
-        function submitForms() {
-            var form = document.createElement("form");
-            form.setAttribute("method", "post");
-            form.setAttribute("enctype", "multipart/form-data")
-            form.setAttribute("onSubmit", "return false")
-            var title = document.getElementById("content-title")
-            var category = document.getElementById("category")
-            var is_private = document.getElementById("is-private")
-            var file = document.getElementById("content-file")
-            form.appendChild(title);
-            form.appendChild(category);
-            form.appendChild(is_private);
-            form.appendChild(file);
-
-            var attach_files = document.createElement("input").cloneNode(true)
-            attach_files.setAttribute("type", "file");
-            attach_files.setAttribute("name", "attachments");
-            attach_files.setAttribute("multiple", "multiple");
-
-            let list = new DataTransfer();
-
-            var attach_titles = "[ ";
-            var attach_categories = "[ ";
-            var i = 1;
-            for (const at of attachments) {
-                attach_titles = attach_titles.concat("\"");
-                attach_titles = attach_titles.concat(at['title'].value);
-                attach_titles = attach_titles.concat("\"");
-                attach_titles = attach_titles.concat(",")
-
-                attach_categories = attach_categories.concat("\"");
-                attach_categories = attach_categories.concat(at['category'].value);
-                attach_categories = attach_categories.concat("\"");
-                attach_categories = attach_categories.concat(",")
-                var attachment_file = at['file']
-                list.items.add(attachment_file.files[0])
-                i = i + 1;
-            }
-            attach_files.files = list.files;
-            attach_titles = attach_titles.slice(0, -1) + ']';
-            attach_categories = attach_categories.slice(0, -1) + ']';
-            var at_title = document.createElement("input").cloneNode(true);
-            at_title.setAttribute("type", "text");
-            at_title.setAttribute("class", "form-control");
-            at_title.setAttribute("name", "attach-titles");
-            at_title.setAttribute("value", attach_titles);
-
-            var at_category = document.createElement("input").cloneNode(true);
-            at_category.setAttribute("type", "text");
-            at_category.setAttribute("class", "form-control");
-            at_category.setAttribute("name", "attach-categories");
-            at_category.setAttribute("value", attach_categories);
-
-            form.appendChild(at_title);
-            form.appendChild(at_category);
-            form.appendChild(attach_files);
-            $(document.body).append(form);
-            form.submit();
-
         }
     </script>
 {% endblock javascripts %}

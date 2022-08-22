@@ -95,7 +95,8 @@ def login(request):
 
 
 def save_attr(request, content_id):
-    print(request.GET)
+    print(request.POST)
+    print(request.FILES)
 
 
 def get_sign_up(request, error_str):
@@ -263,8 +264,6 @@ def add_content(request):
                                                 file=attachment_file)
                 content_attachments.append(content_attachment)
 
-        print(category.title)
-        print(category.allowed_suffixes.all()[0].title)
         if content_file.suffix not in category.allowed_suffixes.all():
             return error(request, "Suffix is not proper for content file")
         for content_attachment in content_attachments:
@@ -284,7 +283,7 @@ def add_content(request):
             content_attachment.save()
     else:
         return error(request, "request is not defined")
-    return render(request, 'main.html')
+    return redirect('/')
 
 
 def error(request, str):
