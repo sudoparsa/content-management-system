@@ -248,12 +248,6 @@
               <input class="icon-trash mr-3" type="button" value="dorost" onclick="my_func()">
 
               <script>
-                //async function my_func(event){
-                  //console.log(event)
-                  //let response = await fetch('http://127.0.0.1:8000/delete-library', {method: 'POST' ,
-                  //headers:{'Content-Type': 'application/json',} , body: JSON.stringify({category: event, title: 'batman'})})
-                //}
-
 
                 function my_func(){
                   var form = document.createElement('form')
@@ -280,18 +274,17 @@
                 
               </script>
 
-              <form id = 'form' action="/delete-library" method="POST">
-                {% csrf_token %}
-                <input type="submit">
-              </form>
+{#              <form id = 'form' action="/delete-library" method="POST">#}
+{#                {% csrf_token %}#}
+{#                <input type="submit">#}
+{#              </form>#}
 
             
 
-              
-                
 
-    
-              </button>
+
+
+
 
               <span><a style="color:grey; margin-right: 20px;"><span class="icon-trash mr-3"></span></a></span>
 
