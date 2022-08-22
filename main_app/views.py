@@ -293,24 +293,30 @@ def my_page(request, type, categoryTitle):
 
     if type == 'files':
         if categoryTitle == 'all':
-            items = Content.objects.filter(creator_account = account)
+            privates = list(Content.objects.filter(creator_account = account))
+            publics = list(Content.objects.filter(is_private = False))
+
+            items = publics + privates
         else:
-            category = Category.objects.filter(title = categoryTitle)[0]
-            items = Content.objects.filter(category = category)
+            category = Category.objects.get(title = categoryTitle)
+            privates = list(Content.objects.filter(creator_account = account, category = category))
+            publics = list(Content.objects.filter(is_private = False, category = category))
+
+            items = publics + privates
         file_or_lib = 'file'
     elif type == 'libraries':
         if categoryTitle == 'all':
-            items = Library.objects.all()
+            items = Library.objects.filter(account = account)
         else:
-            category = Category.objects.filter(title = categoryTitle)[0]
-            items = Library.objects.filter(category = category)
+            category = Category.objects.get(title = categoryTitle)
+            items = Library.objects.filter(category = category, account = account)
         file_or_lib = 'lib'
     elif type == 'shared':
         contents = account.shared_with_contents.all()
         if categoryTitle == 'all':
             items = contents
         else:
-            category = Category.objects.filter(title = categoryTitle)[0]
+            category = Category.objects.get(title = categoryTitle)
             items = contents.filter(category = category)
         file_or_lib = 'file'
         

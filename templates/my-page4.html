@@ -266,7 +266,11 @@
                 <span style = "margin-left: 20px;"></span>
               {%endif%}
 
-              <a style="color: black; margin-right: 20px;" class="icon-trash mr-3" href="" onclick="my_func()"> </a>
+
+              {%if  user.account == item.creator_account%}
+                  <a style="color: black; margin-right: 20px;" class="icon-trash mr-3" href="" onclick="my_func()"> </a>
+              {%else%}
+              {%endif%}
 
 
               <script>
@@ -307,7 +311,12 @@
 
   </div>
 
-  <a href="/add-library" class="button-3"> + add library </a>
+
+  {%if file_or_lib == 'lib'%}
+      <a href="/add-library" class="button-3"> + add library </a>
+  {%else%}
+      <a href="/content" class="button-3"> + add file </a>
+  {%endif%}
 
     <main>
     </main>
