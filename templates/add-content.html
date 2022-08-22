@@ -1,0 +1,326 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Add Content {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+{% endblock stylesheets %}
+
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="title">Add Content</h5>
+      </div>
+      <div class="card-body">
+        <form id="form1" onSubmit="return false">
+          <div class="row">
+            <div class="col-md-5 pr-md-1">
+              <div class="form-group">
+                <label>Title</label>
+                <input id="content-title" type="text" class="form-control" name="content-title">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5 pr-md-1">
+              <div class="form-group">
+                <label>Category</label>
+                <select id="category" class="form-control" name="category">
+                  {% for option in categories %}
+                      <option value="{{option.id}}" class="dropdown-item">{{ option.title }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5 pr-md-1">
+              <div class="form-group">
+                <label>File Sharing</label>
+                <select id="is-private" class="form-control" name="is-private">
+                  {% for option in privates %}
+                      <option value="{{option}}" class="dropdown-item" >{{ option }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+          </div>
+
+        </form>
+        <label>Upload File</label>
+        <div class="row card-body">
+          <form enctype="multipart/form-data" id="form2" onSubmit="return false">
+              {% csrf_token %}
+              <input id="content-file" type="file" name="content-file">
+          </form>
+          <button data-toggle="modal" data-target="#attachModal" id="addAttach">
+            <i></i> Add Attachments
+          </button>
+        </div>
+        <label>Attachments:</label>
+        <div class="container" id="attachList"></div>
+        <div>
+          <div class="modal fade modal-primary" id="attachModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-login">
+              <div class="modal-content">
+                <div class="card card-login card-plain">
+                  <div class="modal-body ">
+                    <form class="form" id="form3" onSubmit="return false">
+                      <div class="card-content">
+                        <div class="input-group no-border form-control-lg">
+                            <input id="attach-title" name="attach-title" type="text" class="form-control" placeholder="Title">
+                        </div>
+
+                        <div class="input-group no-border form-control-lg">
+                            <select id="attach-category" name="attach-category" class="form-control">
+                            </select>
+                        </div>
+                      </div>
+                    </form>
+                    <form enctype="multipart/form-data" id="form4" onSubmit="return false">
+                      {% csrf_token %}
+                      <input id="attach" type="file" name="attach">
+                    </form>
+                  </div>
+                  <div class="modal-footer text-center pt-4">
+                    <button type="submit" class="btn btn-neutral btn-round btn-lg btn-block" onclick="submitAttachments()">Add</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button type="submit" class="btn btn-fill btn-primary" id="btn-submit">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+window.onload = function() {
+}
+  $('#attachList').empty();
+  for(const at of attachments){
+      var div_main = document.createElement("div");
+      div_main.setAttribute("class", "row");
+      div_main.setAttribute("id", "div_attach_" + at.title.value);
+
+      var div_text = document.createElement("div");
+      div_text.setAttribute("class", "col-sm");
+
+      var div_button = document.createElement("div");
+      div_button.setAttribute("class", "col-sm");
+
+      div_text.innerHTML = at.title.value
+
+      var button = document.createElement("button");
+      button.setAttribute("class", "close");
+      button.setAttribute("aria-label", "Close");
+      var span = document.createElement("span");
+      span.setAttribute("aria-hidden", "true");
+      span.innerHTML = "&times;" ;
+      span.setAttribute("style", "color:white");
+      button.appendChild(span);
+
+      button.onclick = function () {
+        for( var i = 0; i < attachments.length; i++){
+            if ( attachments[i].title.value === at.title.value) {
+                attachments.splice(i, 1);
+                attach_titles.splice(i, 1);
+                break;
+            }
+        }
+        id_temp = "div_attach_" + at.title.value;
+        var elem = document.getElementById(id_temp);
+        elem.remove();
+      }
+
+      div_button.appendChild(button);
+
+      div_main.appendChild(div_text);
+      div_main.appendChild(div_button);
+
+      document.getElementById("attachList").appendChild(div_main);
+   }
+}
+</script>
+<script type="text/javascript">
+        $("#addAttach").click(function () {
+            $("#attach").val('');
+            $("#attach-title").val('');
+            var cat_id = $("#category").val();
+            $("#attach-category option").remove();
+            var s = {{attach_categories|safe}}
+            var items = $.grep(s, function(v) {
+                return v.category_id === parseInt(cat_id);
+            });
+            $.each(items, function (i, item) {
+                $('#attach-category').append($('<option>', {
+                    value: item.value,
+                    text : item.title
+                }));
+            });
+            $("#attach-category option").each(function(){
+                $(this).prop("class", "dropdown-item");
+            });
+        });
+</script>
+<script>
+  var attachments = []
+  var attach_titles = []
+  if ("{{error}}" !== "None"){
+    alert("{{error | safe}}");
+  }
+
+  const btn = document.getElementById('btn-submit');
+
+  btn.addEventListener('click', function handleClick(event) {
+    event.preventDefault();
+    submitForms();
+  });
+
+  function submitForms() {
+    var form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("enctype", "multipart/form-data")
+    form.setAttribute("onSubmit", "return false")
+    var title = document.getElementById("content-title")
+    var category = document.getElementById("category")
+    var is_private = document.getElementById("is-private")
+    var file = document.getElementById("content-file")
+    form.appendChild(title);
+    form.appendChild(category);
+    form.appendChild(is_private);
+    form.appendChild(file);
+
+    var attach_files = document.createElement("input").cloneNode(true)
+    attach_files.setAttribute("type", "file");
+    attach_files.setAttribute("name", "attachments");
+    attach_files.setAttribute("multiple", "multiple");
+
+    let list = new DataTransfer();
+
+    var attach_titles = "[ ";
+    var attach_categories = "[ ";
+    var i = 1;
+    for(const at of attachments) {
+      attach_titles = attach_titles.concat("\"");
+      attach_titles = attach_titles.concat(at['title'].value);
+      attach_titles = attach_titles.concat("\"");
+      attach_titles = attach_titles.concat(",")
+
+      attach_categories = attach_categories.concat("\"");
+      attach_categories = attach_categories.concat(at['category'].value);
+      attach_categories = attach_categories.concat("\"");
+      attach_categories = attach_categories.concat(",")
+      var attachment_file = at['file']
+      list.items.add(attachment_file.files[0])
+      i = i + 1;
+    }
+    attach_files.files = list.files;
+    attach_titles = attach_titles.slice(0, -1) + ']';
+    attach_categories = attach_categories.slice(0, -1) + ']';
+    var at_title = document.createElement("input").cloneNode(true);
+    at_title.setAttribute("type", "text");
+    at_title.setAttribute("class", "form-control");
+    at_title.setAttribute("name", "attach-titles");
+    at_title.setAttribute("value", attach_titles);
+
+    var at_category = document.createElement("input").cloneNode(true);
+    at_category.setAttribute("type", "text");
+    at_category.setAttribute("class", "form-control");
+    at_category.setAttribute("name", "attach-categories");
+    at_category.setAttribute("value", attach_categories);
+
+    form.appendChild(at_title);
+    form.appendChild(at_category);
+    form.appendChild(attach_files);
+    $(document.body).append(form);
+    form.submit();
+
+  }
+  function submitAttachments() {
+    var attachment_file = document.getElementById("attach")
+    if (attachment_file.value.length === 0) {
+      alert("attachment file is empty");
+    }
+    else{
+      var attachment_title = document.getElementById("attach-title")
+      if (attachment_title.value === "") {
+        alert("attachment title is empty");
+      } else if (attach_titles.includes(attachment_title.value)) {
+        alert("attachment title is not unique");
+      }
+      else {
+        var attachment_category = document.getElementById("attach-category")
+        attachments.push({'file': attachment_file.cloneNode(true), 'title': attachment_title.cloneNode(true), 'category': attachment_category.cloneNode(true)})
+        attach_titles.push(attachment_title.value);
+        $('#attachModal').modal('hide');
+
+        $('#attachList').empty();
+        for(const at of attachments){
+            var div_main = document.createElement("div");
+            div_main.setAttribute("class", "row");
+            div_main.setAttribute("id", "div_attach_" + at.title.value);
+
+            var div_text = document.createElement("div");
+            div_text.setAttribute("class", "col-sm");
+
+            var div_button = document.createElement("div");
+            div_button.setAttribute("class", "col-sm");
+
+            var div_extra = document.createElement("div");
+            div_extra.setAttribute("class", "col-sm");
+
+            div_text.innerHTML = at.title.value
+            div_text.setAttribute("style", "color:white");
+
+            var button = document.createElement("button");
+            button.setAttribute("class", "close");
+            button.setAttribute("aria-label", "Close");
+            var span = document.createElement("span");
+            span.setAttribute("aria-hidden", "true");
+            span.innerHTML = "&times;" ;
+            span.setAttribute("style", "color:white");
+            button.appendChild(span);
+
+            button.onclick = function () {
+              for( var i = 0; i < attachments.length; i++){
+                  if ( attachments[i].title.value === at.title.value) {
+                      attachments.splice(i, 1);
+                      attach_titles.splice(i , 1);
+                      break;
+                  }
+              }
+              id_temp = "div_attach_" + at.title.value;
+              var elem = document.getElementById(id_temp);
+              elem.remove();
+            }
+
+            div_button.appendChild(button);
+
+            div_main.appendChild(div_text);
+            div_main.appendChild(div_button);
+            div_main.appendChild(div_extra);
+
+
+            document.getElementById("attachList").appendChild(div_main);
+         }
+      }
+    }
+  }
+</script>
+{% endblock javascripts %}
