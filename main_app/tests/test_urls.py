@@ -49,6 +49,38 @@ class TestUrls(SimpleTestCase):
         url = reverse('main')
         self.assertEquals(resolve(url).func, main)
 
-    def test_test_url_is_resolved(self):
-        url = reverse('test')
-        self.assertEquals(resolve(url).func, test)
+    def test_content_main_page_url_is_resolved(self):
+        url = reverse('content_main_page', args=['1'])
+        self.assertEquals(resolve(url).func, content_main_page)
+
+    def test_add_content_url_is_resolved(self):
+        url = reverse('add-content')
+        self.assertEquals(resolve(url).func, add_content)
+
+    def test_download_content_url_is_resolved(self):
+        url = reverse('download-content', args=[1])
+        self.assertEquals(resolve(url).func, create_download_link)
+
+    def test_share_content_url_is_resolved(self):
+        url = reverse('share_content', args=[1, '<username>'])
+        self.assertEquals(resolve(url).func, share_content)
+
+    def test_show_library_url_is_resolved(self):
+        url = reverse('show-library')
+        self.assertEquals(resolve(url).func, show_library)
+
+    def test_add_library_url_is_resolved(self):
+        url = reverse('add-library')
+        self.assertEquals(resolve(url).func, add_library)
+
+    def test_add_attribute_key_url_is_resolved(self):
+        url = reverse('add-attribute-key')
+        self.assertEquals(resolve(url).func, add_attribute_key)
+
+    def test_delete_library_url_is_resolved(self):
+        url = reverse('delete-library')
+        self.assertEquals(resolve(url).func, delete_library)
+
+    def test_add_to_library_url_is_resolved(self):
+        url = reverse('add_library', args=[1, 1])
+        self.assertEquals(resolve(url).func, add_to_library)
