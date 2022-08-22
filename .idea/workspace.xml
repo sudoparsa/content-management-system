@@ -2,9 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99e897d6-0993-4aa7-a72c-d034c895ba17" name="Default Changelist" comment="download-link">
+    <list default="true" id="99e897d6-0993-4aa7-a72c-d034c895ba17" name="Default Changelist" comment="toDo">
+      <change afterPath="$PROJECT_DIR$/static/Add-library.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/Blog-Template.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/Post-Template.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/attribute-key.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates2/images/download1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/content.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/content.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Add-library.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Add-library.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Library-x.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Library-x.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Library.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Library.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/attribute-key.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/add-attribute-key.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates2/attribute-key.css" beforeDir="false" afterPath="$PROJECT_DIR$/templates2/attribute-key.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates2/images/download.png" beforeDir="false" afterPath="$PROJECT_DIR$/templates/images/download1.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,8 +45,13 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/New WinRAR ZIP archive/content.html" />
   </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/images" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/images" />
       <recent name="$PROJECT_DIR$/static" />
       <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$/templates2" />
@@ -43,7 +60,7 @@
       <recent name="$PROJECT_DIR$/static/images" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Django Server.content-management-system">
     <configuration name="Add-library.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/content-management-system/templates2/Add-library.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
@@ -53,7 +70,7 @@
     <configuration name="Library.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/content-management-system/templates2/Library.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
-    <configuration name="attribute-key.html (1)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/content-management-system/templates/attribute-key.html" useBuiltInWebServerPort="true">
+    <configuration name="add-attribute-key.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/content-management-system/templates/add-attribute-key.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <configuration name="attribute-key.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/content-management-system/templates2/attribute-key.html" useBuiltInWebServerPort="true">
@@ -65,10 +82,11 @@
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="Content_Management.settings" />
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="launchJavascriptDebuger" value="false" />
@@ -95,6 +113,7 @@
       <workItem from="1661003272001" duration="4094000" />
       <workItem from="1661044713869" duration="2530000" />
       <workItem from="1661080387745" duration="11066000" />
+      <workItem from="1661152472718" duration="4125000" />
     </task>
     <task id="LOCAL-00001" summary="toDo">
       <created>1661115543716</created>
@@ -132,5 +151,16 @@
     <MESSAGE value="toDo" />
     <MESSAGE value="download-link" />
     <option name="LAST_COMMIT_MESSAGE" value="download-link" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main_app/views.py</url>
+          <line>566</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
