@@ -18,7 +18,9 @@ urlpatterns = [
     path('content/<int:content_id>/', views.content_main_page, name='content_main_page'),
     path('', views.main, name='main'),
     path('my-page/<str:type>/<str:categoryTitle>/', views.my_page, name= 'my_page'),
-    path('test', views.test, name = 'test'),
+    path('library/<int:libraryId>/', views.library_page, name= 'library-page'),
+
+    path('personal-info', views.personal_info, name = 'personal-info'),
 
     path('show-library/', views.show_library, name='show-library'),
     path('add-library/', views.add_library, name='add-library'),

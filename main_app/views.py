@@ -309,7 +309,16 @@ def my_page(request, type, categoryTitle):
             items = contents.filter(category = category)
         file_or_lib = 'file'
         
-    return render(request, 'my-page4.html', {'file_or_lib': file_or_lib, 'items': items, 'categories':Category.objects.all(),'categoryTitle': categoryTitle, 'type': type})
+    categories = Category.objects.all()
+
+    return render(request, 'my-page4.html', {'view':'my-page', 'file_or_lib': file_or_lib, 'items': items, 'categories': categories,'categoryTitle': categoryTitle, 'type': type})
+
+
+def library_page(request, libraryId):
+    library = Library.objects.get(pk = libraryId)
+    contents = library.contents.all()
+
+    return render(request, 'my-page4.html', {'view':'library', 'file_or_lib': 'file', 'items': contents})
 
 
     
@@ -322,7 +331,7 @@ def main(request):
     return render(request, 'main.html')
 
 
-def test(request):
+def personal_info(request):
     print('hhhh')
     if request.method == 'POST':
         print('--------------------------------')
@@ -345,12 +354,9 @@ def test(request):
                 file2.write(file.read())
                 request.user.account.image = "dynamic/user_images/t.png"
                 request.user.account.save()
-                return HttpResponse(request, 'success')
+                return render(request, 'personal-info.html')
             except:
                 return Http404
-
-            
-
         else:
             return error(request, "Suffix not acceptable")
     else:

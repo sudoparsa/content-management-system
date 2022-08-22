@@ -122,7 +122,6 @@
   });
 </script>
 
-<!-- <div style="background-image: url({% static 'images/banner3.jpg' %}); height: 150px; repeat: no-repeat"> -->
     
 
   <div class="hello" style="margin:0; height:100px; background-image: linear-gradient( 135deg, #9f05ff69 10%, #fd5e086b 100%);"> 
@@ -139,7 +138,7 @@
           <div class="profile">
             <div style="position: relative;">
               <img src= "../../../{{user.account.image}}" alt="user image" style="display: block;">
-              <a href="" style="color: black;">
+              <a href="/personal-info" style="color: black;">
                 <span class="icon-pencil mr-3" style="position: absolute; bottom:0px; left:175px;"></span>
               </a>
             </div>
@@ -149,30 +148,33 @@
   
           <div class="nav-menu">
             <ul>
-              <!-- <li class="active"><a href="/" style="white-space: pre;"><span class="icon-home mr-3"></span>   Home</a></li> -->
-
-              {% if type == 'files' %}
-                <li class="active"><a href="/my-page/files/all/" style="white-space: pre;"><span class="icon-files-o mr-3"></span>   Files</a></li>
-              {%else%}
-                <li><a href="/my-page/files/all/" style="white-space: pre;"><span class="icon-files-o mr-3"></span>   Files</a></li>
-              {%endif%}
-
-              {% if type == 'libraries' %}
-                <li class="active"><a href="/my-page/libraries/all/" style="white-space: pre;"><span class="icon-book mr-3"></span>   Library</a></li>
-              {%else%}
-                <li><a href="/my-page/libraries/all/" style="white-space: pre;"><span class="icon-book mr-3"></span>   Library</a></li>
-              {%endif%}
-
-
-              {% if type == 'shared' %}
-                <li class="active"><a href="/my-page/shared/all" style="white-space: pre;"><span class="icon-share2 mr-3"></span>   Shared with me</a></li>
-              {%else%}
-                <li><a href="/my-page/shared/all" style="white-space: pre;"><span class="icon-share2 mr-3"></span>   Shared with me</a></li>
-              {%endif%}
 
               
+              {% if view == 'my-page'%}
+                  {% if type == 'files' %}
+                    <li class="active"><a href="/my-page/files/all/" style="white-space: pre;"><span class="icon-files-o mr-3"></span>   Files</a></li>
+                  {%else%}
+                    <li><a href="/my-page/files/all/" style="white-space: pre;"><span class="icon-files-o mr-3"></span>   Files</a></li>
+                  {%endif%}
 
-              <li><a href="/test" style="white-space: pre;"><span class="icon-person mr-3"></span>   Personal Info</a></li>
+                  {% if type == 'libraries' %}
+                    <li class="active"><a href="/my-page/libraries/all/" style="white-space: pre;"><span class="icon-book mr-3"></span>   Library</a></li>
+                  {%else%}
+                    <li><a href="/my-page/libraries/all/" style="white-space: pre;"><span class="icon-book mr-3"></span>   Library</a></li>
+                  {%endif%}
+
+
+                  {% if type == 'shared' %}
+                    <li class="active"><a href="/my-page/shared/all" style="white-space: pre;"><span class="icon-share2 mr-3"></span>   Shared with me</a></li>
+                  {%else%}
+                    <li><a href="/my-page/shared/all" style="white-space: pre;"><span class="icon-share2 mr-3"></span>   Shared with me</a></li>
+                  {%endif%}
+
+              {% else %}
+              {%endif%}
+
+              <li><a href="/" style="white-space: pre;"><span class="icon-home mr-3"></span>   Home</a></li>
+              <li><a href="/personal-info" style="white-space: pre;"><span class="icon-person mr-3"></span>   Personal Info</a></li>
               <li><a href="/logout" style="white-space: pre;"><span class="icon-sign-out mr-3"></span>   Logout</a></li>
             </ul>
           </div>
@@ -187,30 +189,32 @@
             
     </div>
 
+    {% if view == 'my-page'%}
+        <ul class="navbar-nav">
+          {% if categoryTitle == 'all' %}
+            <li class = "nav-item active">
+                <a class="nav-link" href="../all/" > All </a>
+            </li>
+          {%else%}
+            <li class = "nav-item">
+              <a class="nav-link" href="../all/" > All </a>
+            </li>
+          {%endif%}
 
-    <ul class="navbar-nav">
-      {% if categoryTitle == 'all' %}
-        <li class = "nav-item active">
-            <a class="nav-link" href="../all/" > All </a>
-        </li>
-      {%else%}
-        <li class = "nav-item">
-          <a class="nav-link" href="../all/" > All </a>
-        </li>
-      {%endif%}
-
-      {%for category in categories%}
-        {% if categoryTitle == category.title %}
-          <li class="nav-item active">
-            <a href="../{{category.title}}/" class="nav-link">{{category.title}}</a>
-          </li>
-        {%else%}
-          <li class="nav-item">
-            <a href="../{{category.title}}/" class="nav-link">{{category.title}}</a>
-          </li>
-        {%endif%}
-      {%endfor%}
-    </ul>
+          {%for category in categories%}
+            {% if categoryTitle == category.title %}
+              <li class="nav-item active">
+                <a href="../{{category.title}}/" class="nav-link">{{category.title}}</a>
+              </li>
+            {%else%}
+              <li class="nav-item">
+                <a href="../{{category.title}}/" class="nav-link">{{category.title}}</a>
+              </li>
+            {%endif%}
+          {%endfor%}
+        </ul>
+    {% else %}
+    {%endif%}
 
 
   <div style="height: 25px;"> </div>
