@@ -2,6 +2,7 @@
 <!doctype html>
 <html lang="en">
   <head>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -267,6 +268,138 @@
               {%endif%}
 
 
+              <a style="color: black; margin-right: 20px;" class="icon-trash mr-3" href="#" onclick="my_func('{{item.category.title}}', '{{item.title}}')"> </a>
+
+              
+              <input type="button" value="dorost" onclick="my_func('{{item.category.title}}', '{{item.title}}')">
+
+              <div> {{item.title}}</div>
+              
+
+              <script>
+                function my_func(category, title){
+                  var form = document.createElement('form')
+                  var inp1 = document.createElement("input")
+                  var inp2 = document.createElement("input")
+                  form.setAttribute("method", "post")
+                  form.setAttribute("action", "/delete-library")
+                  inp1.setAttribute("type", "text")
+                  inp2.setAttribute("type", "text")
+                  inp1.setAttribute("value", category)
+                  inp2.setAttribute("value", title)
+                  inp1.setAttribute("name", "category")
+                  inp2.setAttribute("name", "title")
+                  inp1.setAttribute("class", "form-control");
+                  inp2.setAttribute("class", "form-control");
+
+                  form.appendChild(inp1)
+                  form.appendChild(inp2)
+
+                  $(document.body).append(form);
+                  console.log(form)
+                  form.submit();
+                }
+              </script>
+
+          </div>
+        </div>
+      </div>
+      {%endfor%}
+
+
+    </div>  
+
+  </div>
+
+
+  {%if file_or_lib == 'lib'%}
+      <a href="/add-library" class="button-3"> + add library </a>
+  {%else%}
+      <a href="/content" class="button-3"> + add file </a>
+  {%endif%}
+
+    <main>
+    </main>
+    
+
+    
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{%static 'my-page/lib/easing/easing.min.js' %}"></script>
+    <script src="{%static 'my-page/lib/easing/easing.min.js' %}"></script>
+    <script src="{%static 'my-page/lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="{%static 'my-page/lib/isotope/isotope.pkgd.min.js' %}"></script>
+    <script src="{%static 'my-page/lib/lightbox/js/lightbox.min.js' %}"></script>
+
+
+
+    <script src="{%static 'main-page-js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{%static 'main-page-js/popper.min.js' %}"></script>
+    <script src="{%static 'main-page-js/bootstrap.min.js' %}"></script>
+
+
+
+
+
+
+    <!-- <script>
+      function post_delete_content(){
+        var form = document.createElement('form')
+        var inp1 = document.createElement("input")
+        form.setAttribute("method", "post")
+        form.setAttribute("action", "/delete-content")
+        inp1.setAttribute("type", "number")
+        inp1.setAttribute("value", "{{item.id}}")
+        inp1.setAttribute("name", "conent_id")
+        inp1.setAttribute("class", "form-control")
+
+        form.appendChild(inp1)
+
+        $(document.body).append(form);
+        console.log(form)
+        form.submit();
+      }
+    </script> -->
+
+  </body>
+</html>
+
+
+
+
+              <!-- <a style="color: black; margin-right: 20px;" class="icon-trash mr-3" href="" onclick="my_func()"> </a>
+
+              <script>
+                function my_func(){
+                  var form = document.createElement('form')
+                  var inp1 = document.createElement("input")
+                  var inp2 = document.createElement("input")
+                  form.setAttribute("method", "post");
+                  form.setAttribute("action", "/delete-library");
+                  inp1.setAttribute("type", "text");
+                  inp2.setAttribute("type", "text");
+                  inp1.setAttribute("value", "{{item.category.title}}");
+                  inp2.setAttribute("value", "{{item.title}}");
+                  inp1.setAttribute("name", "category");
+                  inp2.setAttribute("name", "title");
+                  inp1.setAttribute("class", "form-control");
+                  inp2.setAttribute("class", "form-control");
+          
+                  form.appendChild(inp1)
+                  form.appendChild(inp2)
+          
+                  $(document.body).append(form);
+                  console.log('lnt')
+                  form.submit();
+                }
+              </script> -->
+          
+
+
+              
+
               <!-- {%if file_or_lib == 'lib' %}
                   {%if  user.account == item.account%}
                       <a style="color: black; margin-right: 20px;" class="icon-trash mr-3" href="" onclick="my_func()"> </a>
@@ -302,130 +435,4 @@
                       <a style="color: black; margin-right: 20px;" class="icon-trash mr-3" href="" onclick="post_delete_content()"> </a>
                   {%else%}
                   {%endif%}
-              {%endif%} -->
-
-              <input id = {{content.category.title}} type="button" value="dorost" onclick="my_func()">
-              <a style="color: black; margin-right: 20px;" class="icon-trash mr-3" href="" onclick="my_func()"> </a>
-
-              <script>
-                function my_func(){
-                  var form = document.createElement('form')
-                  var inp1 = document.createElement("input")
-                  var inp2 = document.createElement("input")
-                  form.setAttribute("method", "post")
-                  form.setAttribute("action", "/delete-library")
-                  inp1.setAttribute("type", "text")
-                  inp2.setAttribute("type", "text")
-                  inp1.setAttribute("value", "{{item.category.title}}")
-                  inp2.setAttribute("value", "{{item.title}}")
-                  inp1.setAttribute("name", "category")
-                  inp2.setAttribute("name", "title")
-                  inp1.setAttribute("class", "form-control");
-                  inp2.setAttribute("class", "form-control");
-
-                  form.appendChild(inp1)
-                  form.appendChild(inp2)
-
-                  $(document.body).append(form);
-                  console.log(form)
-                  form.submit();
-                }
-              </script>
-
-
-            
-
-
-              <!-- <a style="color: black; margin-right: 20px;" class="icon-trash mr-3" href="" onclick="my_func()"> </a>
-
-              <script>
-                function my_func(){
-                  var form = document.createElement('form')
-                  var inp1 = document.createElement("input")
-                  var inp2 = document.createElement("input")
-                  form.setAttribute("method", "post");
-                  form.setAttribute("action", "/delete-library");
-                  inp1.setAttribute("type", "text");
-                  inp2.setAttribute("type", "text");
-                  inp1.setAttribute("value", "{{item.category.title}}");
-                  inp2.setAttribute("value", "{{item.title}}");
-                  inp1.setAttribute("name", "category");
-                  inp2.setAttribute("name", "title");
-                  inp1.setAttribute("class", "form-control");
-                  inp2.setAttribute("class", "form-control");
-          
-                  form.appendChild(inp1)
-                  form.appendChild(inp2)
-          
-                  $(document.body).append(form);
-                  console.log('lnt')
-                  form.submit();
-                }
-              </script> -->
-          
-
-          </div>
-          
-
-        </div>
-      </div>
-      {%endfor%}
-
-
-    </div>  
-
-  </div>
-
-
-  {%if file_or_lib == 'lib'%}
-      <a href="/add-library" class="button-3"> + add library </a>
-  {%else%}
-      <a href="/content" class="button-3"> + add file </a>
-  {%endif%}
-
-    <main>
-    </main>
-    
-
-    
-
-
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="{%static 'lib/easing/easing.min.js' %}"></script>
-    <script src="{%static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
-    <script src="{%static 'lib/isotope/isotope.pkgd.min.js' %}"></script>
-    <script src="{%static 'lib/lightbox/js/lightbox.min.js' %}"></script>
-
-
-
-    <script src="{%static 'main-page-js/jquery-3.3.1.min.js' %}"></script>
-    <script src="{%static 'main-page-js/popper.min.js' %}"></script>
-    <script src="{%static 'main-page-js/bootstrap.min.js' %}"></script>
-    <script src="{%static 'main-page-js/main.js' %}"></script>
-
-
-
-
-
-    <!-- <script>
-      function post_delete_content(){
-        var form = document.createElement('form')
-        var inp1 = document.createElement("input")
-        form.setAttribute("method", "post")
-        form.setAttribute("action", "/delete-content")
-        inp1.setAttribute("type", "number")
-        inp1.setAttribute("value", "{{item.id}}")
-        inp1.setAttribute("name", "conent_id")
-        inp1.setAttribute("class", "form-control")
-
-        form.appendChild(inp1)
-
-        $(document.body).append(form);
-        console.log(form)
-        form.submit();
-      }
-    </script> -->
-
-  </body>
-</html>
+              {%endif%} -->s
