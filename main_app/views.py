@@ -4,6 +4,7 @@ from tkinter.messagebox import NO
 from urllib import response
 
 from django.db import transaction
+from django.shortcuts import render, get_object_or_404
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, Http404
 from django.http import HttpResponseRedirect
@@ -279,6 +280,11 @@ def add_content(request):
             content_attachment.content = content
             content_attachment.file.save()
             content_attachment.save()
+        attr_keys = ContentAttributeKey.objects.filter(category=content.category)
+        for key in attr_keys:
+            content_attribute = ContentAttribute(key=key, value="", content=content)
+            content_attribute.save()
+
     else:
         return error(request, "request is not defined")
     return render(request, 'main.html')
@@ -724,11 +730,12 @@ def create_download_link(request, content_id):
 
     file_paths.append(f'static/content/Downloads/content/{content.pk}_{content.title}.{content.file.suffix.title}')
     for attachment in Attachment.objects.filter(content=content):
-        path = f'static/content/Downloads/attachment/{attachment.pk}_{attachment.title}.{attachment.file.suffix.title}'
-        file = open(path, 'wb')
-        file.write(attachment.file.bytes)
-        file.close()
-        file_paths.append(path)
+        if attachment is not None:
+            path = f'static/content/Downloads/attachment/{attachment.pk}_{attachment.title}.{attachment.file.suffix.title}'
+            file = open(path, 'wb')
+            file.write(attachment.file.bytes)
+            file.close
+            file_paths.append(path)
     with ZipFile(f'static/content/Downloads/{content.title}_{content_id}.zip', 'w') as zip:
         for file in file_paths:
             zip.write(file, basename(file))
@@ -737,10 +744,7 @@ def create_download_link(request, content_id):
 
 
 def delete_library(request):
-    print('hhhhhh')
     if request.method == 'POST':
-        print(request.POST['category'])
-        print(request.POST['title'])
         account = Account.objects.get(user_id=request.user.id)
         category = Category.objects.get(title=request.POST['category'])
         library = Library.objects.get(title=request.POST['title'], category_id=category.id, account_id=account.id)
