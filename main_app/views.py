@@ -8,16 +8,20 @@ from django.shortcuts import render, get_object_or_404
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_protect
-from main_app.models import ContentAttribute, Attachment, Content, Library, Suffix, Category, AttachCategory, File, ContentAttributeKey, Account
+from main_app.models import Library, ContentAttribute, Attachment, Content, Library, Suffix, Category, AttachCategory, \
+    File, ContentAttributeKey, Account
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 
+from zipfile import ZipFile
+
+import os
+from os.path import basename
 
 # Create your views here.
 def suffix(request):
     return render(request, 'example.html')
-
 
 
 @csrf_protect
@@ -64,15 +68,14 @@ def redirect_not_authenticated(request):
     if not request.user.is_authenticated:
         return redirect('/')
 
+
 def redirect_admin(request):
     if request.user.is_superuser:
         return redirect('/admin')
-    
 
 
 def get_login(request, error_str):
-    return render(request, 'Sign-in.html', context= {'error': error_str})
-
+    return render(request, 'Sign-in.html', context={'error': error_str})
 
 
 def login(request):
@@ -87,12 +90,12 @@ def login(request):
         else:
             return get_login(request, 'invalid username or password')
     else:
-        return render(request, 'Sign-in.html', context= {'error': "None"})
-
+        return render(request, 'Sign-in.html', context={'error': "None"})
 
 
 def get_sign_up(request, error_str):
-    return render(request, 'Sign-up.html', context= {'error': error_str})
+    return render(request, 'Sign-up.html', context={'error': error_str})
+
 
 def sign_up(request):
     print("hello")
@@ -115,11 +118,12 @@ def sign_up(request):
             dynamic_file.write(static_file.read())
 
             account = Account.objects.create(user=user, storage=0, image = 'dynamic/user_images/' + username +'.png')
+
             account.save()
 
             return redirect('login')
     else:
-        return render(request, 'Sign-up.html', context= {'error': "None"})
+        return render(request, 'Sign-up.html', context={'error': "None"})
 
 
 def get_add_content(request, err_str="None"):
@@ -132,6 +136,17 @@ def get_add_content(request, err_str="None"):
     return render(request, 'add-content.html',
                   {'categories': Category.objects.all(), 'privates': ['Private', 'Public'],
                    'attach_categories': attach_list, 'error': err_str})
+
+
+def share_content(request, content_id, username):
+    content = Content.objects.get(pk = content_id)
+    user = User.objects.get(username=username)
+    account = Account.objects.get(user=user)
+    content.shared_with_accounts.add(account)
+    content.save()
+    account.save()
+    user.save()
+    return redirect('../../')
 
 
 @transaction.atomic
@@ -176,7 +191,6 @@ def add_content(request):
             return error(request, 'File is required')
 
         idx_suffix = file.name.rfind('.')
-        print('hhhhhh', idx_suffix)
         if idx_suffix == -1:
             return error(request, "File does not have suffix")
         suffix_title = file.name[idx_suffix + 1:]
@@ -279,7 +293,6 @@ def handle_uploaded_file(f):
 
 
 def my_page(request, type, categoryTitle):
-    
     auth_result = redirect_not_authenticated(request)
     if auth_result is not None:
         return auth_result
@@ -287,7 +300,6 @@ def my_page(request, type, categoryTitle):
     admin_result = redirect_admin(request)
     if admin_result is not None:
         return admin_result
-    
 
     account = request.user.account
 
@@ -304,6 +316,7 @@ def my_page(request, type, categoryTitle):
 
             items = publics + privates
         file_or_lib = 'file'
+
     elif type == 'libraries':
         if categoryTitle == 'all':
             items = Library.objects.filter(account = account)
@@ -311,11 +324,13 @@ def my_page(request, type, categoryTitle):
             category = Category.objects.get(title = categoryTitle)
             items = Library.objects.filter(category = category, account = account)
         file_or_lib = 'lib'
+
     elif type == 'shared':
         contents = account.shared_with_contents.all()
         if categoryTitle == 'all':
             items = contents
         else:
+            
             category = Category.objects.get(title = categoryTitle)
             items = contents.filter(category = category)
         file_or_lib = 'file'
@@ -332,7 +347,8 @@ def library_page(request, libraryId):
     return render(request, 'my-page4.html', {'view':'library', 'file_or_lib': 'file', 'items': contents})
 
 
-    
+
+
 def logout(request):
     auth.logout(request)
     return redirect("/")
@@ -402,6 +418,7 @@ def modify_content_page(content):
 def content_main_page(request, content_id):
     content = Content.objects.get(pk=content_id)
     context = {}
+    context['content_id'] = content_id
     context['title'] = content.title
     context['category'] = content.category.title
     context['categoryID'] = content.category.pk
@@ -445,6 +462,15 @@ def content_main_page(request, content_id):
     context['error'] = "None"
     context['image_address'] = content.category.image
     print(content.category.image)
+    l = list(Library.objects.filter(category=content.category))
+    ll = []
+    for item in l:
+        ll.append({'title': item.title, 'value': item.pk})
+    context['libraries'] = ll
+    usernames_values = []
+    for user in list(User.objects.all()):
+        usernames_values.append(user.username)
+    context['usernames_values'] = usernames_values
     print(context)
     return render(request, 'content.html', context)
 
@@ -539,48 +565,53 @@ def create_category(request):
         raise Http404("Request must be post")
 
 
-def download_content(request, content_id):
-    content = Content.objects.all().get(pk=content_id)
-    return render(request, '../templates/download_content/content.html',
-                  {'content_title': content.title, 'content_suffix': content.file.suffix})
-
-
 def create_download_link(request, content_id):
+    file_paths = []
     content = Content.objects.all().get(pk=content_id)
-    file = open(f'static/content/Downloads/{content.title}.{content.file.suffix}', 'wb')
+    file = open(f'static/content/Downloads/content/{content.pk}_{content.title}.{content.file.suffix.title}', 'wb')
     file.write(content.file.bytes)
     file.close()
-    return redirect("../download/")
+
+    file_paths.append(f'static/content/Downloads/content/{content.pk}_{content.title}.{content.file.suffix.title}')
+    for attachment in Attachment.objects.filter(content=content):
+        path = f'static/content/Downloads/attachment/{attachment.pk}_{attachment.title}.{attachment.file.suffix.title}'
+        file = open(path, 'wb')
+        file.write(attachment.file.bytes)
+        file.close
+        file_paths.append(path)
+    with ZipFile(f'static/content/Downloads/{content.title}_{content_id}.zip', 'w') as zip:
+        for file in file_paths:
+            zip.write(file, basename(file))
+        print(zip)
+    return HttpResponse(f'/static/content/Downloads/{content.title}_{content_id}.zip')
+
+
+
 
 
 def delete_library(request):
     if request.method == 'POST':
-        print('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
-        print(request)
-        print(request.POST['category'] + '  hello')
-        print(request.POST['title'] + '  hello')
-
-        account = Account.objects.get(id=request.user.id)
+        account = Account.objects.get(user_id=request.user.id)
         category = Category.objects.get(title=request.POST['category'])
-        library = Library.objects.get(title=request.POST['title'], category_id=category.id, account_id=account.user_id)
+        library = Library.objects.get(title=request.POST['title'], category_id=category.id, account_id=account.id)
         library.delete()
-        
 
         return redirect('/my-page/libraries/all/')
 
+
 def show_library(request):
-    account = Account.objects.get(id=request.user.id)
-    libraries = {'libraries': Library.objects.get(account_id=account.user_id).values()}
+    account = Account.objects.get(user_id=request.user.id)
+    libraries = {'libraries': Library.objects.get(account_id=account.id).values()}
+    #todo: change templates
     return render(request, 'Library.html', context=libraries)
 
 
-# Done
 def add_library(request):
     if request.method == 'POST':
-        account = Account.objects.get(id=request.user.id)
+        account = Account.objects.get(user_id=request.user.id)
         category = Category.objects.get(title=request.POST['category'])
-        Library.objects.create(title=request.POST['library_name'], category_id=category.id, account_id=account.user_id)
-        return HttpResponse("library has been successfully created")
+        Library.objects.create(title=request.POST['library_name'], category_id=category.id, account_id=account.id)
+        return redirect('/my-page/libraries/all/')
     elif request.method == 'GET':
         categories = Category.objects.all().values()
         categories = {
@@ -588,14 +619,6 @@ def add_library(request):
         }
         return render(request, 'Add-library.html', context=categories)
 
-
-def delete_library(request):
-    if request.method == 'POST':
-        account = Account.objects.get(id=request.user.id)
-        category = Category.objects.get(title=request.POST['category'])
-        library = Library.objects.get(title=request.POST['title'], category_id=category.id, account_id=account.user_id)
-        library.delete()
-    return HttpResponse("library has been successfully deleted")
 
 
 def show_attribute_key(request):
@@ -606,19 +629,19 @@ def show_attribute_key(request):
 
 def add_attribute_key(request):
     if request.method == 'POST':
-        account = Account.objects.get(id=request.user.id)
+        account = Account.objects.get(user_id=request.user.id)
         category = Category.objects.get(title=request.POST['category'])
         ContentAttributeKey.objects.create(key=request.POST['attribute_name'], category_id=category.id,
-                                           account_id=account.user_id)
+                                           account_id=account.id)
         return HttpResponse("attribute has been successfully created")
     elif request.method == 'GET':
         categories = {
             'categories': Category.objects.all().values()
         }
-        return render(request, 'attribute-key.html', context=categories)
+        return render(request, 'add-attribute-key.html', context=categories)
 
 
 def delete_attribute_key(request):
     if request.method == 'POST':
         ContentAttributeKey.objects.get(key=request.POST['attribute_key']).delete()
-    return HttpResponse("attribute has been successfully deleted")
+    return redirect('/my-page/libraries/all/')

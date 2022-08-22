@@ -26,12 +26,10 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-
                             </div>
                             <div class="col-md-4">
                                 <img src="../../dynamic/{{ image_address }}" height="90px">
                             </div>
-
                         </div>
                         <div class="row">
                             <div class="col-md-5 pr-md-1">
@@ -40,12 +38,8 @@
                                     <input id="category-title" type="text" class="form-control" name="category"
                                            disabled>
                                 </div>
-
-
                             </div>
-
                         </div>
-
                         <div class="row">
                             <div class="col-md-5 pr-md-1">
                                 <div class="form-group">
@@ -54,11 +48,10 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-
                             </div>
-                            <div class="col-md-4">
-                                <button type="button" class="btn btn-primary" style="height: 50px"> Create download
-                                    link
+                            <div class="col-md-4" id="place-download">
+                                <button id="download-link" onclick="download_link()" class="btn btn-neutral btn-round btn-lg btn-block">
+                                    Create Download Link
                                 </button>
                             </div>
                         </div>
@@ -68,41 +61,108 @@
                                     <label>Creator</label>
                                     <input id="creator" type="text" class="form-control" name="creator" disabled>
                                 </div>
-
-
                             </div>
                             <div class="col-md-3">
                             </div>
                             <div class="col-md-4">
-                                <button type="button" class="btn btn-success" style="height: 50px"> Add to library
+                                <button data-toggle="modal" data-target="#libraryModal" id="addLibrary" type="button"
+                                        class="btn btn-success" style="height: 50px "> Add to library
                                 </button>
                             </div>
                         </div>
+                        <div>
+                            <div class="modal fade modal-primary" id="libraryModal" tabindex="-1" role="dialog"
+                                 aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-login">
+                                    <div class="modal-content">
+                                        <div class="card card-login card-plain">
+                                            <div class="modal-body ">
+                                                <form class="form" id="form7" onSubmit="return false">
+                                                    <div class="card-content">
+                                                        <div class="input-group no-border form-control-lg">
+                                                            <select id="libraryA" name="libraryA"
+                                                                    class="form-control">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                            <div class="modal-footer text-center pt-4">
+                                                <form action="" id='form9' method="post">
+                                                    <button type="submit"
+                                                            class="btn btn-neutral btn-round btn-lg btn-block">Add
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 pr-md-1">
+                                <div class="form-group">
+                                    <label>Creation Date</label>
+                                    <input id="creation-date" type="text" class="form-control" name="creation-date"
+                                           disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                            </div>
+                            <div class="col-md-4">
+                                <button data-toggle="modal" data-target="#shareModal" id="shareContent" type="button"
+                                        class="btn btn-info" style="height: 50px"> Share content
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="modal fade modal-primary" id="shareModal" tabindex="-1" role="dialog"
+                                 aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-login">
+                                    <div class="modal-content">
+                                        <div class="card card-login card-plain">
+                                            <div class="modal-body ">
+                                                <form class="form" id="form3" onSubmit="return false">
+                                                    <div class="card-content">
+                                                        <div class="input-group no-border form-control-lg">
+                                                            <input id="username" name="username" type="text"
+                                                                   class="form-control" placeholder="Username">
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer text-center pt-4">
+                                                <form action="" id='form10' method="post">
+                                                    <button type="Share"
+                                                            class="btn btn-neutral btn-round btn-lg btn-block"
+                                                            onclick="share()">Share
+                                                    </button>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </form>
-                </div>
-                <div class="row">
-                    <div class="col-md-5 pr-md-1">
-                        <div class="form-group">
-                            <label>Creation Date</label>
-                            <input id="creation-date" type="text" class="form-control" name="creation-date"
-                                   disabled>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label>Attachments:</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <button data-toggle="modal" data-target="#attachModal" id="addAttach">
+                                <i></i> Add Attachments
+                            </button>
                         </div>
                     </div>
+                    <div class="container" id="attachList"></div>
+                    <hr color="white"/>
+                    <form id="form_attribute" onSubmit="return false">
 
+                    </form>
                 </div>
-
-                </form>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <label>Attachments:</label>
-                    </div>
-                    <div class="col-sm-3">
-                        <button data-toggle="modal" data-target="#attachModal" id="addAttach">
-                            <i></i> Add Attachments
-                        </button>
-                    </div>
-                </div>
-                <div class="container" id="attachList"></div>
                 <div>
                     <div class="modal fade modal-primary" id="attachModal" tabindex="-1" role="dialog"
                          aria-labelledby="myModalLabel" aria-hidden="true">
@@ -139,10 +199,6 @@
                         </div>
                     </div>
                 </div>
-                <hr color="white"/>
-                <form id="form_attribute" onSubmit="return false">
-
-                </form>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-fill btn-primary" id="btn-submit">Save</button>
                 </div>
@@ -217,6 +273,49 @@
             }
         }
     </script>
+
+
+    <script>
+        function download_link(){
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open( "POST", 'download-link-content', false); // false for synchronous request
+            xmlHttp.onreadystatechange = function() {
+              if (xmlHttp.readyState === 4)  {
+                document.getElementById("download-link").remove();
+                var btn = document.createElement("a");
+                btn.setAttribute("class", "btn btn-neutral btn-round btn-lg btn-block");
+                btn.innerHTML = "Download";
+                console.log(xmlHttp.response)
+                btn.setAttribute("href", xmlHttp.response);
+                btn.setAttribute("download", "");
+                document.getElementById("place-download").appendChild(btn);
+              }
+            };
+            xmlHttp.send( null );
+            return xmlHttp;
+        }
+    </script>
+
+    <script type="text/javascript">
+        $("#addLibrary").click(function () {
+
+            $("#libraryA option").remove();
+            var items = {{libraries|safe}}
+                $.each(items, function (i, item) {
+                    $('#libraryA').append($('<option>', {
+                        value: item.value,
+                        text: item.title
+                    }));
+                });
+            $("#libraryA option").each(function () {
+                $(this).prop("class", "dropdown-item");
+            });
+            var libId = $('#libraryA').val()
+            var url = 'addLibrary/' + libId + '/'
+            document.getElementById("form9").setAttribute("action", url)
+        });
+    </script>
+
     <script type="text/javascript">
         $("#addAttach").click(function () {
             $("#attach").val('');
@@ -240,9 +339,7 @@
         });
     </script>
     <script>
-
         handleAttributes();
-
         var attachments =
         {{attachments|safe}}
         var attach_titles = []
@@ -346,7 +443,7 @@
                 akv1 = arr[2 * i]
 
                 div1 = document.createElement("div");
-                div1.setAttribute("class", "col");
+                div1.setAttribute("class", "col-md-6");
 
                 div3 = document.createElement("div");
                 div3.setAttribute("class", "form-group");
@@ -371,25 +468,21 @@
                     akv2 = arr[2 * i + 1]
 
                     div1 = document.createElement("div");
-                    div1.setAttribute("class", "col");
+                    div1.setAttribute("class", "col-md-6");
 
                     div3 = document.createElement("div");
                     div3.setAttribute("class", "form-group");
-
                     lbl = document.createElement("label");
                     lbl.innerHTML = akv2.key;
-
                     inp = document.createElement("input");
                     inp.setAttribute("type", "text");
                     inp.setAttribute("class", "form-control");
                     inp.setAttribute("name", akv2.key);
                     inp.setAttribute("id", akv2.key);
                     inp.setAttribute("value", akv2.value);
-
                     div3.appendChild(lbl);
                     div3.appendChild(inp);
                     div1.appendChild(div3);
-
                     div_m.appendChild(div1.cloneNode(true));
 
                 }
@@ -397,6 +490,7 @@
                 document.getElementById("form_attribute").appendChild(div_m.cloneNode(true));
             }
         }
+
 
         function submitAttachments() {
             var attachment_file = document.getElementById("attach")
@@ -468,6 +562,26 @@
                         document.getElementById("attachList").appendChild(div_main);
                     }
                 }
+            }
+        }
+    </script>
+    <script>
+
+        function share() {
+            var flag = 0;
+            var username = $('#username').val();
+            var usernames_values = {{ usernames_values|safe }};
+
+            for (username_value in usernames_values) {
+                if (username.valueOf() == usernames_values[username_value].valueOf()) {
+                    flag = 1;
+                }
+            }
+            if (flag == 0) {
+                alert("User name is not valid");
+            } else {
+                var url = 'shareContent/' + username + '/'
+                document.getElementById("form10").setAttribute("action", url)
             }
         }
     </script>

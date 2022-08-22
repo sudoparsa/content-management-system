@@ -1,23 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b861eff9-544e-4c2a-8850-4da0f33db2be" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/static/Library-x.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/Library.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/Add-library.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/Add-library.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/Blog-Template.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/Library-x.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/Library-x.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/Library.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/Library.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/Post-Template.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/attribute-key.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/attribute-key.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/jquery.js" afterDir="false" />
+    <list default="true" id="99e897d6-0993-4aa7-a72c-d034c895ba17" name="Default Changelist" comment="addLibrary">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/content.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/content.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +22,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2DB7h0EszCMEff3XdV4IIlM7AEz" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -44,9 +34,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/parham/Projects/SUT/content-management-system/static",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+    "nodejs_package_manager_path": "npm"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -59,7 +47,7 @@
       <recent name="$PROJECT_DIR$/static/images" />
     </key>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.attribute-key.html (1)">
+  <component name="RunManager" selected="Django Server.content-management-system">
     <configuration name="Add-library.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/content-management-system/templates2/Add-library.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
@@ -81,10 +69,11 @@
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="Content_Management.settings" />
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="launchJavascriptDebuger" value="false" />
@@ -100,18 +89,17 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.Library.html" />
+        <item itemvalue="JavaScript Debug.Library-x.html" />
         <item itemvalue="JavaScript Debug.attribute-key.html (1)" />
         <item itemvalue="JavaScript Debug.attribute-key.html" />
-        <item itemvalue="JavaScript Debug.Library-x.html" />
         <item itemvalue="JavaScript Debug.Add-library.html" />
-        <item itemvalue="JavaScript Debug.Library.html" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b861eff9-544e-4c2a-8850-4da0f33db2be" name="Changes" comment="" />
       <created>1660160738857</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -120,7 +108,16 @@
       <workItem from="1661003272001" duration="4094000" />
       <workItem from="1661044713869" duration="2530000" />
       <workItem from="1661080387745" duration="11066000" />
+      <workItem from="1661156894687" duration="8675000" />
     </task>
+    <task id="LOCAL-00001" summary="addLibrary">
+      <created>1661120305191</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1661120305191</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -136,5 +133,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="addLibrary" />
+    <option name="LAST_COMMIT_MESSAGE" value="addLibrary" />
   </component>
 </project>
