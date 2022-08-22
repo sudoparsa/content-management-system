@@ -278,6 +278,11 @@ def add_content(request):
             content_attachment.content = content
             content_attachment.file.save()
             content_attachment.save()
+        attr_keys = ContentAttributeKey.objects.filter(category=content.category)
+        for key in attr_keys:
+            content_attribute = ContentAttribute(key=key, value="", content=content)
+            content_attribute.save()
+
     else:
         return error(request, "request is not defined")
     return render(request, 'main.html')
@@ -723,11 +728,12 @@ def create_download_link(request, content_id):
 
     file_paths.append(f'static/content/Downloads/content/{content.pk}_{content.title}.{content.file.suffix.title}')
     for attachment in Attachment.objects.filter(content=content):
-        path = f'static/content/Downloads/attachment/{attachment.pk}_{attachment.title}.{attachment.file.suffix.title}'
-        file = open(path, 'wb')
-        file.write(attachment.file.bytes)
-        file.close
-        file_paths.append(path)
+        if attachment is not None:
+            path = f'static/content/Downloads/attachment/{attachment.pk}_{attachment.title}.{attachment.file.suffix.title}'
+            file = open(path, 'wb')
+            file.write(attachment.file.bytes)
+            file.close
+            file_paths.append(path)
     with ZipFile(f'static/content/Downloads/{content.title}_{content_id}.zip', 'w') as zip:
         for file in file_paths:
             zip.write(file, basename(file))
