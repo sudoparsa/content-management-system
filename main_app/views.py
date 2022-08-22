@@ -398,7 +398,6 @@ def my_page(request, type, categoryTitle):
             category = Category.objects.get(title=categoryTitle)
             items = Library.objects.filter(category=category, account=account)
 
-        print(len(list(items[0].contents.all())))
         file_or_lib = 'lib'
 
     elif type == 'shared':

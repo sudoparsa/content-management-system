@@ -15,6 +15,45 @@
                 <div class="card-header">
                     <h5 class="title">Content Page</h5>
                 </div>
+
+
+
+
+
+                <aside class="sidebar" >
+                    <div class="toggle" style="overflow:hidden;" >
+                      <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar" style="color:white;">
+                            <span></span>
+                          </a>
+                    </div>
+                    <div class="side-inner">
+              
+            
+                      <div class="profile">
+                        <div style="position: relative;">
+                          <img src= "../../../{{user.account.image}}" alt="user image" style="display: block;">
+                          <a href="/personal-info" style="color: black;">
+                            <span class="icon-pencil mr-3" style="position: absolute; bottom:0px; left:175px;"></span>
+                          </a>
+                        </div>
+            
+                        <h3 class="name">{{user.first_name}} {{user.last_name}}</h3>
+                      </div>        
+              
+                      <div>
+                        <ul>
+                          <li><a href="/" style="white-space: pre; color:black;"><span class="icon-home mr-3"></span>   Home</a></li>
+                          <li><a href="/personal-info" style="white-space: pre; color:black; "><span class="icon-person mr-3"></span>   Personal Info</a></li>
+                          <li><a href="/logout" style="white-space: pre; color:black;"><span class="icon-sign-out mr-3"></span>   Logout</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                    
+                  </aside>
+
+
+
+
                 <div class="card-body">
                     <form id="form1" onSubmit="return false">
                         <div class="row">
