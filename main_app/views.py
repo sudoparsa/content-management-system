@@ -805,15 +805,19 @@ def add_attribute_key(request):
         query_set = ContentAttributeKey.objects.filter(key=request.POST['attribute_name'], category_id=category.id,
                                                        account_id=account.id)
         if len(query_set) == 0:
-            ContentAttributeKey.objects.create(key=request.POST['attribute_name'], category_id=category.id,
-                                               account_id=account.id)
+            content_attr_key = ContentAttributeKey(key=request.POST['attribute_name'], category_id=category.id,
+                                                   account_id=account.id)
+            content_attr_key.save()
+            contents = Content.objects.filter(creator_account=account, category_id=category.id)
+            for content in contents:
+                content_att_val = ContentAttribute(key=content_attr_key, value="", content=content)
+            content_att_val.save()
         return redirect('/content-attribute-key/')
     elif request.method == 'GET':
         categories = {
             'categories': Category.objects.all().values()
         }
         return render(request, 'add-attribute-key.html', context=categories)
-
 
 
 # def delete_attribute_key(request):
@@ -826,14 +830,14 @@ def delete_content(request):
     if request.method == 'POST':
         print('yyyy')
         content_id = request.POST['content_id']
-        content = Content.objects.get(pk = content_id)
+        content = Content.objects.get(pk=content_id)
         file = content.file
         print(content.title)
         # file.delete()
         # content.delete()
         return redirect('/my-page/files/all/')
 
+
 def delete_attribute_key(request, item_id):
     ContentAttributeKey.objects.get(id=item_id).delete()
     return redirect('/content-attribute-key/')
-
