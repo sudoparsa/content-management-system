@@ -824,13 +824,12 @@ def add_attribute_key(request):
 
 def delete_content(request):
     if request.method == 'POST':
-        print('yyyy')
         content_id = request.POST['content_id']
         content = Content.objects.get(pk = content_id)
-        file = content.file
-        print(content.title)
-        # file.delete()
-        # content.delete()
+        if request.user.account == content.creator_account:
+            file = content.file
+            file.delete()
+            content.delete()
         return redirect('/my-page/files/all/')
 
 def delete_attribute_key(request, item_id):
