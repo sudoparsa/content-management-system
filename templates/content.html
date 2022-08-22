@@ -178,7 +178,7 @@
                                                            class="form-control" placeholder="Title">
                                                 </div>
 
-                                                <div class="input-group no-border form-control-lg">
+                                                <div class="input-group no-border form-control-lg" id = "attachments">
                                                     <select id="attach-category" name="attach-category"
                                                             class="form-control">
                                                     </select>
@@ -601,10 +601,11 @@
                 form.appendChild(attr_elem);
 
             }
+            var attachments = document.createElement("attachments");
+            alert(attachments)
 
             $(document.body).append(form);
             form.submit();
-
         }
     </script>
     <script>
