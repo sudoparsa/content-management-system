@@ -170,7 +170,6 @@ def add_content(request):
             return error(request, 'File is required')
 
         idx_suffix = file.name.rfind('.')
-        print('hhhhhh', idx_suffix)
         if idx_suffix == -1:
             return error(request, "File does not have suffix")
         suffix_title = file.name[idx_suffix + 1:]
@@ -347,6 +346,7 @@ def modify_content_page(content):
 def content_main_page(request, content_id):
     content = Content.objects.get(pk=content_id)
     context = {}
+    context['content_id'] = content_id
     context['title'] = content.title
     context['category'] = content.category.title
     context['categoryID'] = content.category.pk
@@ -492,11 +492,11 @@ def download_content(request, content_id):
 
 def create_download_link(request, content_id):
     content = Content.objects.all().get(pk=content_id)
-    file = open(f'static/content/Downloads/{content.title}.{content.file.suffix}', 'wb')
+    file = open(f'static/content/Downloads/{content.title}.{content.file.suffix.title}', 'wb')
     file.write(content.file.bytes)
     file.close()
 
-    return redirect("../download/")
+    return HttpResponse(f'/static/content/Downloads/{content.title}.{content.file.suffix.title}')
 
 
 def delete_library(request):

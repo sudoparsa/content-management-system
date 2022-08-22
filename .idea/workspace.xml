@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99e897d6-0993-4aa7-a72c-d034c895ba17" name="Default Changelist" comment="toDo">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content_Management/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Content_Management/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_app/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/content.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/content.html" afterDir="false" />
     </list>
@@ -29,6 +28,11 @@
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/New WinRAR ZIP archive/content.html" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -83,7 +87,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b861eff9-544e-4c2a-8850-4da0f33db2be" name="Changes" comment="" />
+      <changelist id="99e897d6-0993-4aa7-a72c-d034c895ba17" name="Default Changelist" comment="toDo" />
       <created>1660160738857</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -93,6 +97,14 @@
       <workItem from="1661044713869" duration="2530000" />
       <workItem from="1661080387745" duration="11066000" />
     </task>
+    <task id="LOCAL-00001" summary="toDo">
+      <created>1661115543716</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1661115543716</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -109,5 +121,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="toDo" />
+    <option name="LAST_COMMIT_MESSAGE" value="toDo" />
   </component>
 </project>

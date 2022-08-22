@@ -16,6 +16,7 @@ urlpatterns = [
     path('create-category/', views.create_category, name='create-category'),
     path('content', views.add_content, name='add-content'),
     path('content/<int:content_id>/', views.content_main_page, name='content_main_page'),
+    path('content/<int:content_id>/download-link-content', views.create_download_link, name='download-content'),
     path('', views.main, name='main'),
     path('my-page/<str:type>/<str:categoryTitle>/', views.my_page, name= 'my_page'),
     path('test', views.test, name = 'test'),
