@@ -90,7 +90,7 @@
 
                                             </div>
                                             <div class="modal-footer text-center pt-4">
-                                                <form action="" id = 'form9' method="post">
+                                                <form action="" id='form9' method="post">
                                                     <button type="submit"
                                                             class="btn btn-neutral btn-round btn-lg btn-block">Add
                                                     </button>
@@ -100,15 +100,53 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-5 pr-md-1">
-                                    <div class="form-group">
-                                        <label>Creation Date</label>
-                                        <input id="creation-date" type="text" class="form-control" name="creation-date"
-                                               disabled>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 pr-md-1">
+                                <div class="form-group">
+                                    <label>Creation Date</label>
+                                    <input id="creation-date" type="text" class="form-control" name="creation-date"
+                                           disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                            </div>
+                            <div class="col-md-4">
+                                <button data-toggle="modal" data-target="#shareModal" id="shareContent" type="button"
+                                        class="btn btn-info" style="height: 50px"> Share content
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="modal fade modal-primary" id="shareModal" tabindex="-1" role="dialog"
+                                 aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-login">
+                                    <div class="modal-content">
+                                        <div class="card card-login card-plain">
+                                            <div class="modal-body ">
+                                                <form class="form" id="form3" onSubmit="return false">
+                                                    <div class="card-content">
+                                                        <div class="input-group no-border form-control-lg">
+                                                            <input id="username" name="username" type="text"
+                                                                   class="form-control" placeholder="Username">
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer text-center pt-4">
+                                                <form action="" id='form10' method="post">
+                                                    <button type="Share"
+                                                            class="btn btn-neutral btn-round btn-lg btn-block"
+                                                            onclick="share()">Share
+                                                    </button>
+                                                </form>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </form>
                     <div class="row">
                         <div class="col-sm-3">
@@ -420,21 +458,17 @@
 
                     div3 = document.createElement("div");
                     div3.setAttribute("class", "form-group");
-
                     lbl = document.createElement("label");
                     lbl.innerHTML = akv2.key;
-
                     inp = document.createElement("input");
                     inp.setAttribute("type", "text");
                     inp.setAttribute("class", "form-control");
                     inp.setAttribute("name", akv2.key);
                     inp.setAttribute("id", akv2.key);
                     inp.setAttribute("value", akv2.value);
-
                     div3.appendChild(lbl);
                     div3.appendChild(inp);
                     div1.appendChild(div3);
-
                     div_m.appendChild(div1.cloneNode(true));
 
                 }
@@ -442,6 +476,7 @@
                 document.getElementById("form_attribute").appendChild(div_m.cloneNode(true));
             }
         }
+
 
         function submitAttachments() {
             var attachment_file = document.getElementById("attach")
@@ -513,6 +548,26 @@
                         document.getElementById("attachList").appendChild(div_main);
                     }
                 }
+            }
+        }
+    </script>
+    <script>
+
+        function share() {
+            var flag = 0;
+            var username = $('#username').val();
+            var usernames_values = {{ usernames_values|safe }};
+
+            for (username_value in usernames_values) {
+                if (username.valueOf() == usernames_values[username_value].valueOf()) {
+                    flag = 1;
+                }
+            }
+            if (flag == 0) {
+                alert("User name is not valid");
+            } else {
+                var url = 'shareContent/' + username + '/'
+                document.getElementById("form10").setAttribute("action", url)
             }
         }
     </script>

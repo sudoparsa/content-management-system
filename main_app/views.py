@@ -127,6 +127,17 @@ def get_add_content(request, err_str="None"):
                    'attach_categories': attach_list, 'error': err_str})
 
 
+def share_content(request, content_id, username):
+    content = Content.objects.get(pk = content_id)
+    user = User.objects.get(username=username)
+    account = Account.objects.get(user=user)
+    content.shared_with_accounts.add(account)
+    content.save()
+    account.save()
+    user.save()
+    return redirect('../../')
+
+
 @transaction.atomic
 def add_content(request):
     if request.method == 'GET':
@@ -393,6 +404,10 @@ def content_main_page(request, content_id):
     for item in l:
         ll.append({'title': item.title, 'value': item.pk})
     context['libraries'] = ll
+    usernames_values = []
+    for user in list(User.objects.all()):
+        usernames_values.append(user.username)
+    context['usernames_values'] = usernames_values
     print(context)
     return render(request, 'content.html', context)
 
