@@ -27,7 +27,10 @@ urlpatterns = [
     path('show-library/', views.show_library, name='show-library'),
     path('add-library/', views.add_library, name='add-library'),
     path('add-attribute-key/', views.add_attribute_key, name='add-attribute-key'),
-
     path('delete-library', views.delete_library, name='delete-library'),
+    path('delete-attribute-key/<str:item_id>', views.delete_attribute_key, name='delete-attribute-key'),
+    path('content-attribute-key/', views.show_attribute_key, name='content-attribute-key'),
+    path('content-attribute-key/category/<str:cat_id>', views.get_category, name='get_cat_id'),
     path('delete-content', views.delete_content, name='delete-content')
+
 ]

@@ -4,15 +4,16 @@ from tkinter.messagebox import NO
 from urllib import response
 
 from django.db import transaction
-from django.shortcuts import render, get_object_or_404
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, Http404
+from django.http import HttpResponseRedirect
+
 from django.views.decorators.csrf import csrf_protect
 from main_app.models import Library, ContentAttribute, Attachment, Content, Library, Suffix, Category, AttachCategory, \
     File, ContentAttributeKey, Account
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User, auth
-from django.contrib import messages
+from django.template import loader
 
 from zipfile import ZipFile
 
@@ -602,8 +603,13 @@ def add_library(request):
     if request.method == 'POST':
         account = Account.objects.get(user_id=request.user.id)
         category = Category.objects.get(title=request.POST['category'])
-        Library.objects.create(title=request.POST['library_name'], category_id=category.id, account_id=account.id)
+        query_set = Library.objects.filter(title=request.POST['library_name'], category_id=category.id,
+                                           account_id=account.id)
+        if len(query_set) == 0:
+            Library.objects.create(title=request.POST['library_name'], category_id=category.id, account_id=account.id)
+
         return redirect('/my-page/libraries/all/')
+
     elif request.method == 'GET':
         categories = Category.objects.all().values()
         categories = {
@@ -613,18 +619,34 @@ def add_library(request):
 
 
 def show_attribute_key(request):
-    account = Account.objects.get(id=request.user.id)
-    attribute_keys = {'attribute_keys': ContentAttributeKey.objects.get(account_id=account.user_id).values()}
-    return render(request, 'attribute-key.html', context=attribute_keys)
+    if request.method == 'GET':
+        account = Account.objects.get(user_id=request.user.id)
+        categories = list(Category.objects.all().values())
+        context = {'categories': categories}
+        return render(request, 'Content-Attribute-Key.html', context=context)
+
+
+def get_category(request, cat_id):
+    categories = list(Category.objects.all().values())
+    context = {
+        'categories': categories,
+        'key_attributes': ContentAttributeKey.objects.filter(
+            category_id=int(cat_id)
+        ).values()
+    }
+    return render(request, 'Content-Attribute-Key.html', context=context)
 
 
 def add_attribute_key(request):
     if request.method == 'POST':
         account = Account.objects.get(user_id=request.user.id)
         category = Category.objects.get(title=request.POST['category'])
-        ContentAttributeKey.objects.create(key=request.POST['attribute_name'], category_id=category.id,
-                                           account_id=account.id)
-        return HttpResponse("attribute has been successfully created")
+        query_set = ContentAttributeKey.objects.filter(key=request.POST['attribute_name'], category_id=category.id,
+                                                       account_id=account.id)
+        if len(query_set) == 0:
+            ContentAttributeKey.objects.create(key=request.POST['attribute_name'], category_id=category.id,
+                                               account_id=account.id)
+        return redirect('/content-attribute-key/')
     elif request.method == 'GET':
         categories = {
             'categories': Category.objects.all().values()
@@ -632,10 +654,11 @@ def add_attribute_key(request):
         return render(request, 'add-attribute-key.html', context=categories)
 
 
-def delete_attribute_key(request):
-    if request.method == 'POST':
-        ContentAttributeKey.objects.get(key=request.POST['attribute_key']).delete()
-    return redirect('/my-page/libraries/all/')
+
+# def delete_attribute_key(request):
+#     if request.method == 'POST':
+#         ContentAttributeKey.objects.get(key=request.POST['attribute_key']).delete()
+#     return redirect('/my-page/libraries/all/')
 
 
 def delete_content(request):
@@ -648,4 +671,8 @@ def delete_content(request):
         # file.delete()
         # content.delete()
         return redirect('/my-page/files/all/')
+
+def delete_attribute_key(request, item_id):
+    ContentAttributeKey.objects.get(id=item_id).delete()
+    return redirect('/content-attribute-key/')
 
