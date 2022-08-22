@@ -12,6 +12,10 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 
+from zipfile import ZipFile
+
+import os
+from os.path import basename
 
 # Create your views here.
 def suffix(request):
@@ -484,19 +488,25 @@ def create_category(request):
         raise Http404("Request must be post")
 
 
-def download_content(request, content_id):
-    content = Content.objects.all().get(pk=content_id)
-    return render(request, '../templates/download_content/content.html',
-                  {'content_title': content.title, 'content_suffix': content.file.suffix})
-
-
 def create_download_link(request, content_id):
+    file_paths = []
     content = Content.objects.all().get(pk=content_id)
-    file = open(f'static/content/Downloads/{content.title}.{content.file.suffix.title}', 'wb')
+    file = open(f'static/content/Downloads/content/{content.pk}_{content.title}.{content.file.suffix.title}', 'wb')
     file.write(content.file.bytes)
     file.close()
 
-    return HttpResponse(f'/static/content/Downloads/{content.title}.{content.file.suffix.title}')
+    file_paths.append(f'static/content/Downloads/content/{content.pk}_{content.title}.{content.file.suffix.title}')
+    for attachment in Attachment.objects.filter(content=content):
+        path = f'static/content/Downloads/attachment/{attachment.pk}_{attachment.title}.{attachment.file.suffix.title}'
+        file = open(path, 'wb')
+        file.write(attachment.file.bytes)
+        file.close
+        file_paths.append(path)
+    with ZipFile(f'static/content/Downloads/{content.title}_{content_id}.zip', 'w') as zip:
+        for file in file_paths:
+            zip.write(file, basename(file))
+        print(zip)
+    return HttpResponse(f'/static/content/Downloads/{content.title}_{content_id}.zip')
 
 
 def delete_library(request):
