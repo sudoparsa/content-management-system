@@ -331,21 +331,26 @@ def main(request):
     return render(request, 'main.html')
 
 
+
+def get_personal_info(request, error_str):
+    return render(request, 'personal-info.html', context= {'error': error_str})
+
+
 def personal_info(request):
     print('hhhh')
     if request.method == 'POST':
         print('--------------------------------')
         file = (request.FILES.get('content-file', None))
         if file is None:
-            return error(request, 'File is required')
+            return get_personal_info(request, 'File is required')
 
         idx_suffix = file.name.rfind('.')
         if idx_suffix == -1:
-            return error(request, "File does not have suffix")
+            return get_personal_info(request, "File does not have suffix")
 
         suffix_title = file.name[idx_suffix + 1:]
         if len(suffix_title) == 0:
-            return error(request, "File does not have proper suffix")
+            return get_personal_info(request, "File does not have proper suffix")
         if suffix_title == 'jpg' or suffix_title == 'png':
             
             try:
@@ -354,13 +359,13 @@ def personal_info(request):
                 file2.write(file.read())
                 request.user.account.image = "dynamic/user_images/t.png"
                 request.user.account.save()
-                return render(request, 'personal-info.html')
+                return get_personal_info(request, "None")
             except:
                 return Http404
         else:
-            return error(request, "Suffix not acceptable")
+            return get_personal_info(request, "Suffix not acceptable")
     else:
-        return render(request, 'personal-info.html')
+        return get_personal_info(request, "None")
 
 
 def modify_content_page(content):

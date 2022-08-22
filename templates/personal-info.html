@@ -14,10 +14,7 @@
 
 </head>
 <body>
-    
-</body>
-</html>
-<div class="container">
+  <div class="container">
     <div class="main-body">
 
         <div style="height: 50px;">
@@ -131,3 +128,22 @@
 
         </div>
     </div>
+</body>
+
+<script>
+  window.onload = function() {
+      if ("{{error}}" !== "None"){
+          alert("{{error}}")
+      }
+
+
+  }
+
+  const btn = document.getElementById('btn-submit');
+
+  btn.addEventListener('click', function handleClick(event) {
+      event.preventDefault();
+      document.getElementById('form').submit()
+  });
+</script>
+</html>
