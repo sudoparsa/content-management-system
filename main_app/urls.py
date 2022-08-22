@@ -16,7 +16,6 @@ urlpatterns = [
     path('create-category/', views.create_category, name='create-category'),
     path('content', views.add_content, name='add-content'),
     path('content/<int:content_id>/', views.content_main_page, name='content_main_page'),
-    path('content/<int:content_id>/save/', views.save_attr, name='save_attr'),
     path('content/<int:content_id>/download-link-content', views.create_download_link, name='download-content'),
     path('content/<int:content_id>/addLibrary/<int:library_id>/', views.add_to_library, name='add_library'),
     path('content/<int:content_id>/shareContent/<str:username>/', views.share_content, name='share_content'),

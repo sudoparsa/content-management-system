@@ -160,7 +160,7 @@
                     </div>
                     <div class="container" id="attachList"></div>
                     <hr color="white"/>
-                    <form id="form_attribute" onSubmit="return false" action="save/">
+                    <form id="form_attribute" onSubmit="return false">
 
                     </form>
                 </div>
@@ -534,7 +534,6 @@
             form.setAttribute("method", "post");
             form.setAttribute("enctype", "multipart/form-data")
             form.setAttribute("onSubmit", "return false")
-            form.setAttribute("action","save/")
             var arr =
             {{attribute_key_values|safe}}
             for (i in arr) {
@@ -567,6 +566,7 @@
                 } else {
                     console.log("OO")
                     attach_categories = attach_categories.concat("\"");
+                    attach_categories = attach_categories.concat(" ");
                     attach_categories = attach_categories.concat("\"");
                     attach_categories = attach_categories.concat(",")
                 }
