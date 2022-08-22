@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="99e897d6-0993-4aa7-a72c-d034c895ba17" name="Default Changelist" comment="add to library Merge!">
+    <list default="true" id="99e897d6-0993-4aa7-a72c-d034c895ba17" name="Default Changelist" comment="save content edition">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content_Management/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Content_Management/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/content.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/content.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -106,7 +107,7 @@
       <workItem from="1661003272001" duration="4094000" />
       <workItem from="1661044713869" duration="2530000" />
       <workItem from="1661080387745" duration="11066000" />
-      <workItem from="1661156894687" duration="19714000" />
+      <workItem from="1661156894687" duration="21542000" />
     </task>
     <task id="LOCAL-00001" summary="addLibrary">
       <created>1661120305191</created>
@@ -129,7 +130,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661185891284</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="save content edition">
+      <created>1661187458134</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1661187458134</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -150,6 +158,18 @@
     <MESSAGE value="addLibrary" />
     <MESSAGE value="share content" />
     <MESSAGE value="add to library Merge!" />
-    <option name="LAST_COMMIT_MESSAGE" value="add to library Merge!" />
+    <MESSAGE value="save content edition" />
+    <option name="LAST_COMMIT_MESSAGE" value="save content edition" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main_app/views.py</url>
+          <line>97</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
