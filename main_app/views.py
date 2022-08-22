@@ -330,7 +330,7 @@ def my_page(request, type, categoryTitle):
         if categoryTitle == 'all':
             items = contents
         else:
-            
+
             category = Category.objects.get(title = categoryTitle)
             items = contents.filter(category = category)
         file_or_lib = 'file'
@@ -387,8 +387,8 @@ def personal_info(request):
 
                 result_file = open('dynamic/user_images/' + username +'.png', "wb")
                 result_file.write(file.read())
-                account.image = 'dynamic/user_images/' + username +'.png'
-                account.save()
+                request.user.account.image = 'dynamic/user_images/' + username +'.png'
+                request.user.account.save()
 
                 return get_personal_info(request, "None")
             except:
