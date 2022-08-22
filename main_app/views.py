@@ -1,6 +1,7 @@
 import json
 from datetime import datetime
 from tkinter.messagebox import NO
+from urllib import response
 
 from django.db import transaction
 from django.shortcuts import render, get_object_or_404
@@ -291,22 +292,24 @@ def my_page(request, type, categoryTitle):
         else:
             category = Category.objects.filter(title = categoryTitle)[0]
             items = Content.objects.filter(category = category)
+        file_or_lib = 'file'
     elif type == 'libraries':
         if categoryTitle == 'all':
             items = Library.objects.all()
         else:
             category = Category.objects.filter(title = categoryTitle)[0]
             items = Library.objects.filter(category = category)
+        file_or_lib = 'lib'
     elif type == 'shared':
-
         contents = account.shared_with_contents.all()
         if categoryTitle == 'all':
             items = contents
         else:
             category = Category.objects.filter(title = categoryTitle)[0]
             items = contents.filter(category = category)
+        file_or_lib = 'file'
         
-    return render(request, 'my-page4.html', {'contents': items, 'categories':Category.objects.all(),'categoryTitle': categoryTitle, 'type': type})
+    return render(request, 'my-page4.html', {'file_or_lib': file_or_lib, 'items': items, 'categories':Category.objects.all(),'categoryTitle': categoryTitle, 'type': type})
 
 
     
@@ -323,7 +326,33 @@ def test(request):
     print('hhhh')
     if request.method == 'POST':
         print('--------------------------------')
-        print(request.FILES)
+        file = (request.FILES.get('content-file', None))
+        if file is None:
+            return error(request, 'File is required')
+
+        idx_suffix = file.name.rfind('.')
+        if idx_suffix == -1:
+            return error(request, "File does not have suffix")
+
+        suffix_title = file.name[idx_suffix + 1:]
+        if len(suffix_title) == 0:
+            return error(request, "File does not have proper suffix")
+        if suffix_title == 'jpg' or suffix_title == 'png':
+            
+            try:
+                print(request.user.account.image)
+                file2 = open("dynamic/user_images/t.png", "wb")
+                file2.write(file.read())
+                request.user.account.image = "dynamic/user_images/t.png"
+                request.user.account.save()
+                return HttpResponse(request, 'success')
+            except:
+                return Http404
+
+            
+
+        else:
+            return error(request, "Suffix not acceptable")
     else:
         return render(request, 'personal-info.html')
 
