@@ -387,7 +387,8 @@ def my_page(request, type, categoryTitle):
             # privates = list(Content.objects.filter(creator_account=account, category=category))
             # publics = list(Content.objects.filter(is_private=False, category=category))
 
-        items = Content.objects.filter(Q(creator_account=account, category=category), Q(is_private=False, category=category))
+            items = Content.objects.filter(Q(creator_account=account, category=category), Q(is_private=False, category=category))
+            
         file_or_lib = 'file'
 
     elif type == 'libraries':
